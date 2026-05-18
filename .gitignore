@@ -2,6 +2,7 @@
 *.db
 *.db-journal
 *.db-wal
+*.db-shm
 
 # Caché de tokens de Spotify y credenciales
 *.cache
@@ -19,3 +20,10 @@ Backend/entrenar_algoritmo.py
 Backend/extraer_picos.py
 Backend/unuso.py
 Backend/limpiador.py
+historial_spotify_completo.csv
+importar_csv.py
+core_matematicov2.py
+core_matematicov1.py
+maquina_del_tiempov0.py
+oneuse.py
+playlist.py
