@@ -1,0 +1,21 @@
+# Bases de datos locales (Privado)
+*.db
+*.db-journal
+*.db-wal
+
+# Caché de tokens de Spotify y credenciales
+*.cache
+.env
+config.py
+
+# Archivos del sistema y de Python
+__pycache__/
+*.pyc
+.DS_Store
+
+Backend/a.py
+Backend/cirugia.py
+Backend/entrenar_algoritmo.py
+Backend/extraer_picos.py
+Backend/unuso.py
+Backend/limpiador.py
