@@ -33,6 +33,7 @@ def configurar_bd():
                 colaboradores TEXT,
                 imagen_url TEXT,
                 artista_img TEXT,
+                album TEXT,
                 año_lanzamiento INTEGER,
                 popularidad INTEGER,
                 generos TEXT
@@ -66,14 +67,16 @@ def configurar_bd():
         ''')
     cursor.execute('''
             CREATE TABLE IF NOT EXISTS configuracion_usuario (
-                id TEXT,
+                user_id TEXT,
                 factor_sensibilidad REAL DEFAULT 0,
                 tolerancia_atracon REAL DEFAULT 0,
                 tasa_amnesia REAL DEFAULT 0,
                 año_nostalgia REAL DEFAULT 0,
                 generos_rapidos TEXT,
                 generos_refugio TEXT,
-                PRIMARY KEY (id)
+                sensibilidad_fatiga REAL DEFAULT 1.0,  -- Multiplicador para las canciones
+                tiempo_recuperacion INTEGER DEFAULT 30, -- Días medios para el Modo Amnistía
+                estilo_escucha TEXT DEFAULT 'Fiel'      -- 'Intenso' o 'Fiel'
             )
         ''')
 
@@ -141,7 +144,7 @@ def capturar_historial(conexion):
 
             # --- ENRIQUECER CATÁLOGO CENTRAL ---
             # 🚀 AÑADIMOS artista_img a la comprobación
-            cursor.execute("SELECT año_lanzamiento, generos, artista_img FROM canciones WHERE track_id = ?", (track_id,))
+            cursor.execute("SELECT año_lanzamiento, generos, artista_img, album FROM canciones WHERE track_id = ?", (track_id,))
             fila_meta = cursor.fetchone()
 
             # 🚀 Si falta el año, el género, O LA IMAGEN, forzamos a que llame a Spotify
@@ -150,8 +153,11 @@ def capturar_historial(conexion):
                 año = int(fecha_salida[:4]) if len(fecha_salida) >= 4 else None
                 artist_id = track['artists'][0].get('id')
                 
-                # 1. 🖼️ Foto de la canción (Álbum)
+                # 1. 🖼️ Foto de la canción (Álbum) y Nombre del Álbum Limpio 🏆
                 img_url = track['album']['images'][0]['url'] if track.get('album') and track['album'].get('images') else ""
+                
+                # 🎯 CORRECCIÓN AQUÍ: Sacamos el NOMBRE del álbum como texto, no el objeto entero
+                album_name = track.get('album', {}).get('name', 'Single')
                 
                 # 2. 🧬 Géneros y Foto del Artista
                 generos_str = ""
@@ -172,12 +178,23 @@ def capturar_historial(conexion):
                     generos_str = artistas_consultados[artist_id]["gen"]
                     artista_img = artistas_consultados[artist_id]["img"]
 
-                # 3. 💾 Guardamos TODO (Añadimos imagen_url y artista_img)
+                # 3. 💾 GUARDADO BLINDADO (10 columnas = 10 signos '?' = 10 variables)
                 cursor.execute('''
                     INSERT OR REPLACE INTO canciones 
-                    (track_id, nombre, artista, colaboradores, popularidad, año_lanzamiento, generos, imagen_url, artista_img)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-                ''', (track_id, track_name_limpio, artista_final, colaboradores_str, track.get('popularity', 50), año, generos_str, img_url, artista_img))
+                    (track_id, nombre, artista, colaboradores, album, popularidad, año_lanzamiento, generos, imagen_url, artista_img)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ''', (
+                    track_id, 
+                    track_name_limpio, 
+                    artista_final, 
+                    colaboradores_str, 
+                    album_name,              # 📂 ¡El nombre del álbum ya entra aquí clavado!
+                    track.get('popularity', 50), 
+                    año, 
+                    generos_str, 
+                    img_url, 
+                    artista_img
+                ))
                 
         conexion.commit()
         print(f"[{datetime.now().strftime('%H:%M:%S')}] Captura completada: {nuevas_canciones} reproducciones nuevas.")

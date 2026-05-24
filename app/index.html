@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <section id="pantalla-bienvenida" class="pantalla-bienvenida-full hidden">
+    <section id="pantalla-bienvenida" class="pantalla-bienvenida-full">
     
     <div class="bienvenida-centro">
         
@@ -25,7 +25,7 @@
         </div>
 
         <div class="bienvenida-acciones">
-            <button class="btn-login-spotify glass-panel-accent-glow">
+            <button class="btn-login-spotify glass-panel-accent-glow" onclick="window.location.href='/login'">
                 <i class="fab fa-spotify"></i> Conectar con Spotify
             </button>
             
@@ -196,7 +196,7 @@
             </div>
 
             <div class="zona-peligrosa">
-                <button class="btn-logout glass-panel-danger">
+                <button class="btn-logout glass-panel-danger" onclick="window.location.href='/logout'"">
                     <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
                 </button>
             </div>

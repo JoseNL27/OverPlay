@@ -4,6 +4,51 @@ let chartInstancia = null;
 let pantallaAnterior = "dashboard";
 let ecosistemaInstancia = null;
 
+// ==========================================
+// 🛡️ EL GUARDIÁN DE LA SESIÓN
+// ==========================================
+async function verificarSesion() {
+    try {
+        const respuesta = await fetch('/api/me');
+        const pantallaBienvenida = document.getElementById('pantalla-bienvenida');
+        
+        if (respuesta.ok) {
+            // 🟢 CÓDIGO 200: El usuario tiene la cookie y está en la DB
+            const datos = await respuesta.json();
+            
+            // 1. Escondemos la pantalla de bienvenida de golpe
+            pantallaBienvenida.classList.add('hidden');
+            
+            // 2. Inyectamos su nombre real en el Perfil
+            // (Asegúrate de que el <h2> o <span> de tu perfil tenga id="nombre-usuario")
+            const elementoNombre = document.getElementById('nombre-usuario');
+            if (elementoNombre) {
+                elementoNombre.textContent = datos.nombre;
+            }
+            
+            console.log(`[🛰️] Sesión confirmada. Bienvenido, ${datos.nombre}`);
+            
+            // 3. AQUÍ arrancarías el resto del Dashboard (cargar playlists, etc.)
+            // cargarDatosDashboard(); 
+            
+        } else {
+            // 🔴 CÓDIGO 401: No hay cookie o caducó
+            // Quitamos el candado de la bienvenida para que cubra la pantalla
+            pantallaBienvenida.classList.remove('hidden');
+            console.log("[🚫] No hay sesión activa. Mostrando O.V.R. Gate.");
+        }
+    } catch (error) {
+        console.error("❌ Error de red comprobando la sesión:", error);
+        // Si el backend está apagado, mostramos la bienvenida por seguridad
+        document.getElementById('pantalla-bienvenida').classList.remove('hidden');
+    }
+}
+
+// Ejecutamos al guardián nada más cargar la página
+window.onload = () => {
+    verificarSesion();
+};
+
 // 🚀 ARRANQUE DE LA APLICACIÓN
 inicializarApp();
 

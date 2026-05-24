@@ -1,6 +1,7 @@
 import os
 import secrets
 from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI
+from engine import mapear_top_artistas_cold_start, procesar_cold_start
 from fastapi.responses import HTMLResponse
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
@@ -84,6 +85,19 @@ def login_spotify():
     url = f"https://accounts.spotify.com/authorize?response_type=code&client_id={CLIENT_ID}&scope={scope}&redirect_uri={REDIRECT_URI}"
     return RedirectResponse(url)
 
+# ==========================================
+# 🛑 CERRAR SESIÓN Y DESTRUIR COOKIE
+# ==========================================
+@app.get("/logout")
+def cerrar_sesion():
+    # 1. Preparamos el billete de vuelta a la página principal
+    response = RedirectResponse(url="/")
+    
+    # 2. Aniquilamos el sello de seguridad
+    response.delete_cookie(key="session_user")
+    
+    return response
+
 @app.get("/callback")
 def callback_spotify(code: str):
     print("🛸 Código recibido de Spotify, iniciando intercambio de tokens...")
@@ -114,12 +128,53 @@ def callback_spotify(code: str):
     user_data = user_res.json()
     spotify_user_id = user_data.get("id")
     display_name = user_data.get("display_name", spotify_user_id)
-    
+
+    sp = spotipy.Spotify(auth=access_token)
+   
+   # ==========================================
+        # 🧠 COLD START INTELIGENTE (A.I.A.)
+        # ==========================================
+        # Comprobamos si ya le hemos hecho el escáner a este usuario antes
+    conexion = obtener_conexion()
+    cursor = conexion.cursor()
+
+    cursor.execute("SELECT * FROM perfiles_usuario WHERE user_id = ?", (spotify_user_id,))
+    if not cursor.fetchone():
+        print(f"[🛰️] Usuario nuevo ({spotify_user_id}). Iniciando escáner de Cold Start...")
+            
+        try:
+            # 1. Le pedimos los datos a Spotify (La Matriz)
+            matriz = mapear_top_artistas_cold_start(sp)
+                
+            # 2. El motor procesa la psicología del usuario
+            resultados_artistas, estilo, sensibilidad = procesar_cold_start(matriz)
+                
+            # Definimos la recuperación base según el estilo (puedes ajustar estos días)
+            recuperacion = 30 if estilo == "Fiel" else 15
+                
+            # 3. Guardamos su Perfil Global
+            cursor.execute("""
+                    INSERT INTO perfiles_usuario (user_id, sensibilidad_fatiga, tiempo_recuperacion, estilo_escucha)
+                    VALUES (?, ?, ?, ?)
+                """, (spotify_user_id, sensibilidad, recuperacion, estilo))
+                
+            # 4. Guardamos el O.V.R. base de sus artistas top
+            for artista, datos in resultados_artistas.items():
+                    cursor.execute("""
+                        INSERT INTO fatiga_artistas (user_id, artista, clasificacion, ovr_base)
+                        VALUES (?, ?, ?, ?)
+                    """, (spotify_user_id, artista, datos["clasificacion"], datos["ovr_inicial"]))
+                
+            conexion.commit()
+            print(f"✅ Perfil creado con éxito -> Estilo: {estilo} | Multiplicador: {sensibilidad}x")
+                
+        except Exception as e:
+                print(f"❌ Error durante el Cold Start: {e}")
+                conexion.rollback() # Si algo peta, deshacemos para que no se quede a medias
+
     # 3. 💾 GUARDADO EN DB
     if spotify_user_id:
         try:
-            conexion = obtener_conexion()
-            cursor = conexion.cursor()
             
             cursor.execute('''
                 INSERT OR REPLACE INTO usuarios (user_id, nombre, refresh_token, rol) 
@@ -142,8 +197,40 @@ def callback_spotify(code: str):
         httponly=True, 
         samesite="lax"
     )
-    
+    conexion.close()
     return response
+
+# ==========================================
+# 🕵️‍♂️ EL CHIVATO DE SESIÓN (Frontera Frontend/Backend)
+# ==========================================
+@app.get("/api/me")
+def obtener_usuario_actual(request: Request):
+    # 1. Intentamos leer la cookie blindada
+    user_id = request.cookies.get("session_user")
+    
+    # 2. Si no hay cookie, cerramos la puerta de golpe (Error 401)
+    if not user_id:
+        raise HTTPException(status_code=401, detail="No hay sesión activa")
+        
+    # 3. Si hay cookie, buscamos su nombre en la base de datos
+    try:
+        conexion = sqlite3.connect("historial.db")
+        cursor = conexion.cursor()
+        
+        cursor.execute("SELECT nombre FROM usuarios WHERE user_id = ?", (user_id,))
+        fila = cursor.fetchone()
+        conexion.close()
+        
+        # 4. Devolvemos el JSON limpio para que el JavaScript lo pinte en el Perfil
+        if fila:
+            return {"user_id": user_id, "nombre": fila[0]}
+        else:
+            # Por si borraste la DB pero la cookie se quedó guardada en el navegador
+            raise HTTPException(status_code=401, detail="Usuario no existe en DB")
+            
+    except Exception as e:
+        print(f"Error en /api/me: {e}")
+        raise HTTPException(status_code=500, detail="Error interno del servidor")
 
 @app.get("/debug/cancion/{track_id}")
 def debug_cancion(track_id: str):

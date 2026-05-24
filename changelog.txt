@@ -1,0 +1,5 @@
+24/05
+    Añadidas las rutas de la API: /logout y api/me
+    Se le da funcionalidad al login o logout de OverPlay.
+    Funcion async function verificarSesion() en app.js para controlar los logins a través del /me.
+    Añadido el COLD START INTELIGENTE en /callback, capturando los datos del endpoint de spotify /v1/me/top/artists para generar patrones de escucha de nuevos usuarios. Estos datos se guardan en la tabla perfiles_usuario y van ligados a cada user_id. Asimismo, se crea la tabla fatiga_artistas en la que se guarda el estado "Transitorio", "Artista Ancla" y el multiplicador de fatiga de cada artista de los devueltos por el endpoint antes mencionado.
