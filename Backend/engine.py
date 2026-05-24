@@ -1,3 +1,78 @@
+from datetime import datetime
+
+def procesar_fatiga_canciones(matriz_canciones):
+    """
+    Analiza las tendencias de las canciones y calcula su overrate inicial (OVR).
+    Devuelve un diccionario listo para ser insertado en fatiga_actual.
+    """
+    resultados_canciones = {}
+    P_FUERA = 25
+
+    for track_id, posiciones in matriz_canciones.items():
+        p_short = posiciones.get('short') or P_FUERA
+        p_medium = posiciones.get('medium') or P_FUERA
+        p_long = posiciones.get('long') or P_FUERA
+
+        # FÓRMULA: Tendencia = P_short - P_long
+        tendencia = p_short - p_long
+
+        # ☢️ CASO A: Temazo histórico quemado (Estaba en el Top Long y ya no está en Short)
+        if tendencia >= 15 and p_long <= 5:
+            ovr_inicial = 80.0  # Fatiga altísima inicial
+            etiqueta = "Quenada Histórica"
+
+        # 📉 CASO B: Obsesión en bucle (Puesto alto en Short, no existía en Long)
+        elif tendencia <= -15 and p_short <= 5:
+            ovr_inicial = 20.0  # OVR inicial bajo, pero con predisposición a subir rápido
+            etiqueta = "Bucle Reciente"
+
+        # 📈 CASO C: Clásico personal (Estable en los tres rangos)
+        elif abs(tendencia) <= 12 and p_long < P_FUERA:
+            ovr_inicial = 5.0   # Casi inmune a la fatiga inicial
+            etiqueta = "Inmune Inicial"
+            
+        else:
+            # Canciones de rotación normal o término medio
+            ovr_inicial = 35.0
+            etiqueta = "Rotación Estándar"
+
+        resultados_canciones[track_id] = {
+            "overrate": ovr_inicial,
+            "etiqueta": etiqueta
+        }
+
+    return resultados_canciones
+
+def mapear_top_tracks_cold_start(sp):
+    rangos = ['short_term', 'medium_term', 'long_term']
+    matriz_canciones = {} # Estructura: { "Nombre Artista": { "short": X, "medium": Y, "long": Z } }
+
+    for rango in rangos:
+        try:
+            # Pedimos los 20 tracks top en este rango específico
+            results = sp.current_user_top_tracks(time_range=rango, limit=20)
+            
+            for index, item in enumerate(results.get('items', [])):
+                track_name = item.get('name')
+                posicion = index + 1 # Puesto 1 al 20
+                
+                if track_name not in matriz_canciones:
+                    matriz_canciones[track_name] = {'short': None, 'medium': None, 'long': None}
+                
+                # Mapeamos de forma limpia según el rango
+                if rango == 'short_term':
+                    matriz_canciones[track_name]['short'] = posicion
+                elif rango == 'medium_term':
+                    matriz_canciones[track_name]['medium'] = posicion
+                elif rango == 'long_term':
+                    matriz_canciones[track_name]['long'] = posicion
+                    
+        except Exception as e:
+            print(f"⚠️ Error capturando rango {rango}: {e}")
+            
+    return matriz_canciones
+
+
 def mapear_top_artistas_cold_start(sp):
     """
     Escanea los tres rangos de tiempo de Spotify para cruzar las posiciones

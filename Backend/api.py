@@ -1,7 +1,7 @@
 import os
 import secrets
 from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI
-from engine import mapear_top_artistas_cold_start, procesar_cold_start
+from engine import mapear_top_artistas_cold_start, procesar_cold_start, mapear_top_tracks_cold_start, procesar_fatiga_canciones
 from fastapi.responses import HTMLResponse
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
@@ -164,7 +164,39 @@ def callback_spotify(code: str):
                         INSERT INTO fatiga_artistas (user_id, artista, clasificacion, ovr_base)
                         VALUES (?, ?, ?, ?)
                     """, (spotify_user_id, artista, datos["clasificacion"], datos["ovr_inicial"]))
+
+            # ========================================================
+                # 🎵 🚀 NUEVA LÓGICA: COLD START DE CANCIONES (fatiga_actual)
+                # ========================================================
+            print(f"[🎵] Escaneando tracks de {spotify_user_id}...")
                 
+                # 1. Traemos la matriz de canciones que ya has programado
+            matriz_canciones = mapear_top_tracks_cold_start(sp)
+                
+                # 2. Procesamos el OVR inicial de cada track
+            resultados_canciones = procesar_fatiga_canciones(matriz_canciones)
+                
+                # Timestamp actual para dejar registro limpio de cuándo se calculó
+            ahora_str = datetime.now().isoformat()
+
+                # 3. Inyectamos en la tabla fatiga_actual
+            for track_id, datos in resultados_canciones.items():
+                cursor.execute("""
+                    INSERT OR REPLACE INTO fatiga_actual 
+                    (user_id, track_id, lambda, puntos_fatiga, overrate, pico_historico, etiquetas, fecha_pico, ultima_actualizacion)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    spotify_user_id, 
+                    track_id, 
+                    0.0,              # lambda inicial por defecto
+                    0.0,              # puntos_fatiga inicial por defecto
+                    datos["overrate"], # 🔥 ¡Tu OVR inicial de la canción!
+                    datos["overrate"], # El pico histórico inicial coincide con su arranque
+                    datos["etiqueta"], # 'Bucle Reciente', 'Quemada Histórica', etc.
+                    ahora_str,        # fecha_pico
+                    ahora_str         # ultima_actualizacion
+                ))
+
             conexion.commit()
             print(f"✅ Perfil creado con éxito -> Estilo: {estilo} | Multiplicador: {sensibilidad}x")
                 
@@ -675,46 +707,84 @@ def obtener_canciones_stats():
         conexion.close()
         
 @app.get("/dashboard")
-def obtener_dashboard():
+def obtener_dashboard(request: Request): # 👈 Añadimos 'request' para leer las cookies
+    # 1. Verificar sesión a través de la cookie segura
+    user_id = request.cookies.get("session_user")
+    if not user_id:
+        raise HTTPException(status_code=401, detail="No autorizado")
+
     conexion = obtener_conexion()
     conexion.row_factory = sqlite3.Row
     cursor = conexion.cursor()
 
+    # 2. Inicializar el cliente 'sp' dinámicamente usando el refresh_token del usuario
+    try:
+        cursor.execute("SELECT refresh_token FROM usuarios WHERE user_id = ?", (user_id,))
+        usuario_db = cursor.fetchone()
+        if not usuario_db or not usuario_db['refresh_token']:
+            raise HTTPException(status_code=401, detail="Sesión inválida en DB")
+        
+        # 🔄 REFRESO MANUAL DIRECTO (Anti-sp_oauth)
+        import requests
+        from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET # Asegúrate de que tus variables se llaman así
+        
+        res = requests.post("https://accounts.spotify.com/api/token", data={
+            "grant_type": "refresh_token",
+            "refresh_token": usuario_db['refresh_token'],
+            "client_id": SPOTIFY_CLIENT_ID,
+            "client_secret": SPOTIFY_CLIENT_SECRET
+        })
+        
+        tokens_nuevos = res.json()
+        nuevo_access_token = tokens_nuevos.get("access_token")
+        
+        if not nuevo_access_token:
+            raise HTTPException(status_code=401, detail="No se pudo refrescar el token de Spotify")
+            
+        # Inicializamos sp con el token fresco del usuario actual
+        sp = spotipy.Spotify(auth=nuevo_access_token)
+        
+    except Exception as e:
+        print(f"❌ Error autenticando sp en dashboard: {e}")
+        conexion.close()
+        raise HTTPException(status_code=500, detail="Error de autenticación con Spotify")
+
     dashboard = {"en_racha": [], "quemadas": [], "subiendo": [], "olvidadas": []}
 
-    # 1. OBTENER IDS (V2: Usando fatiga_actual en lugar de fatiga_canciones y estadisticas_vitales_cancion)
+    # --- OBTENER IDS ---
     try:
-        cursor.execute("SELECT track_id FROM fatiga_actual ORDER BY lambda_actual DESC LIMIT 4")
+        # Corregido a lambda (tu columna base de fatiga_actual)
+        cursor.execute("SELECT track_id FROM fatiga_actual WHERE user_id = ? ORDER BY lambda DESC LIMIT 4", (user_id,))
         ids_racha = [row['track_id'] for row in cursor.fetchall()]
     except: ids_racha = []
 
     try:
-        cursor.execute("SELECT track_id FROM fatiga_actual ORDER BY puntos_fatiga DESC LIMIT 4")
+        cursor.execute("SELECT track_id FROM fatiga_actual WHERE user_id = ? ORDER BY puntos_fatiga DESC LIMIT 4", (user_id,))
         ids_quemadas = [row['track_id'] for row in cursor.fetchall()]
     except: ids_quemadas = []
 
     try:
         cursor.execute('''
             SELECT track_id FROM reproducciones 
-            WHERE played_at >= date('now', '-7 days')
+            WHERE user_id = ? AND played_at >= date('now', '-7 days')
             GROUP BY track_id 
             ORDER BY COUNT(*) DESC LIMIT 4
-        ''')
+        ''', (user_id,))
         ids_subiendo = [row['track_id'] for row in cursor.fetchall()]
     except: ids_subiendo = []
 
     try:
         cursor.execute('''
             SELECT track_id FROM fatiga_actual
-            WHERE pico_historico > 50
+            WHERE user_id = ? AND pico_historico > 50
             ORDER BY RANDOM() LIMIT 4
-        ''')
+        ''', (user_id,))
         ids_olvidadas = [row['track_id'] for row in cursor.fetchall()]
     except: ids_olvidadas = []
 
     todos_los_temas = list(set(ids_racha + ids_quemadas + ids_subiendo + ids_olvidadas))
     
-    # 2. CONSULTAR CACHÉ LOCAL (V2: canciones)
+    # --- CONSULTAR CACHÉ LOCAL ---
     mapa_canciones = {}
     if todos_los_temas:
         placeholders = ', '.join(['?'] * len(todos_los_temas))
@@ -727,23 +797,32 @@ def obtener_dashboard():
                 "imagen": row['imagen_url']
             }
 
-    # 3. LO QUE NO ESTÉ EN CACHÉ, SE BUSCA EN SPOTIFY
+    # --- LO QUE NO ESTÉ EN CACHÉ, SE BUSCA EN SPOTIFY ---
     temas_faltantes = [t for t in todos_los_temas if t not in mapa_canciones]
     
     if temas_faltantes:
-        print(f"🔍 Buscando {len(temas_faltantes)} temas en Spotify...")
+        print(f"🔍 Buscando {len(temas_faltantes)} temas faltantes en Spotify para poblar caché...")
         for tema in temas_faltantes:
             try:
+                # El id inmutable suele ser "Nombre - Artista", buscamos limpio
                 res = sp.search(q=tema, type="track", limit=1)
                 if res['tracks']['items']:
                     t = res['tracks']['items'][0]
-                    nombre, artista = t['name'], t['artists'][0]['name']
-                    img = t['album']['images'][2]['url'] if t['album']['images'] else ""
+                    nombre = t['name']
+                    artista = t['artists'][0]['name']
+                    img = t['album']['images'][0]['url'] if t['album']['images'] else ""
+                    fecha_salida = t.get('album', {}).get('release_date', '')
+                    año = int(fecha_salida[:4]) if len(fecha_salida) >= 4 else None
+                    popularidad = t.get('popularity', 50)
+                    album_name = t.get('album', {}).get('name', 'Single')
                 else:
                     partes = tema.split(' - ')
                     nombre = partes[0] if len(partes) > 0 else tema
                     artista = partes[1] if len(partes) > 1 else "Unknown"
-                    img = "https://via.placeholder.com/55x55/181818/1DB954?text=🎵"
+                    img = ""
+                    año = None
+                    popularidad = 50
+                    album_name = "Single"
 
                 mapa_canciones[tema] = {
                     "track_id": tema,
@@ -752,18 +831,19 @@ def obtener_dashboard():
                     "imagen": img
                 }
                 
-                # V2: Guardar en la nueva tabla canciones
+                # 🔧 ADAPTACIÓN ANTI-TROLY: Insertamos respetando las 10 columnas reales de tu DB
                 cursor.execute('''
-                    INSERT OR REPLACE INTO canciones (track_id, nombre, artista, imagen_url)
-                    VALUES (?, ?, ?, ?)
-                ''', (tema, nombre, artista, img))
+                    INSERT OR REPLACE INTO canciones 
+                    (track_id, nombre, artista, colaboradores, imagen_url, artista_img, album, año_lanzamiento, popularidad, generos)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ''', (tema, nombre, artista, "", img, "", album_name, año, popularidad, ""))
                 
             except Exception as e:
                 print(f"❌ Error en caché de '{tema}': {e}")
         
         conexion.commit()
 
-    # 4. CONSTRUIR RESPUESTA
+    # --- CONSTRUIR RESPUESTA ---
     for tid in ids_racha:
         if tid in mapa_canciones: dashboard["en_racha"].append(mapa_canciones[tid])
     for tid in ids_quemadas:
@@ -773,21 +853,20 @@ def obtener_dashboard():
     for tid in ids_olvidadas:
         if tid in mapa_canciones: dashboard["olvidadas"].append(mapa_canciones[tid])
 
-    # --- NUEVO: ÍNDICE DE SATURACIÓN SEMANAL ---
+    # --- ÍNDICE DE SATURACIÓN SEMANAL ---
     dashboard["fatiga_semanal"] = 0.0
     dashboard["estado_semanal"] = "FRESH"
     
     try:
-        # V2: fatiga_actual
         cursor.execute('''
             SELECT AVG(IFNULL(f.puntos_fatiga, 0)) as media_fatiga
             FROM (
                 SELECT DISTINCT track_id 
                 FROM reproducciones 
-                WHERE played_at >= date('now', '-7 days')
+                WHERE user_id = ? AND played_at >= date('now', '-7 days')
             ) r
-            LEFT JOIN fatiga_actual f ON r.track_id = f.track_id
-        ''')
+            LEFT JOIN fatiga_actual f ON r.track_id = f.track_id AND f.user_id = ?
+        ''', (user_id, user_id))
         fila = cursor.fetchone()
         media = fila['media_fatiga'] if fila and fila['media_fatiga'] else 0.0
         
@@ -799,8 +878,9 @@ def obtener_dashboard():
         
     except Exception as e:
         print(f"❌ Error calculando fatiga semanal: {e}")
+        
     conexion.close()
-    return dashboard 
+    return dashboard
 
 @app.get("/radar")
 def obtener_radar_filtrado(rango: str = "MAX"):
