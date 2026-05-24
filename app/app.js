@@ -4,17 +4,17 @@ let chartInstancia = null;
 let pantallaAnterior = "dashboard";
 let ecosistemaInstancia = null;
 
-// 🚀 FIX 1: Arranque a la fuerza, sin esperar eventos fantasma
+// 🚀 ARRANQUE DE LA APLICACIÓN
 inicializarApp();
 
 function inicializarApp() {
-    console.log("🚀 Iniciando App a la fuerza...");
+    console.log("🚀 Iniciando OverPlay de forma segura...");
 
-    // 1. PRIMERO encendemos los botones (A prueba de balas)
+    // 1. Activamos la botonera global
     bindGlobalEvents(); 
-    console.log("✅ Botones activados y listos");
+    console.log("✅ Sistema de navegación mapeado");
 
-    // 2. SEGUNDO cargamos los datos con escudo
+    // 2. Cargamos el Dashboard inicial con escudo anti-crasheos
     try {
         cargarDashboard();
     } catch (error) {
@@ -23,53 +23,59 @@ function inicializarApp() {
 }
 
 /* =========================================================
-   ACTUALIZAR EVENTOS GLOBALES
+   SISTEMA DE NAVEGACIÓN Y EVENTOS GLOBALES
 ========================================================= */
 function bindGlobalEvents() {
-    console.log("🔗 Atando la nueva navegación...");
+    console.log("🔗 Sincronizando los cables del Nav-Bar...");
 
     const navInicio = document.getElementById("nav-inicio");
     const navPlaylists = document.getElementById("nav-playlists");
-    const navAjustes = document.getElementById("nav-ajustes"); 
     const navBuscar = document.getElementById("nav-buscar");
+    const navPerfil = document.getElementById("nav-perfil");
 
+    // Evento: INICIO / DASHBOARD
     if (navInicio) {
         navInicio.onclick = () => {
-            console.log("🏠 Yendo al Home...");
-            actualizarNav("nav-inicio");
+            console.log("🏠 Moviendo interfaz al Dashboard...");
+            mostrarPantalla("pantalla-dashboard");
             cargarDashboard();
         };
     }
 
+    // Evento: PLAYLISTS
     if (navPlaylists) {
         navPlaylists.onclick = () => {
-            console.log("🎵 Yendo a Playlists...");
-            actualizarNav("nav-playlists");
+            console.log("🎵 Abriendo gestor de Playlists...");
+            mostrarPantalla("pantalla-playlists");
             cargarPlaylists();
         };
     }
 
-    // 🚀 EL CABLE DEL PANEL DE CONFIGURACIÓN
-    if (navAjustes) {
-        navAjustes.onclick = () => {
-            console.log("⚙️ Abriendo Calibración del Núcleo...");
-            actualizarNav("nav-ajustes");
-            abrirConfiguracion(); // La función que creamos en el paso anterior
-        };
-    }
+    // Evento: BUSCADOR
     if (navBuscar) {
         navBuscar.onclick = () => {
-            console.log("🔍 Abriendo Escáner Global...");
-            actualizarNav("nav-buscar");
+            console.log("🔍 Activando Escáner Global...");
             mostrarPantalla("pantalla-buscar");
-            if (typeof setHeader === 'function') setHeader("Base de Datos", "Escáner manual");
-            // Trucazo: Hacemos focus al input automáticamente para que se abra el teclado del móvil
-            setTimeout(() => document.getElementById("input-buscador").focus(), 100);
+            setHeader("Base de Datos", "Escáner manual");
+            // Auto-focus para que el teclado del móvil salte al instante
+            setTimeout(() => {
+                const inputBuscador = document.getElementById("input-buscador");
+                if (inputBuscador) inputBuscador.focus();
+            }, 100);
+        };
+    }
+
+    // Evento: PERFIL + CONFIGURACIÓN (La pestaña 'Tú')
+    if (navPerfil) {
+        navPerfil.onclick = () => {
+            console.log("👤 Accediendo al perfil del operador...");
+            mostrarPantalla("vista-perfil");
+            setHeader("Perfil", "Configuración del núcleo");
         };
     }
 }
 
-// Función para cambiar el color del icono activo
+// Intercambiador estético de botones activos en el Nav-Bar
 function actualizarNav(idActivo) {
     document.querySelectorAll(".nav-item").forEach(item => {
         item.classList.remove("activa");
@@ -78,39 +84,41 @@ function actualizarNav(idActivo) {
     if (item) item.classList.add("activa");
 }
 
-/* 🚀 FIX: Modificamos mostrarPantalla para que actualice la Nav sola */
-function mostrarPantalla(id) {
-    const pantallas = document.querySelectorAll("section");
-    pantallas.forEach(p => p.style.display = "none");
+// El motor principal que muestra y oculta las pantallas sin conflictos
+function mostrarPantalla(idObjetivo) {
+    // Escaneamos todas las secciones de pantallas posibles
+    const pantallas = document.querySelectorAll("section.pantalla, #vista-perfil");
     
-    const pantalla = document.getElementById(id);
-    if (pantalla) {
-        pantalla.style.display = "block";
+    // Reseteo total: apagamos y añadimos el candado 'hidden' a todo
+    pantallas.forEach(p => {
+        p.style.display = "none";
+        p.classList.add("hidden");
+        p.classList.remove("activa");
+    });
+    
+    // Encendemos quirúrgicamente la pantalla que queremos ver
+    const pantallaActiva = document.getElementById(idObjetivo);
+    if (pantallaActiva) {
+        pantallaActiva.style.display = "block";
+        pantallaActiva.classList.remove("hidden");
+        pantallaActiva.classList.add("activa");
     }
 
-    // Si entramos en análisis o playlists, marcamos el icono de Playlists
-    if (id === "pantalla-playlists" || id === "pantalla-analisis") {
-        actualizarNav("nav-playlists");
-    } else if (id === "pantalla-dashboard") {
+    // 🎯 MAPEO AUTOMÁTICO DE BOTONES (Vincula la pantalla con su icono del menú)
+    if (idObjetivo === "pantalla-dashboard") {
         actualizarNav("nav-inicio");
+    } else if (idObjetivo === "pantalla-playlists" || idObjetivo === "pantalla-analisis") {
+        actualizarNav("nav-playlists");
+    } else if (idObjetivo === "pantalla-buscar") {
+        actualizarNav("nav-buscar");
+    } else if (idObjetivo === "vista-perfil") {
+        actualizarNav("nav-perfil");
     }
 }
+
 /* =========================================================
-   HELPERS UI (¡Recuperados!)
+   HELPERS UI
 ========================================================= */
-
-function mostrarPantalla(id) {
-    const pantallas = document.querySelectorAll("section");
-    pantallas.forEach(p => { p.style.display = "none"; });
-    
-    const pantalla = document.getElementById(id);
-    if (pantalla) {
-        pantalla.style.display = "block";
-        pantalla.classList.remove("hidden"); 
-    }
-}
-
-// 🚀 FIX 2: Recuperamos la función del Header para que no pete cargarPlaylists
 function setHeader(titulo, subtitulo = "") {
     const tituloEl = document.getElementById("app-titulo");
     const subEl = document.getElementById("app-subtitulo");
@@ -118,7 +126,6 @@ function setHeader(titulo, subtitulo = "") {
     if (subEl) subEl.textContent = subtitulo;
 }
 
-// 🚀 FIX 3: Recuperamos el escapador de comillas para que no peten las gráficas
 function escaparComillas(str) {
     return str ? str.replace(/'/g, "\\'") : "Desconocido";
 }

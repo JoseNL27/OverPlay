@@ -97,6 +97,7 @@ def capturar_historial(conexion):
         cursor = conexion.cursor()
         nuevas_canciones = 0
         artistas_consultados = {}
+        print(results)
 
         for item in results['items']:
             track = item.get('track')
