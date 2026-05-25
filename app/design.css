@@ -6,11 +6,11 @@
     --bg-main: #0b0b0c;
     --bg-card: #151517;
     --bg-card-hover: #1c1c1f;
-    --bg-soft: rgba(255,255,255,0.04);
-    --border-soft: rgba(255,255,255,0.08);
+    --bg-soft: rgba(255, 255, 255, 0.04);
+    --border-soft: rgba(255, 255, 255, 0.08);
 
     --primary: #1DB954;
-    --primary-soft: rgba(29,185,84,0.15);
+    --primary-soft: rgba(29, 185, 84, 0.15);
 
     --danger: #ff4d61;
     --warning: #ffb347;
@@ -21,8 +21,8 @@
     --text-sub: #9ca3af;
     --text-fade: #6b7280;
 
-    --shadow-lg: 0 12px 30px rgba(0,0,0,0.35);
-    --shadow-md: 0 6px 20px rgba(0,0,0,0.25);
+    --shadow-lg: 0 12px 30px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.25);
 
     --radius-xl: 24px;
     --radius-lg: 18px;
@@ -45,7 +45,7 @@ html {
 }
 
 body {
-    background: radial-gradient(circle at top, rgba(29,185,84,0.12), transparent 35%), var(--bg-main);
+    background: radial-gradient(circle at top, rgba(29, 185, 84, 0.12), transparent 35%), var(--bg-main);
     color: var(--text-main);
     font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     min-height: 100vh;
@@ -63,7 +63,8 @@ body {
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
-    padding-bottom: 90px; /* 🚨 Espacio vital para la Bottom Nav Bar */
+    padding-bottom: 90px;
+    /* 🚨 Espacio vital para la Bottom Nav Bar */
 }
 
 .pantalla {
@@ -93,7 +94,8 @@ body {
 .header-logo-container {
     display: flex;
     align-items: center;
-    gap: 14px; /* Espaciado perfecto entre logo y texto */
+    gap: 14px;
+    /* Espaciado perfecto entre logo y texto */
 }
 
 /* --- CONTENEDOR DEL ICONO SVG (Tu Logo Real Inyectado) --- */
@@ -101,13 +103,11 @@ body {
     width: clamp(38px, 4vw, 62px);
     height: clamp(38px, 4vw, 62px);
 
-    background: linear-gradient(
-        45deg,
-        #32ff88,
-        #25ff08,
-        #0dff86,
-        #297247
-    );
+    background: linear-gradient(45deg,
+            #32ff88,
+            #25ff08,
+            #0dff86,
+            #297247);
 
     background-size: 300% 300%;
 
@@ -125,13 +125,11 @@ body {
     mask-size: contain;
 
     /* Glow cyberpunk */
-    filter: drop-shadow(0 0 6px rgba(50, 255, 136, 0.7))
-            drop-shadow(0 0 14px rgba(0, 229, 255, 0.4))
-            drop-shadow(0 0 24px rgba(180, 0, 255, 0.3));
+    filter: drop-shadow(0 0 6px rgba(50, 255, 136, 0.7)) drop-shadow(0 0 14px rgba(0, 229, 255, 0.4)) drop-shadow(0 0 24px rgba(180, 0, 255, 0.3));
 
     /* Animaciones */
     animation: neonShift 4s ease-in-out infinite,
-               pulseGlow 2.5s ease-in-out infinite;
+        pulseGlow 2.5s ease-in-out infinite;
 
     transition: transform 0.2s ease;
 }
@@ -139,9 +137,7 @@ body {
 /* Hover: efecto “energía activada” */
 .logo-svg-wrapper:hover {
     transform: scale(1.1) rotate(-2deg);
-    filter: drop-shadow(0 0 10px #32ff88)
-            drop-shadow(0 0 20px #00e5ff)
-            drop-shadow(0 0 30px #b400ff);
+    filter: drop-shadow(0 0 10px #32ff88) drop-shadow(0 0 20px #00e5ff) drop-shadow(0 0 30px #b400ff);
 }
 
 /* Movimiento del gradiente */
@@ -149,9 +145,11 @@ body {
     0% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0% 50%;
     }
@@ -159,13 +157,14 @@ body {
 
 /* Pulso de energía */
 @keyframes pulseGlow {
-    0%, 100% {
-        filter: drop-shadow(0 0 6px rgba(50, 255, 136, 0.6))
-                drop-shadow(0 0 14px rgba(0, 229, 255, 0.3));
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 6px rgba(50, 255, 136, 0.6)) drop-shadow(0 0 14px rgba(0, 229, 255, 0.3));
     }
+
     50% {
-        filter: drop-shadow(0 0 12px rgba(50, 255, 136, 1))
-                drop-shadow(0 0 26px rgba(180, 0, 255, 0.6));
+        filter: drop-shadow(0 0 12px rgba(50, 255, 136, 1)) drop-shadow(0 0 26px rgba(180, 0, 255, 0.6));
     }
 }
 
@@ -175,19 +174,23 @@ body {
         animation: none;
     }
 }
+
 /* --- TIPOGRAFÍA Y DISEÑO DEL TÍTULO --- */
 .brand-title {
     font-family: 'Space Grotesk', sans-serif;
-    font-weight: 800; /* Peso ultra-bold para que imponga */
+    font-weight: 800;
+    /* Peso ultra-bold para que imponga */
     font-size: 1.6rem;
     letter-spacing: 1px;
     margin: 0;
-    color: #ffffff; /* OVER en blanco */
+    color: #ffffff;
+    /* OVER en blanco */
     line-height: 1;
 }
 
 .brand-title span {
-    color: #32FF88; /* PLAY en verde neón */
+    color: #32FF88;
+    /* PLAY en verde neón */
     /* Efecto sutil de iluminación en el texto verde */
     text-shadow: 0 0 10px rgba(50, 255, 136, 0.3);
 }
@@ -299,15 +302,17 @@ body {
     width: 100vw;
     height: 100vh;
     background: radial-gradient(circle at center, rgba(10, 10, 12, 0.85) 0%, rgba(0, 0, 0, 0.98) 100%);
-    backdrop-filter: blur(20px); /* El efecto difuminado premium */
+    backdrop-filter: blur(20px);
+    /* El efecto difuminado premium */
     -webkit-backdrop-filter: blur(20px);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999; /* Blindado por encima de cualquier menú o modal */
+    z-index: 9999;
+    /* Blindado por encima de cualquier menú o modal */
     overflow: hidden;
     box-sizing: border-box;
-    
+
     /* 🔥 El Escudo de Glow Animado en los marcos */
     animation: respiracionNeon 4s infinite alternate ease-in-out;
 }
@@ -316,11 +321,12 @@ body {
 @keyframes respiracionNeon {
     0% {
         box-shadow: inset 0 0 25px rgba(50, 255, 136, 0.15),
-                    inset 0 0 50px rgba(50, 255, 136, 0.05);
+            inset 0 0 50px rgba(50, 255, 136, 0.05);
     }
+
     100% {
         box-shadow: inset 0 0 45px rgba(50, 255, 136, 0.35),
-                    inset 0 0 90px rgba(50, 255, 136, 0.15);
+            inset 0 0 90px rgba(50, 255, 136, 0.15);
     }
 }
 
@@ -350,7 +356,8 @@ body {
 }
 
 .brand-maxi {
-    font-size: 2.4rem; /* Tamaño imponente */
+    font-size: 2.4rem;
+    /* Tamaño imponente */
     letter-spacing: 2px;
 }
 
@@ -375,8 +382,10 @@ body {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 800;
     font-size: 1.05rem;
-    color: #000000; /* Texto oscuro para romper con el fondo */
-    background: #32FF88; /* Color base de marca */
+    color: #000000;
+    /* Texto oscuro para romper con el fondo */
+    background: #32FF88;
+    /* Color base de marca */
     border: 1px solid rgba(50, 255, 136, 0.5);
     border-radius: 16px;
     cursor: pointer;
@@ -409,7 +418,8 @@ body {
 }
 
 .text-link-subdued:hover {
-    color: #32FF88; /* Se ilumina sutilmente al pasar por encima */
+    color: #32FF88;
+    /* Se ilumina sutilmente al pasar por encima */
 }
 
 /* =========================================================
@@ -425,13 +435,13 @@ body {
 
 .widget-card {
     /* 🚀 MAGIA CRISTALINA AQUÍ */
-    background: linear-gradient(145deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: var(--radius-xl);
     padding: 20px;
-    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
 }
 
 .widget-header {
@@ -447,7 +457,7 @@ body {
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--text-main);
-    text-shadow: 0 0 10px rgba(255,255,255,0.2);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 .widget-lista {
@@ -460,7 +470,7 @@ body {
     align-items: center;
     gap: 12px;
     padding: 10px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     cursor: pointer;
     transition: background 0.2s ease;
 }
@@ -539,8 +549,8 @@ body {
     -webkit-overflow-scrolling: touch;
 }
 
-.scroll-horizontal::-webkit-scrollbar { 
-    display: none; 
+.scroll-horizontal::-webkit-scrollbar {
+    display: none;
 }
 
 /* =========================================================
@@ -570,15 +580,40 @@ body {
     background-color: #222;
 }
 
-.widget-neon-cancion:active img { transform: scale(0.95); }
+.widget-neon-cancion:active img {
+    transform: scale(0.95);
+}
 
 /* Estados Neón para Canciones */
-.widget-neon-cancion.racha img { box-shadow: 0 0 15px rgba(156, 39, 176, 0.6); border: 1px solid #9c27b0; }
-.widget-neon-cancion.quemada img { box-shadow: 0 0 15px rgba(255, 71, 87, 0.6); border: 1px solid #ff4757; }
-.widget-neon-cancion.olvidada img { box-shadow: 0 0 15px rgba(30, 144, 255, 0.6); border: 1px solid #1e90ff; }
-.widget-neon-cancion.fresh img { box-shadow: 0 0 15px rgba(74, 222, 128, 0.6); border: 1px solid #4ade80; }
-.widget-neon-cancion.warning img { box-shadow: 0 0 15px rgba(255, 179, 71, 0.6); border: 1px solid #ffb347; }
-.widget-neon-cancion.burnout img { box-shadow: 0 0 15px rgba(255, 77, 97, 0.6); border: 1px solid #ff4d61; }
+.widget-neon-cancion.racha img {
+    box-shadow: 0 0 15px rgba(156, 39, 176, 0.6);
+    border: 1px solid #9c27b0;
+}
+
+.widget-neon-cancion.quemada img {
+    box-shadow: 0 0 15px rgba(255, 71, 87, 0.6);
+    border: 1px solid #ff4757;
+}
+
+.widget-neon-cancion.olvidada img {
+    box-shadow: 0 0 15px rgba(30, 144, 255, 0.6);
+    border: 1px solid #1e90ff;
+}
+
+.widget-neon-cancion.fresh img {
+    box-shadow: 0 0 15px rgba(74, 222, 128, 0.6);
+    border: 1px solid #4ade80;
+}
+
+.widget-neon-cancion.warning img {
+    box-shadow: 0 0 15px rgba(255, 179, 71, 0.6);
+    border: 1px solid #ffb347;
+}
+
+.widget-neon-cancion.burnout img {
+    box-shadow: 0 0 15px rgba(255, 77, 97, 0.6);
+    border: 1px solid #ff4d61;
+}
 
 /* 🎤 Tarjeta de Artista (Redonda Neón) */
 .widget-neon-artista {
@@ -603,26 +638,36 @@ body {
     transition: transform 0.2s ease;
 }
 
-.widget-neon-artista:active img { transform: scale(0.95); }
+.widget-neon-artista:active img {
+    transform: scale(0.95);
+}
 
 /* Estados Neón para Artistas */
-.widget-neon-artista.quemado img { box-shadow: 0 0 20px rgba(255, 71, 87, 0.7); border: 2px solid #ff4757; }
-.widget-neon-artista.frio img { box-shadow: 0 0 20px rgba(30, 144, 255, 0.7); border: 2px solid #1e90ff; }
+.widget-neon-artista.quemado img {
+    box-shadow: 0 0 20px rgba(255, 71, 87, 0.7);
+    border: 2px solid #ff4757;
+}
+
+.widget-neon-artista.frio img {
+    box-shadow: 0 0 20px rgba(30, 144, 255, 0.7);
+    border: 2px solid #1e90ff;
+}
 
 /* Textos comunes de las tarjetas premium */
-.widget-text-nombre { 
-    font-size: 11px; 
-    font-weight: bold; 
-    white-space: nowrap; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
-    width: 100%; 
+.widget-text-nombre {
+    font-size: 11px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
 }
-.widget-text-score { 
-    font-size: 10px; 
-    font-family: 'Courier New', monospace; 
-    color: #aaa; 
-    margin-top: 2px; 
+
+.widget-text-score {
+    font-size: 10px;
+    font-family: 'Courier New', monospace;
+    color: #aaa;
+    margin-top: 2px;
 }
 
 /* =========================================================
@@ -636,7 +681,7 @@ body {
 }
 
 .playlist-card {
-    background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border-soft);
@@ -710,14 +755,22 @@ body {
     background: rgba(255, 77, 97, 0.1);
     box-shadow: 0 0 10px rgba(255, 77, 97, 0.3);
 }
-.mini-ovr-btn.overdrive:hover svg { stroke: #ff4d61; transform: translateY(-2px); }
+
+.mini-ovr-btn.overdrive:hover svg {
+    stroke: #ff4d61;
+    transform: translateY(-2px);
+}
 
 .mini-ovr-btn.amnesty:hover {
     border-color: #60a5fa;
     background: rgba(96, 165, 250, 0.1);
     box-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
 }
-.mini-ovr-btn.amnesty:hover svg { stroke: #60a5fa; transform: translateY(2px); }
+
+.mini-ovr-btn.amnesty:hover svg {
+    stroke: #60a5fa;
+    transform: translateY(2px);
+}
 
 /* =========================================================
    TARJETAS DE CANCIÓN (FLEXBOX PREMIUM)
@@ -737,7 +790,7 @@ body {
     align-items: center;
     justify-content: space-between;
     /* Cámbiales el background sólido por esto: */
-    background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-radius: 12px;
@@ -825,7 +878,7 @@ body {
     left: 0;
     width: 100%;
     height: 3px;
-    background: rgba(255,255,255,0.03);
+    background: rgba(255, 255, 255, 0.03);
 }
 
 .fatiga-bar-fill {
@@ -838,7 +891,10 @@ body {
 ========================================================= */
 .detalle-header-blur {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 220px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 220px;
     background-size: cover;
     background-position: center;
     filter: blur(25px) brightness(0.4);
@@ -860,46 +916,86 @@ body {
 }
 
 .detalle-portada-v2 {
-    width: 140px; height: 140px;
+    width: 140px;
+    height: 140px;
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     margin-bottom: 15px;
 }
 
 .detalle-titulo-v2 {
-    font-size: 22px; font-weight: 900; color: #fff;
-    margin-bottom: 5px; text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    font-size: 22px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 5px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .colab-chip {
     display: inline-block;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 4px 10px; border-radius: 20px;
-    font-size: 11px; margin: 2px;
-    cursor: pointer; transition: 0.2s;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    margin: 2px;
+    cursor: pointer;
+    transition: 0.2s;
 }
-.colab-chip:hover { background: rgba(255,255,255,0.2); }
+
+.colab-chip:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
 
 /* Pestañas */
 .tabs-container {
-    display: flex; justify-content: center;
-    gap: 10px; margin: 15px 0;
-    position: relative; z-index: 1;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+    position: relative;
+    z-index: 1;
 }
+
 .tab-btn {
-    background: transparent; border: none; color: #888;
-    font-size: 13px; font-weight: bold; letter-spacing: 1px;
-    padding: 8px 16px; cursor: pointer; transition: 0.3s;
+    background: transparent;
+    border: none;
+    color: #888;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: 0.3s;
     border-bottom: 2px solid transparent;
 }
-.tab-btn.active {
-    color: #1DB954; border-bottom: 2px solid #1DB954;
-}
-.tab-content { display: none; padding: 0 15px; }
-.tab-content.active { display: block; animation: fadeIn 0.3s ease; }
 
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.tab-btn.active {
+    color: #1DB954;
+    border-bottom: 2px solid #1DB954;
+}
+
+.tab-content {
+    display: none;
+    padding: 0 15px;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 /* =========================================================
    PANTALLA DE DETALLE (Estilo iOS Bottom Sheet)
@@ -909,13 +1005,14 @@ body {
     inset: 0;
     z-index: 999;
     display: flex;
-    align-items: flex-end; /* 🚀 Hace que el panel se ancle abajo */
+    align-items: flex-end;
+    /* 🚀 Hace que el panel se ancle abajo */
 }
 
 .detalle-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     transition: opacity 0.3s ease;
@@ -925,15 +1022,17 @@ body {
     position: relative;
     width: 100%;
     max-width: 520px;
-    height: 90%; /* Ocupa el 90% de la pantalla */
+    height: 90%;
+    /* Ocupa el 90% de la pantalla */
     margin: 0 auto;
     overflow-y: auto;
     /* Fondo oscuro y elegante */
     background: linear-gradient(180deg, #151517 0%, #0b0b0c 100%);
-    border-radius: 32px 32px 0 0; /* Bordes muy redondos solo arriba */
+    border-radius: 32px 32px 0 0;
+    /* Bordes muy redondos solo arriba */
     padding: 30px 24px 100px 24px;
-    box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
-    border-top: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .detalle-header {
@@ -950,7 +1049,7 @@ body {
     height: 36px;
     border-radius: 50%;
     border: none;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     color: white;
     cursor: pointer;
@@ -971,7 +1070,7 @@ body {
     height: 200px;
     border-radius: 24px;
     object-fit: cover;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     margin-top: 20px;
 }
 
@@ -996,7 +1095,8 @@ body {
 .hud-grid {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columnas precisas */
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 columnas precisas */
     gap: 12px;
     margin-top: 30px;
 }
@@ -1017,14 +1117,20 @@ body {
 .hud-box::before {
     content: '';
     position: absolute;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     width: 3px;
     height: 100%;
     background: rgba(255, 255, 255, 0.1);
 }
 
-.hud-box.highlight::before { background: var(--success); }
-.hud-box.alert::before { background: var(--danger); }
+.hud-box.highlight::before {
+    background: var(--success);
+}
+
+.hud-box.alert::before {
+    background: var(--danger);
+}
 
 .hud-label {
     color: var(--text-sub);
@@ -1038,7 +1144,8 @@ body {
 .hud-value {
     font-size: 24px;
     font-weight: 900;
-    font-family: 'Courier New', Courier, monospace; /* Fuente de hackeo */
+    font-family: 'Courier New', Courier, monospace;
+    /* Fuente de hackeo */
     color: var(--text-main);
 }
 
@@ -1109,24 +1216,27 @@ body {
     .app-container {
         max-width: 1200px;
     }
+
     .dashboard-grid {
         grid-template-columns: repeat(4, 1fr);
     }
+
     .resultados-grid {
         gap: 18px;
     }
 }
+
 /* =========================================================
    BANNER DE SATURACIÓN SEMANAL (HUD)
    ========================================================= */
 .banner-saturacion {
-    background: linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-xl);
     padding: 22px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     margin-bottom: 24px;
 }
 
@@ -1166,7 +1276,7 @@ body {
 .banner-bar-bg {
     width: 100%;
     height: 6px;
-    background: rgba(255,255,255,0.05);
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
     overflow: hidden;
 }
@@ -1176,6 +1286,7 @@ body {
     border-radius: 10px;
     transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
+
 .radar-center-text {
     position: absolute;
     top: 55%;
@@ -1186,7 +1297,8 @@ body {
     font-weight: 900;
     font-family: 'Courier New', Courier, monospace;
     color: var(--text-main);
-    pointer-events: none; /* Para que no moleste al pasar el dedo por el gráfico */
+    pointer-events: none;
+    /* Para que no moleste al pasar el dedo por el gráfico */
 }
 
 .radar-center-text span {
@@ -1196,6 +1308,7 @@ body {
     font-family: 'Inter', sans-serif;
     letter-spacing: 1px;
 }
+
 /* Filtros del Radar */
 .radar-filtros {
     display: flex;
@@ -1221,8 +1334,9 @@ body {
 .btn-rango.activo {
     background: rgba(255, 255, 255, 0.15);
     color: var(--text-main);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
+
 /* =========================================================
    LA JOYA DEL DÍA (Spotlight Premium)
    ========================================================= */
@@ -1250,9 +1364,11 @@ body {
 .joya-card::before {
     content: '';
     position: absolute;
-    top: -50%; right: -50%;
-    width: 100px; height: 200%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    top: -50%;
+    right: -50%;
+    width: 100px;
+    height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
     transform: rotate(45deg);
     pointer-events: none;
 }
@@ -1262,7 +1378,7 @@ body {
     height: 64px;
     border-radius: 12px;
     object-fit: cover;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     border: 2px solid rgba(168, 85, 247, 0.5);
 }
 
@@ -1277,7 +1393,8 @@ body {
 .joya-label {
     font-size: 10px;
     font-weight: 900;
-    color: #a855f7; /* Morado eléctrico */
+    color: #a855f7;
+    /* Morado eléctrico */
     letter-spacing: 1.5px;
     margin-bottom: 4px;
     text-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
@@ -1305,7 +1422,8 @@ body {
    DISEÑO DEL PANEL DE CALIBRACIÓN
 ========================================================= */
 .config-panel {
-    max-width: 500px; /* Un poco más estrecho que la vista de detalle */
+    max-width: 500px;
+    /* Un poco más estrecho que la vista de detalle */
     max-height: 90vh;
     overflow-y: auto;
 }
@@ -1370,7 +1488,7 @@ body {
     display: flex;
     justify-content: space-between;
     font-size: 10px;
-    color: rgba(255,255,255,0.4);
+    color: rgba(255, 255, 255, 0.4);
     text-transform: uppercase;
 }
 
@@ -1421,9 +1539,12 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(10, 10, 12, 0.85); /* Fondo oscuro hacker */
-    backdrop-filter: blur(8px); /* Efecto cristal guapo */
-    z-index: 9999; /* Por encima de la navbar y todo lo demás */
+    background-color: rgba(10, 10, 12, 0.85);
+    /* Fondo oscuro hacker */
+    backdrop-filter: blur(8px);
+    /* Efecto cristal guapo */
+    z-index: 9999;
+    /* Por encima de la navbar y todo lo demás */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1481,7 +1602,8 @@ body {
 .search-header {
     position: sticky;
     top: 0;
-    background: var(--bg-main); /* Cambia por tu variable de fondo oscuro si tienes otra */
+    background: var(--bg-main);
+    /* Cambia por tu variable de fondo oscuro si tienes otra */
     padding: 10px 0 15px 0;
     z-index: 10;
 }
@@ -1497,20 +1619,28 @@ body {
     font-family: 'Courier New', Courier, monospace;
     outline: none;
     transition: all 0.3s;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
     box-sizing: border-box;
 }
 
 .input-cyber:focus {
     border-color: #1DB954;
-    box-shadow: 0 0 15px rgba(29, 185, 84, 0.3), inset 0 0 10px rgba(0,0,0,0.5);
+    box-shadow: 0 0 15px rgba(29, 185, 84, 0.3), inset 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 /* Animación de pulso cibernético */
 @keyframes pulsoCyber {
-    0% { opacity: 0.3; }
-    50% { opacity: 0.6; }
-    100% { opacity: 0.3; }
+    0% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+
+    100% {
+        opacity: 0.3;
+    }
 }
 
 .skeleton-card {
@@ -1530,7 +1660,8 @@ body {
     gap: 15px;
     margin-top: 20px;
     margin-bottom: 10px;
-    grid-column: span 2; /* Para que ocupe todo el ancho en el grid */
+    grid-column: span 2;
+    /* Para que ocupe todo el ancho en el grid */
 }
 
 .ovr-btn {
@@ -1574,14 +1705,22 @@ body {
     box-shadow: 0 0 15px rgba(255, 77, 97, 0.3);
     color: #ff4d61;
 }
-.ovr-btn.overdrive:hover svg { stroke: #ff4d61; transform: translateY(-3px); }
+
+.ovr-btn.overdrive:hover svg {
+    stroke: #ff4d61;
+    transform: translateY(-3px);
+}
 
 .ovr-btn.amnesty:hover {
     border-color: #60a5fa;
     box-shadow: 0 0 15px rgba(96, 165, 250, 0.3);
     color: #60a5fa;
 }
-.ovr-btn.amnesty:hover svg { stroke: #60a5fa; transform: translateY(3px); }
+
+.ovr-btn.amnesty:hover svg {
+    stroke: #60a5fa;
+    transform: translateY(3px);
+}
 
 
 
@@ -1603,7 +1742,8 @@ body {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    border: 3px solid #1DB954; /* Verde Spotify */
+    border: 3px solid #1DB954;
+    /* Verde Spotify */
     box-shadow: 0 0 15px rgba(29, 185, 84, 0.4);
     object-fit: cover;
 }
