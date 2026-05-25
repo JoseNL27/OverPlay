@@ -1,0 +1,47 @@
++--------------------------------------------------------------------+
+| sql                                                                |
++--------------------------------------------------------------------+
+| CREATE TABLE canciones (                                           |
+|                 track_id TEXT PRIMARY KEY,                         |
+|                 nombre TEXT,                                       |
+|                 artista TEXT,                                      |
+|                 colaboradores TEXT,                                |
+|                 imagen_url TEXT,                                   |
+|                 artista_img TEXT,                                  |
+|                 album TEXT,                                        |
+|                 año_lanzamiento INTEGER,                           |
+|                 popularidad INTEGER,                               |
+|                 generos TEXT                                       |
+|             )                                                      |
+| CREATE TABLE fatiga_actual (                                       |
+|                 user_id TEXT,                                      |
+|                 track_id TEXT,                                     |
+|                 lambda REAL DEFAULT 0,                             |
+|                 puntos_fatiga REAL DEFAULT 0,                      |
+|                 overrate REAL DEFAULT 0,                           |
+|                 pico_historico REAL DEFAULT 0,                     |
+|                 etiquetas TEXT,                                    |
+|                 fecha_pico TIMESTAMP,                              |
+|                 ultima_actualizacion TIMESTAMP,                    |
+|                 PRIMARY KEY (user_id, track_id)                    |
+|             )                                                      |
+| CREATE TABLE historial_diario (                                    |
+|             fecha TEXT,                                            |
+|             track_id TEXT,                                         |
+|             puntos_fatiga REAL,                                    |
+|             PRIMARY KEY (fecha, track_id)                          |
+|         )                                                          |
+| CREATE TABLE reproducciones (                                      |
+|                 user_id TEXT,                                      |
+|                 track_id TEXT,                                     |
+|                 played_at TIMESTAMP,                               |
+|                 PRIMARY KEY (user_id, track_id, played_at)         |
+|             )                                                      |
+| CREATE TABLE usuarios (                                            |
+|                 user_id TEXT PRIMARY KEY,                          |
+|                 nombre TEXT,                                       |
+|                 refresh_token TEXT,                                |
+|                 rol TEXT DEFAULT 'beta_tester',                    |
+|                 fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP |
+|             )                                                      |
++--------------------------------------------------------------------+
