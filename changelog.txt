@@ -5,3 +5,6 @@
     Añadido el COLD START INTELIGENTE en /callback, capturando los datos del endpoint de spotify /v1/me/top/artists para generar patrones de escucha de nuevos usuarios. Estos datos se guardan en la tabla perfiles_usuario y van ligados a cada user_id. Asimismo, se crea la tabla fatiga_artistas en la que se guarda el estado "Transitorio", "Artista Ancla" y el multiplicador de fatiga de cada artista de los devueltos por el endpoint antes mencionado.
     Asimismo, se añade el calculo de O.V.R. de los top_tracks (mapear_top_tracks_cold_start) de nuevos usuarios, usando una lógica similar a la de la funcion de mapear_top_artistas_cold_start.
     Arreglo del endpoint /dashboard para rellenar las tablas vacías en caso de Cold Start.
+25/05
+    Migración desde Termux completada.
+    Añadido requeriments.txt
