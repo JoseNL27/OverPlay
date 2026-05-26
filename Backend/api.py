@@ -18,7 +18,7 @@ class ConfigUsuario(BaseModel):
     factor_sensibilidad: float
     tolerancia_atracon: float
     tasa_amnesia: float
-    año_nostalgia: int
+    ano_nostalgia: int
     generos_rapidos: str
     generos_refugio: str
 
@@ -485,7 +485,7 @@ def detalle_cancion(track_id: str):
     cursor = conexion.cursor()
     try:
         # 1. METADATOS BÁSICOS
-        cursor.execute("SELECT nombre, artista, colaboradores, imagen_url, año_lanzamiento, popularidad FROM canciones WHERE track_id = ?", (track_id,))
+        cursor.execute("SELECT nombre, artista, colaboradores, imagen_url, ano_lanzamiento, popularidad FROM canciones WHERE track_id = ?", (track_id,))
         meta_row = cursor.fetchone()
         if not meta_row:
             return {"error": "Canción no encontrada"}
@@ -495,7 +495,7 @@ def detalle_cancion(track_id: str):
             "artista": meta_row[1],
             "colaboradores": meta_row[2] if meta_row[2] else "",
             "imagen_url": meta_row[3],
-            "año": meta_row[4] if meta_row[4] else "Desconocido",
+            "ano_lanzamiento": meta_row[4] if meta_row[4] else "Desconocido",
             "popularidad": meta_row[5] if meta_row[5] else 0
         }
 
@@ -602,7 +602,7 @@ def detalle_cancion(track_id: str):
     cursor = conexion.cursor()
     try:
         # 1. METADATOS BÁSICOS
-        cursor.execute("SELECT nombre, artista, colaboradores, imagen_url, año_lanzamiento, popularidad FROM canciones WHERE track_id = ?", (track_id,))
+        cursor.execute("SELECT nombre, artista, colaboradores, imagen_url, ano_lanzamiento, popularidad FROM canciones WHERE track_id = ?", (track_id,))
         meta_row = cursor.fetchone()
         if not meta_row:
             return {"error": "Canción no encontrada"}
@@ -612,7 +612,7 @@ def detalle_cancion(track_id: str):
             "artista": meta_row[1],
             "colaboradores": meta_row[2] if meta_row[2] else "",
             "imagen_url": meta_row[3],
-            "año": meta_row[4] if meta_row[4] else "Desconocido",
+            "ano_lanzamiento": meta_row[4] if meta_row[4] else "Desconocido",
             "popularidad": meta_row[5] if meta_row[5] else 0
         }
 
@@ -834,7 +834,7 @@ def obtener_dashboard(request: Request): # 👈 Añadimos 'request' para leer la
                 # 🔧 ADAPTACIÓN ANTI-TROLY: Insertamos respetando las 10 columnas reales de tu DB
                 cursor.execute('''
                     INSERT OR REPLACE INTO canciones 
-                    (track_id, nombre, artista, colaboradores, imagen_url, artista_img, album, año_lanzamiento, popularidad, generos)
+                    (track_id, nombre, artista, colaboradores, imagen_url, artista_img, album, ano_lanzamiento, popularidad, generos)
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ''', (tema, nombre, artista, "", img, "", album_name, año, popularidad, ""))
                 
@@ -1018,7 +1018,7 @@ def guardar_configuracion(config: ConfigUsuario):
             SET factor_sensibilidad = ?,
                 tolerancia_atracon = ?,
                 tasa_amnesia = ?,
-                año_nostalgia = ?,
+                ano_nostalgia = ?,
                 generos_rapidos = ?,
                 generos_refugio = ?
             WHERE id = 1
@@ -1026,7 +1026,7 @@ def guardar_configuracion(config: ConfigUsuario):
             config.factor_sensibilidad, 
             config.tolerancia_atracon, 
             config.tasa_amnesia, 
-            config.año_nostalgia, 
+            config.ano_nostalgia, 
             config.generos_rapidos, 
             config.generos_refugio
         ))
