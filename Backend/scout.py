@@ -1,18 +1,25 @@
-import spotipy
-from spotipy.oauth2 import SpotifyOAuth
 import sqlite3
-import time
 import os
 import re
 import requests
 from datetime import datetime
-from calcular_fatiga import calcular_fatiga_diaria
-from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI
+from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET
+# Importa aquí tus funciones de limpieza de caracteres si las tienes en otro archivo, ej:
+# from limpiador import limpiar_nombre_track, separar_artistas
 
-def configurar_bd():
-    ruta_bd = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'historial.db')
-    conexion = sqlite3.connect(ruta_bd, timeout=30.0) 
-    conexion.execute("PRAGMA journal_mode=WAL;")
+def ejecutar_batida_captura():
+    print(f"\n[🦇] [{datetime.now().strftime('%H:%M:%S')}] Iniciando batida de reconocimiento multiusuario...")
+    
+    # 1. Conectamos a la DB y nos traemos a todos los usuarios registrados
+    # Como estás en PC, asegúrate de apuntar bien a la ruta si es necesario
+    # 🎯 1. BLINDAJE DE RUTA: Buscamos la DB donde realmente está el script
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    DB_PATH = os.path.join(BASE_DIR, "historial.db")
+    
+    print(f"📂 Conectando a la base de datos en: {DB_PATH}") # Para que lo veas con tus propios ojos
+    
+    conexion = sqlite3.connect(DB_PATH)
+    conexion.row_factory = sqlite3.Row
     cursor = conexion.cursor()
     # Tabla de Usuarios (NUEVA)
     cursor.execute('''
@@ -214,25 +221,15 @@ def capturar_historial(conexion):
             print(f"[{datetime.now().strftime('%H:%M:%S')}] Captura completada para {user_id}: {nuevas_canciones} reproducciones nuevas.")
         conexion.commit()
 
-    except Exception as e:
-        conexion.rollback()
-        print(f"❌ Error durante la captura: {e}")
+        except Exception as e:
+            print(f"❌ Error crítico procesando a {user_id}: {e}")
+            continue # Si un usuario falla, que el bucle siga con el siguiente tester
 
+    # Guardamos todos los cambios en la DB tras procesar a todos los usuarios
+    conexion.commit()
+    conexion.close()
+    print("\n[🏁] Batida completa. Base de datos actualizada.")
+
+# Esto te permite probar el script a mano en la consola ejecutando 'python scout.py'
 if __name__ == "__main__":
-    print("🚀 Iniciando Monitor Overplay v6.0 (RAW Data)...")
-    conexion_bd = configurar_bd()
-    ultima_fecha_entrenamiento = None
-    
-    while True:
-        hora_actual = datetime.now()
-        capturar_historial(conexion_bd)
-        
-        print("-> Sincronizando motor matemático...")
-        calcular_fatiga_diaria()
-        
-        fecha_hoy = hora_actual.date()
-        if ultima_fecha_entrenamiento != fecha_hoy:
-            ultima_fecha_entrenamiento = fecha_hoy
-            
-        print(f"[{hora_actual.strftime('%H:%M:%S')}] Ciclo completo. Durmiendo...\n")
-        time.sleep(7200)
+    ejecutar_batida_captura()
