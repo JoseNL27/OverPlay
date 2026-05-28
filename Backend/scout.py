@@ -1,14 +1,19 @@
+#from Backend import prescout
 import sqlite3
 import os
-import re
 import requests
+import re
 from datetime import datetime
 from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET
+from auth import obtener_sp_para_usuario
+
+
 # Importa aquí tus funciones de limpieza de caracteres si las tienes en otro archivo, ej:
 # from limpiador import limpiar_nombre_track, separar_artistas
 
 def ejecutar_batida_captura():
     print(f"\n[🦇] [{datetime.now().strftime('%H:%M:%S')}] Iniciando batida de reconocimiento multiusuario...")
+    artistas_consultados = {}
     
     # 1. Conectamos a la DB y nos traemos a todos los usuarios registrados
     # Como estás en PC, asegúrate de apuntar bien a la ruta si es necesario
@@ -21,117 +26,70 @@ def ejecutar_batida_captura():
     conexion = sqlite3.connect(DB_PATH)
     conexion.row_factory = sqlite3.Row
     cursor = conexion.cursor()
-    # Tabla de Usuarios (NUEVA)
-    cursor.execute('''
-            CREATE TABLE IF NOT EXISTS usuarios (
-                user_id TEXT PRIMARY KEY,
-                nombre TEXT,
-                refresh_token TEXT,
-                rol TEXT DEFAULT 'beta_tester',
-                fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            )
-        ''')
-
-        # Catálogo Global (No lleva user_id porque las canciones son de todos)
-    cursor.execute('''
-            CREATE TABLE IF NOT EXISTS canciones (
-                track_id TEXT PRIMARY KEY,
-                nombre TEXT,
-                artista TEXT,
-                colaboradores TEXT,
-                imagen_url TEXT,
-                artista_img TEXT,
-                album TEXT,
-                año_lanzamiento INTEGER,
-                popularidad INTEGER,
-                generos TEXT
-            )
-        ''')
-
-        # Tabla de Reproducciones (Multi-tenant)
-    cursor.execute('''
-            CREATE TABLE IF NOT EXISTS reproducciones (
-                user_id TEXT,
-                track_id TEXT,
-                played_at TIMESTAMP,
-                PRIMARY KEY (user_id, track_id, played_at)
-            )
-        ''')
-
-        # Tabla de Fatiga / O.V.R. (Multi-tenant)
-    cursor.execute('''
-            CREATE TABLE IF NOT EXISTS fatiga_actual (
-                user_id TEXT,
-                track_id TEXT,
-                lambda REAL DEFAULT 0,
-                puntos_fatiga REAL DEFAULT 0,
-                overrate REAL DEFAULT 0,
-                pico_historico REAL DEFAULT 0,
-                etiquetas TEXT,
-                fecha_pico TIMESTAMP,
-                ultima_actualizacion TIMESTAMP,
-                PRIMARY KEY (user_id, track_id)
-            )
-        ''')
-    cursor.execute('''
-            CREATE TABLE IF NOT EXISTS configuracion_usuario (
-                user_id TEXT,
-                factor_sensibilidad REAL DEFAULT 0,
-                tolerancia_atracon REAL DEFAULT 0,
-                tasa_amnesia REAL DEFAULT 0,
-                año_nostalgia REAL DEFAULT 0,
-                generos_rapidos TEXT,
-                generos_refugio TEXT,
-                sensibilidad_fatiga REAL DEFAULT 1.0,  -- Multiplicador para las canciones
-                tiempo_recuperacion INTEGER DEFAULT 30, -- Días medios para el Modo Amnistía
-                estilo_escucha TEXT DEFAULT 'Fiel'      -- 'Intenso' o 'Fiel'
-            )
-        ''')
-
-    conexion.commit()
-    return conexion
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-def capturar_historial(conexion):
+    
     try:
-        cursor = conexion.cursor()
         cursor.execute("SELECT user_id, refresh_token FROM usuarios")
         usuarios = cursor.fetchall()
+    except sqlite3.OperationalError as e:
+        print(f"❌ Error al leer la tabla usuarios: {e}")
+        conexion.close()
+        return
 
-        for usuario in usuarios:
-            user_id = usuario[0]
-            refresh_token = usuario[1]
-            if not refresh_token:
-                continue
+    if not usuarios:
+        print("⚠️ No hay usuarios registrados en la base de datos para escanear.")
+        conexion.close()
+        return
 
+    print(f"👥 Se han encontrado {len(usuarios)} usuarios en la DB.")
+
+    # 2. Bucle Maestro: Procesamos a cada usuario de forma independiente
+    for usuario in usuarios:
+        user_id = usuario['user_id']
+        refresh_token = usuario['refresh_token']
+        sp = obtener_sp_para_usuario(user_id)
+        print(f"\n👤 Escaneando historial reciente de: {user_id}...")
+
+        try:
+            # 🔄 Refrescamos el token de Spotify para este usuario concreto
             res = requests.post("https://accounts.spotify.com/api/token", data={
                 "grant_type": "refresh_token",
                 "refresh_token": refresh_token,
                 "client_id": SPOTIFY_CLIENT_ID,
                 "client_secret": SPOTIFY_CLIENT_SECRET
             })
+            
             tokens = res.json()
-            nuevo_token = tokens.get("access_token")
-            if not nuevo_token:
-                print(f"⚠️ No se pudo refrescar token para {user_id}")
+            access_token = tokens.get("access_token")
+            
+            if not access_token:
+                print(f"❌ No se pudo refrescar el token para {user_id}. Saltando usuario...")
                 continue
 
-            sp = spotipy.Spotify(auth=nuevo_token)
-            results = sp.current_user_recently_played(limit=50)
+            # 🛰️ Petición directa a las últimas 50 reproducciones de este usuario
+            headers = {"Authorization": f"Bearer {access_token}"}
+            # Usamos el endpoint oficial de recently-played
+            sp_res = requests.get("https://api.spotify.com/v1/me/player/recently-played?limit=50", headers=headers)
             
-            nuevas_canciones = 0
-            artistas_consultados = {}
-            print(f"🔍 Escaneando a {user_id}...")
+            if sp_res.status_code != 200:
+                print(f"❌ Error API Spotify ({sp_res.status_code}) para {user_id}. Saltando...")
+                continue
+                
+            historial = sp_res.json()
+            items = historial.get('items', [])
+            
+            print(f"📥 Capturados {len(items)} temas potenciales para {user_id}.")
 
-            for item in results['items']:
-                track = item.get('track')
-                if not track or track.get('name', "Desconocido") == "Desconocido" or not track.get('artists'): 
-                    continue
+            NUEVOS_TEMAS_CONTADOR = 0
 
+            # 3. Tu lógica de limpieza e inyección (Adaptada)
+            for item in items:
+                track = item['track']
+                played_at = item['played_at'] # Formato ISO de Spotify
+                raw_track_id = track['id']
+                
                 # --- LIMPIEZA DE METADATOS Y ARTISTAS (V3 Anti-Troleo Spotify) ---
                 track_name_limpio = re.sub(r'(?i)(\s*\(with.*?\)|\s*\(feat\..*?\)|\s*\[feat\..*?\]| - remaster.*)', '', track['name']).strip()
-                
+            
                 artistas_spotify = [a['name'] for a in track['artists']]
                 artista_final = artistas_spotify[0] # El que escupe Spotify por defecto esta vez
 
@@ -154,15 +112,15 @@ def capturar_historial(conexion):
                 track_id = f"{track_name_limpio} - {artista_final}"
                 played_at = item.get('played_at')
                 print(track_id)
-
-                # --- GUARDAR REPRODUCCIÓN ---
+                # 4. Inyectamos en la tabla 'reproducciones' vinculando al user_id actual
+                # Usamos INSERT OR IGNORE para que si el tema ya existía con ese timestamp, no se duplique
                 cursor.execute('''
-                    INSERT OR IGNORE INTO reproducciones (user_id, played_at, track_id)
+                    INSERT OR IGNORE INTO reproducciones (user_id, track_id, played_at)
                     VALUES (?, ?, ?)
-                ''', (user_id, played_at, track_id))
+                ''', (user_id, track_id, played_at))
                 
-                if cursor.rowcount == 1:
-                    nuevas_canciones += 1
+                if cursor.rowcount > 0:
+                    NUEVOS_TEMAS_CONTADOR += 1
 
                 # --- ENRIQUECER CATÁLOGO CENTRAL ---
                 # 🚀 AÑADIMOS artista_img a la comprobación
@@ -174,52 +132,51 @@ def capturar_historial(conexion):
                     fecha_salida = track.get('album', {}).get('release_date', '')
                     año = int(fecha_salida[:4]) if len(fecha_salida) >= 4 else None
                     artist_id = track['artists'][0].get('id')
-                    
-                    # 1. 🖼️ Foto de la canción (Álbum) y Nombre del Álbum Limpio 🏆
-                    img_url = track['album']['images'][0]['url'] if track.get('album') and track['album'].get('images') else ""
-                    
-                    # 🎯 CORRECCIÓN AQUÍ: Sacamos el NOMBRE del álbum como texto, no el objeto entero
-                    album_name = track.get('album', {}).get('name', 'Single')
-                    
-                    # 2. 🧬 Géneros y Foto del Artista
-                    generos_str = ""
-                    artista_img = ""
-                    
-                    if artist_id:
-                        # Guardamos un diccionario en caché con la foto y el género para no saturar a Spotify
-                        if artist_id not in artistas_consultados:
-                            try:
-                                datos_artista = sp.artist(artist_id)
-                                gen_str = ", ".join(datos_artista.get('genres', []))
-                                img_art = datos_artista['images'][0]['url'] if datos_artista.get('images') else ""
-                                artistas_consultados[artist_id] = {"gen": gen_str, "img": img_art}
-                            except Exception as e:
-                                print(f"Error sacando datos del artista {artista_final}: {e}")
-                                artistas_consultados[artist_id] = {"gen": "", "img": ""}
-                        
-                        generos_str = artistas_consultados[artist_id]["gen"]
-                        artista_img = artistas_consultados[artist_id]["img"]
-
-                    # 3. 💾 GUARDADO BLINDADO (10 columnas = 10 signos '?' = 10 variables)
-                    cursor.execute('''
-                        INSERT OR REPLACE INTO canciones 
-                        (track_id, nombre, artista, colaboradores, album, popularidad, año_lanzamiento, generos, imagen_url, artista_img)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                    ''', (
-                        track_id, 
-                        track_name_limpio, 
-                        artista_final, 
-                        colaboradores_str, 
-                        album_name,              # 📂 ¡El nombre del álbum ya entra aquí clavado!
-                        track.get('popularity', 50), 
-                        año, 
-                        generos_str, 
-                        img_url, 
-                        artista_img
-                    ))
                 
-            print(f"[{datetime.now().strftime('%H:%M:%S')}] Captura completada para {user_id}: {nuevas_canciones} reproducciones nuevas.")
-        conexion.commit()
+                # 1. 🖼️ Foto de la canción (Álbum) y Nombre del Álbum Limpio 🏆
+                img_url = track['album']['images'][0]['url'] if track.get('album') and track['album'].get('images') else ""
+                
+                # 🎯 CORRECCIÓN AQUÍ: Sacamos el NOMBRE del álbum como texto, no el objeto entero
+                album_name = track.get('album', {}).get('name', 'Single')
+                
+                # 2. 🧬 Géneros y Foto del Artista
+                generos_str = ""
+                artista_img = ""
+                
+                if artist_id:
+                    # Guardamos un diccionario en caché con la foto y el género para no saturar a Spotify
+                    if artist_id not in artistas_consultados:
+                        try:
+                            datos_artista = sp.artist(artist_id)
+                            gen_str = ", ".join(datos_artista.get('genres', []))
+                            img_art = datos_artista['images'][0]['url'] if datos_artista.get('images') else ""
+                            artistas_consultados[artist_id] = {"gen": gen_str, "img": img_art}
+                        except Exception as e:
+                            print(f"Error sacando datos del artista {artista_final}: {e}")
+                            artistas_consultados[artist_id] = {"gen": "", "img": ""}
+                    
+                    generos_str = artistas_consultados[artist_id]["gen"]
+                    artista_img = artistas_consultados[artist_id]["img"]
+
+                # 3. 💾 GUARDADO BLINDADO (10 columnas = 10 signos '?' = 10 variables)
+                cursor.execute('''
+                    INSERT OR REPLACE INTO canciones 
+                    (track_id, nombre, artista, colaboradores, album, popularidad, año_lanzamiento, generos, imagen_url, artista_img)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ''', (
+                    track_id, 
+                    track_name_limpio, 
+                    artista_final, 
+                    colaboradores_str, 
+                    album_name,              # 📂 ¡El nombre del álbum ya entra aquí clavado!
+                    track.get('popularity', 50), 
+                    año, 
+                    generos_str, 
+                    img_url, 
+                    artista_img
+                ))
+            
+            print(f"✅ Guardado fino: {NUEVOS_TEMAS_CONTADOR} reproducciones nuevas indexadas para {user_id}.")
 
         except Exception as e:
             print(f"❌ Error crítico procesando a {user_id}: {e}")

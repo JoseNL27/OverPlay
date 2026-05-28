@@ -14,6 +14,7 @@ import spotipy
 import requests
 from datetime import datetime, timedelta
 from spotipy.oauth2 import SpotifyOAuth
+from auth import obtener_sp_para_usuario
 class ConfigUsuario(BaseModel):
     factor_sensibilidad: float
     tolerancia_atracon: float
@@ -81,36 +82,12 @@ def obtener_spotify_cliente(request: Request):
     if not user_id:
         raise HTTPException(status_code=401, detail="No autorizado")
 
-    conexion = obtener_conexion()
-    conexion.row_factory = sqlite3.Row
-    cursor = conexion.cursor()
-
     try:
-        cursor.execute("SELECT refresh_token FROM usuarios WHERE user_id = ?", (user_id,))
-        usuario_db = cursor.fetchone()
-        if not usuario_db or not usuario_db['refresh_token']:
-            raise HTTPException(status_code=401, detail="Sesión inválida en DB")
-        
-        res = requests.post("https://accounts.spotify.com/api/token", data={
-            "grant_type": "refresh_token",
-            "refresh_token": usuario_db['refresh_token'],
-            "client_id": SPOTIFY_CLIENT_ID,
-            "client_secret": SPOTIFY_CLIENT_SECRET
-        })
-        
-        tokens_nuevos = res.json()
-        nuevo_access_token = tokens_nuevos.get("access_token")
-        
-        if not nuevo_access_token:
-            raise HTTPException(status_code=401, detail="No se pudo refrescar el token de Spotify")
-            
-        sp = spotipy.Spotify(auth=nuevo_access_token)
+        sp = obtener_sp_para_usuario(user_id)
         return {"sp": sp, "user_id": user_id}
     except Exception as e:
         print(f"❌ Error autenticando sp: {e}")
         raise HTTPException(status_code=500, detail="Error de autenticación con Spotify")
-    finally:
-        conexion.close()
 
 # --- RUTAS DE LA API ---
 

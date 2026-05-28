@@ -10,3 +10,8 @@
     Añadido requeriments.txt
 26/05
     Comenzada la reestructuración del Backend completamente.
+28/05
+    Reescritura completa del scout.py
+    Añadido soporte para múltiples usuarios.
+    Añadidos los scripts auth.py y db.py con el objetivo de descentralizar y compartimentar el Backend.
+    *Queda pendiente adaptar el resto de los scripts del Backend para aprovechar el nuevo sistema de autenticación y conexión a la base de datos.* 
