@@ -5,7 +5,7 @@ from engine import mapear_top_artistas_cold_start, procesar_cold_start, mapear_t
 from fastapi.responses import HTMLResponse
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi import FastAPI, HTTPException, Response, Request
+from fastapi import FastAPI, HTTPException, Response, Request, Depends
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 import sqlite3
@@ -75,6 +75,42 @@ def obtener_conexion():
     # Activar el modo WAL para evitar el error "Database is Locked"
     conexion.execute("PRAGMA journal_mode=WAL;")
     return conexion
+
+def obtener_spotify_cliente(request: Request):
+    user_id = request.cookies.get("session_user")
+    if not user_id:
+        raise HTTPException(status_code=401, detail="No autorizado")
+
+    conexion = obtener_conexion()
+    conexion.row_factory = sqlite3.Row
+    cursor = conexion.cursor()
+
+    try:
+        cursor.execute("SELECT refresh_token FROM usuarios WHERE user_id = ?", (user_id,))
+        usuario_db = cursor.fetchone()
+        if not usuario_db or not usuario_db['refresh_token']:
+            raise HTTPException(status_code=401, detail="Sesión inválida en DB")
+        
+        res = requests.post("https://accounts.spotify.com/api/token", data={
+            "grant_type": "refresh_token",
+            "refresh_token": usuario_db['refresh_token'],
+            "client_id": SPOTIFY_CLIENT_ID,
+            "client_secret": SPOTIFY_CLIENT_SECRET
+        })
+        
+        tokens_nuevos = res.json()
+        nuevo_access_token = tokens_nuevos.get("access_token")
+        
+        if not nuevo_access_token:
+            raise HTTPException(status_code=401, detail="No se pudo refrescar el token de Spotify")
+            
+        sp = spotipy.Spotify(auth=nuevo_access_token)
+        return {"sp": sp, "user_id": user_id}
+    except Exception as e:
+        print(f"❌ Error autenticando sp: {e}")
+        raise HTTPException(status_code=500, detail="Error de autenticación con Spotify")
+    finally:
+        conexion.close()
 
 # --- RUTAS DE LA API ---
 
@@ -214,7 +250,6 @@ def callback_spotify(code: str):
             ''', (spotify_user_id, display_name, refresh_token, 'admin'))
             
             conexion.commit()
-            conexion.close()
             print(f"   ✅ OPERADOR REGISTRADO EN DB: {display_name} (ID: {spotify_user_id})")
         except Exception as e:
             print(f"   ❌ Error crítico al escribir en SQLite: {e}")
@@ -239,30 +274,34 @@ def callback_spotify(code: str):
 def obtener_usuario_actual(request: Request):
     # 1. Intentamos leer la cookie blindada
     user_id = request.cookies.get("session_user")
+    print(f"🔍 /api/me → Cookie session_user = {user_id}")
     
     # 2. Si no hay cookie, cerramos la puerta de golpe (Error 401)
     if not user_id:
         raise HTTPException(status_code=401, detail="No hay sesión activa")
         
     # 3. Si hay cookie, buscamos su nombre en la base de datos
+    conexion = obtener_conexion()
     try:
-        conexion = sqlite3.connect("historial.db")
         cursor = conexion.cursor()
         
         cursor.execute("SELECT nombre FROM usuarios WHERE user_id = ?", (user_id,))
         fila = cursor.fetchone()
-        conexion.close()
         
         # 4. Devolvemos el JSON limpio para que el JavaScript lo pinte en el Perfil
         if fila:
-            return {"user_id": user_id, "nombre": fila[0]}
+            return {"user_id": user_id, "nombre": fila['nombre']}
         else:
             # Por si borraste la DB pero la cookie se quedó guardada en el navegador
             raise HTTPException(status_code=401, detail="Usuario no existe en DB")
             
+    except HTTPException:
+        raise
     except Exception as e:
         print(f"Error en /api/me: {e}")
         raise HTTPException(status_code=500, detail="Error interno del servidor")
+    finally:
+        conexion.close()
 
 @app.get("/debug/cancion/{track_id}")
 def debug_cancion(track_id: str):
@@ -339,7 +378,8 @@ def obtener_top_quemadas(limite: int = 15):
 
 # NUEVA RUTA 1: Obtener TODAS las playlists con su PORTADA
 @app.get("/playlists")
-def obtener_playlists():
+def obtener_playlists(auth_data: dict = Depends(obtener_spotify_cliente)):
+    sp = auth_data["sp"]
     print("📡 Frontend pide playlists... Conectando con Spotify...", flush=True) 
     try:
         resultado = []
@@ -372,7 +412,8 @@ def obtener_playlists():
         
 # NUEVA RUTA 2: Analizar playlist y traer PORTADAS DE CANCIONES
 @app.get("/playlist/{playlist_id}") 
-def analizar_playlist(playlist_id: str):
+def analizar_playlist(playlist_id: str, auth_data: dict = Depends(obtener_spotify_cliente)):
+    sp = auth_data["sp"]
     try:
         conexion = obtener_conexion()
         cursor = conexion.cursor()
@@ -598,63 +639,7 @@ def detalle_cancion(track_id: str):
         return {"error": "Fallo interno"}
     finally:
         conexion.close()
-    conexion = obtener_conexion()
-    cursor = conexion.cursor()
-    try:
-        # 1. METADATOS BÁSICOS
-        cursor.execute("SELECT nombre, artista, colaboradores, imagen_url, año_lanzamiento, popularidad FROM canciones WHERE track_id = ?", (track_id,))
-        meta_row = cursor.fetchone()
-        if not meta_row:
-            return {"error": "Canción no encontrada"}
 
-        meta = {
-            "nombre": meta_row[0],
-            "artista": meta_row[1],
-            "colaboradores": meta_row[2] if meta_row[2] else "",
-            "imagen_url": meta_row[3],
-            "año": meta_row[4] if meta_row[4] else "Desconocido",
-            "popularidad": meta_row[5] if meta_row[5] else 0
-        }
-
-        # 2. ESTADÍSTICAS PURAS (Info)
-        cursor.execute("SELECT MIN(played_at), COUNT(*) FROM reproducciones WHERE track_id = ?", (track_id,))
-        stats_row = cursor.fetchone()
-        dia_descubrimiento = stats_row[0].split()[0] if stats_row[0] else "Desconocido"
-        total_escuchas = stats_row[1] or 0
-
-        # Gráfico de Barras: Reproducciones por día (últimos 7 días activos)
-        cursor.execute('''
-            SELECT DATE(played_at) as dia, COUNT(*) 
-            FROM reproducciones 
-            WHERE track_id = ? 
-            GROUP BY dia ORDER BY dia ASC LIMIT 14
-        ''', (track_id,))
-        grafica_repros = [{"x": r[0], "y": r[1]} for r in cursor.fetchall()]
-
-        # 3. ESTADÍSTICAS DE FATIGA (Overrating)
-        cursor.execute("SELECT overrate, max_racha_dias, max_gap_dias, pico_trauma, fecha_pico FROM fatiga_actual WHERE track_id = ?", (track_id,))
-        fat_row = cursor.fetchone()
-        
-        stats_fatiga = {
-            "total_escuchas": total_escuchas,
-            "descubrimiento": dia_descubrimiento,
-            "or_actual": round(fat_row[0], 1) if fat_row else 0,
-            "max_racha_dias": fat_row[1] if fat_row else 0,
-            "max_gap_dias": fat_row[2] if fat_row else 0,
-            "pico_trauma": round(fat_row[3], 1) if fat_row else 0,
-            "fecha_pico": fat_row[4] if fat_row else "N/A"
-        }
-
-        # Gráfico de Líneas: Evolución del OR
-        cursor.execute("SELECT fecha, puntos_fatiga FROM historial_diario WHERE track_id = ? ORDER BY fecha ASC", (track_id,))
-        grafica_or = [{"x": r[0], "y": r[1]} for r in cursor.fetchall()]
-
-        return {"meta": meta, "stats": stats_fatiga, "grafica_repros": grafica_repros, "grafica_or": grafica_or}
-    except Exception as e:
-        print(f"Error en detalle: {e}")
-        return {"error": "Fallo interno"}
-    finally:
-        conexion.close()
 
 @app.get("/widgets/canciones")
 def obtener_canciones_stats():
@@ -707,47 +692,13 @@ def obtener_canciones_stats():
         conexion.close()
         
 @app.get("/dashboard")
-def obtener_dashboard(request: Request): # 👈 Añadimos 'request' para leer las cookies
-    # 1. Verificar sesión a través de la cookie segura
-    user_id = request.cookies.get("session_user")
-    if not user_id:
-        raise HTTPException(status_code=401, detail="No autorizado")
+def obtener_dashboard(auth_data: dict = Depends(obtener_spotify_cliente)):
+    user_id = auth_data["user_id"]
+    sp = auth_data["sp"]
 
     conexion = obtener_conexion()
     conexion.row_factory = sqlite3.Row
     cursor = conexion.cursor()
-
-    # 2. Inicializar el cliente 'sp' dinámicamente usando el refresh_token del usuario
-    try:
-        cursor.execute("SELECT refresh_token FROM usuarios WHERE user_id = ?", (user_id,))
-        usuario_db = cursor.fetchone()
-        if not usuario_db or not usuario_db['refresh_token']:
-            raise HTTPException(status_code=401, detail="Sesión inválida en DB")
-        
-        # 🔄 REFRESO MANUAL DIRECTO (Anti-sp_oauth)
-        import requests
-        from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET # Asegúrate de que tus variables se llaman así
-        
-        res = requests.post("https://accounts.spotify.com/api/token", data={
-            "grant_type": "refresh_token",
-            "refresh_token": usuario_db['refresh_token'],
-            "client_id": SPOTIFY_CLIENT_ID,
-            "client_secret": SPOTIFY_CLIENT_SECRET
-        })
-        
-        tokens_nuevos = res.json()
-        nuevo_access_token = tokens_nuevos.get("access_token")
-        
-        if not nuevo_access_token:
-            raise HTTPException(status_code=401, detail="No se pudo refrescar el token de Spotify")
-            
-        # Inicializamos sp con el token fresco del usuario actual
-        sp = spotipy.Spotify(auth=nuevo_access_token)
-        
-    except Exception as e:
-        print(f"❌ Error autenticando sp en dashboard: {e}")
-        conexion.close()
-        raise HTTPException(status_code=500, detail="Error de autenticación con Spotify")
 
     dashboard = {"en_racha": [], "quemadas": [], "subiendo": [], "olvidadas": []}
 
@@ -884,8 +835,7 @@ def obtener_dashboard(request: Request): # 👈 Añadimos 'request' para leer la
 
 @app.get("/radar")
 def obtener_radar_filtrado(rango: str = "MAX"):
-    conexion = sqlite3.connect("historial.db")
-    conexion.row_factory = sqlite3.Row
+    conexion = obtener_conexion()
     cursor = conexion.cursor()
     
     filtro = ""
@@ -930,7 +880,8 @@ def obtener_radar_filtrado(rango: str = "MAX"):
     return datos
 
 @app.get("/joya")
-def obtener_joya_del_dia():
+def obtener_joya_del_dia(auth_data: dict = Depends(obtener_spotify_cliente)):
+    sp = auth_data["sp"]
     conexion = obtener_conexion()
     cursor = conexion.cursor()
     

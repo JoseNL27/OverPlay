@@ -8,3 +8,5 @@
 25/05
     Migración desde Termux completada.
     Añadido requeriments.txt
+26/05
+    Comenzada la reestructuración del Backend completamente.
