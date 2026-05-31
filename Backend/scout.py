@@ -6,6 +6,7 @@ import re
 from datetime import datetime
 from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET
 from auth import obtener_sp_para_usuario
+from db import obtener_conexion
 
 
 # Importa aquí tus funciones de limpieza de caracteres si las tienes en otro archivo, ej:
@@ -19,12 +20,10 @@ def ejecutar_batida_captura():
     # Como estás en PC, asegúrate de apuntar bien a la ruta si es necesario
     # 🎯 1. BLINDAJE DE RUTA: Buscamos la DB donde realmente está el script
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    DB_PATH = os.path.join(BASE_DIR, "historial.db")
     
-    print(f"📂 Conectando a la base de datos en: {DB_PATH}") # Para que lo veas con tus propios ojos
+   # print(f"📂 Conectando a la base de datos en: {DB_PATH}") # Para que lo veas con tus propios ojos
     
-    conexion = sqlite3.connect(DB_PATH)
-    conexion.row_factory = sqlite3.Row
+    conexion = obtener_conexion()
     cursor = conexion.cursor()
     
     try:

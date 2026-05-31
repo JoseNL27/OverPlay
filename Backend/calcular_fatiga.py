@@ -3,37 +3,40 @@ from datetime import datetime
 import math
 import os
 from core_matematico import calcular_metricas_core
+from db import obtener_conexion
 
-BASE_DATOS = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'historial.db')
 
 def calcular_fatiga_diaria():
     print("🚀 Iniciando Motor Overplay Diario...")
-    conexion = sqlite3.connect(BASE_DATOS, timeout=30.0)
-    conexion.row_factory = sqlite3.Row
+    conexion = obtener_conexion()
     cursor = conexion.cursor()
 
-    # --- 🎛️ CARGAR PREFERENCIAS DEL USUARIO ---
-    cursor.execute("SELECT * FROM configuracion_usuario WHERE id = 1")
-    fila_config = cursor.fetchone()
+    # --- 🎛️ CARGAR PREFERENCIAS DE CADA USUARIO ---
+    try:
+        cursor.execute("SELECT user_id FROM perfiles_usuario")
+        usuarios = cursor.fetchall()
+    except sqlite3.OperationalError as e:
+        print(f"❌ Error al leer la tabla usuarios: {e}")
+        conexion.close()
+        return
+    
+    if not usuarios:
+        print("⚠️ No hay usuarios registrados en la base de datos para escanear.")
+        conexion.close()
+        return
+    
+    for usuario in usuarios:
+        user_id = usuario['user_id']
+        cursor.execute("SELECT sensibilidad_fatiga, tiempo_recuperacion, estilo_escucha FROM perfiles_usuario WHERE user_id = ?", (user_id,))
+        config_usuario = cursor.fetchone()
     
     # Si por algún casual no estuviera, le pasamos un diccionario de emergencia
-    config_usuario = dict(fila_config) if fila_config else {
-        'factor_sensibilidad': 1.0,
-        'tolerancia_atracon': 1.0,
-        'tasa_amnesia': 1.0,
-        'año_nostalgia': 2015,
-        'generos_rapidos': 'reggaeton, trap, urbano, dembow',
-        'generos_refugio': 'lo-fi, classical, ambient, jazz'
+    config_usuario = dict(config_usuario) if config_usuario else {
+        'sensibilidad_fatiga': 1.0,
+        'tiempo_recuperacion': 1.0,
+        'estilo_escucha': 'Normal'
     }
 
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS historial_diario (
-            fecha TEXT,
-            track_id TEXT,
-            puntos_fatiga REAL,
-            PRIMARY KEY (fecha, track_id)
-        )
-    ''')
     ahora = datetime.now()
     fecha_hoy_str = ahora.strftime("%Y-%m-%d")
 

@@ -28,18 +28,18 @@ def calcular_metricas_core(fechas_reproduccion, fecha_objetivo, meta_cancion, vo
     # Volatilidad: Música viral (Pop 90+) sube rápido y se olvida rápido. Nicho (Pop 30) es resistente.
     volatilidad = pop / 50.0 
     
-    generos_cancion = str(meta_cancion.get('generos') or '').lower()
-    gen_rapidos = [g.strip().lower() for g in config_usuario.get('generos_rapidos', '').split(',')]
-    gen_refugio = [g.strip().lower() for g in config_usuario.get('generos_refugio', '').split(',')]
+   # generos_cancion = str(meta_cancion.get('generos') or '').lower()
+   # gen_rapidos = [g.strip().lower() for g in config_usuario.get('generos_rapidos', '').split(',')]
+   # gen_refugio = [g.strip().lower() for g in config_usuario.get('generos_refugio', '').split(',')]
     
     modificador_genero = 1.0
-    if any(g in generos_cancion for g in gen_rapidos if g):
-        modificador_genero = 1.20 # +20% de daño base por ser consumo rápido
-    elif any(g in generos_cancion for g in gen_refugio if g):
-        modificador_genero = 0.80 # -20% de daño base, es tu refugio
+    #if any(g in generos_cancion for g in gen_rapidos if g):
+   #     modificador_genero = 1.20 # +20% de daño base por ser consumo rápido
+    #elif any(g in generos_cancion for g in gen_refugio if g):
+    #    modificador_genero = 0.80 # -20% de daño base, es tu refugio
 
     # Tasa de amnesia base ajustada por volatilidad y el slider del usuario
-    tasa_amnesia_usr = config_usuario.get('tasa_amnesia', 1.0)
+    tasa_amnesia_usr = config_usuario.get('tiempo_recuperacion', 1.0)
     lambda_base = 0.03 * volatilidad * tasa_amnesia_usr
 
     # ---------------------------------------------------------
@@ -57,8 +57,8 @@ def calcular_metricas_core(fechas_reproduccion, fecha_objetivo, meta_cancion, vo
     repros_historicas = 0
     dias_consecutivos = 0
     
-    sensibilidad_usr = config_usuario.get('factor_sensibilidad', 1.0)
-    tolerancia_atracon = config_usuario.get('tolerancia_atracon', 1.0)
+    sensibilidad_usr = config_usuario.get('sensibilidad_fatiga', 1.0)
+    tolerancia_atracon = config_usuario.get(1.0)
 
     # Radiación del Artista y Colaboradores. 
     # Si llevas 2 horas escuchando a Bad Bunny, cualquier tema suyo entra con daño extra.

@@ -14,4 +14,7 @@
     Reescritura completa del scout.py
     Añadido soporte para múltiples usuarios.
     Añadidos los scripts auth.py y db.py con el objetivo de descentralizar y compartimentar el Backend.
-    *Queda pendiente adaptar el resto de los scripts del Backend para aprovechar el nuevo sistema de autenticación y conexión a la base de datos.* 
+    *Queda pendiente adaptar el resto de los scripts del Backend para aprovechar el nuevo sistema de autenticación y conexión a la base de datos.*
+31/05
+    Se adapta calcular_fatiga.py para usar el sistema multiuser.
+    Se dejan placeholders en core_matematico.py hasta adaptarlo a las nuevas tablas de la base de datos.
