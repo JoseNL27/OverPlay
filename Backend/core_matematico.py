@@ -58,7 +58,7 @@ def calcular_metricas_core(fechas_reproduccion, fecha_objetivo, meta_cancion, vo
     dias_consecutivos = 0
     
     sensibilidad_usr = config_usuario.get('sensibilidad_fatiga', 1.0)
-    tolerancia_atracon = config_usuario.get(1.0)
+    tolerancia_atracon = config_usuario.get('tolerancia_atracon', 1.0)
 
     # Radiación del Artista y Colaboradores. 
     # Si llevas 2 horas escuchando a Bad Bunny, cualquier tema suyo entra con daño extra.

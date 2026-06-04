@@ -1,6 +1,7 @@
 import os
 import secrets
 from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI
+from db import obtener_conexion
 from engine import mapear_top_artistas_cold_start, procesar_cold_start, mapear_top_tracks_cold_start, procesar_fatiga_canciones
 from fastapi.responses import HTMLResponse
 from fastapi.responses import RedirectResponse
@@ -44,6 +45,7 @@ REDIRECT_URI = SPOTIFY_REDIRECT_URI
 
 app = FastAPI()
 
+
 # --- CONFIGURACIÓN DE RUTAS FRONTEND ---
 # Calculamos dónde está la carpeta 'app' en relación a este archivo 'api.py'
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -67,15 +69,16 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+conexion = obtener_conexion()
 
-def obtener_conexion():
+#def obtener_conexion():
     # Usamos BASE_DIR que ya tenías definido arriba
-    ruta_bd = os.path.join(BASE_DIR, 'historial.db')
-    conexion = sqlite3.connect(ruta_bd, check_same_thread=False)
-    conexion.row_factory = sqlite3.Row 
+#    ruta_bd = os.path.join(BASE_DIR, 'historial.db')
+#    conexion = sqlite3.connect(ruta_bd, check_same_thread=False)
+#    conexion.row_factory = sqlite3.Row 
     # Activar el modo WAL para evitar el error "Database is Locked"
-    conexion.execute("PRAGMA journal_mode=WAL;")
-    return conexion
+    #conexion.execute("PRAGMA journal_mode=WAL;")
+    #return conexion
 
 def obtener_spotify_cliente(request: Request):
     user_id = request.cookies.get("session_user")
@@ -288,7 +291,7 @@ def debug_cancion(track_id: str):
     informe = {"track_id": track_id}
     
     # 1. Datos del motor de Fatiga (V2: fatiga_actual)
-    cursor.execute("SELECT lambda_actual, puntos_fatiga, ultima_modificacion FROM fatiga_actual WHERE track_id = ?", (track_id,))
+    cursor.execute("SELECT lambda, puntos_fatiga, ultima_actualizacion FROM fatiga_actual WHERE track_id = ?", (track_id,))
     fila_fatiga = cursor.fetchone()
     if fila_fatiga:
         informe["fatiga"] = dict(fila_fatiga)
@@ -503,7 +506,7 @@ def detalle_cancion(track_id: str):
     cursor = conexion.cursor()
     try:
         # 1. METADATOS BÁSICOS
-        cursor.execute("SELECT nombre, artista, colaboradores, imagen_url, ano_lanzamiento, popularidad FROM canciones WHERE track_id = ?", (track_id,))
+        cursor.execute("SELECT nombre, artista, colaboradores, imagen_url, año_lanzamiento, popularidad FROM canciones WHERE track_id = ?", (track_id,))
         meta_row = cursor.fetchone()
         if not meta_row:
             return {"error": "Canción no encontrada"}
@@ -825,9 +828,9 @@ def obtener_radar_filtrado(rango: str = "MAX"):
             # V2: fatiga_actual
             cursor.execute(f'''
                 SELECT 
-                    SUM(CASE WHEN f.puntos_fatiga < 30 THEN 1 ELSE 0 END) as fresh,
-                    SUM(CASE WHEN f.puntos_fatiga >= 30 AND f.puntos_fatiga < 65 THEN 1 ELSE 0 END) as warning,
-                    SUM(CASE WHEN f.puntos_fatiga >= 65 THEN 1 ELSE 0 END) as burnout
+                    SUM(CASE WHEN f.overrate < 30 THEN 1 ELSE 0 END) as fresh,
+                    SUM(CASE WHEN f.overrate >= 30 AND f.overrate < 65 THEN 1 ELSE 0 END) as warning,
+                    SUM(CASE WHEN f.overrate >= 65 THEN 1 ELSE 0 END) as burnout
                 FROM fatiga_actual f
                 INNER JOIN (
                     SELECT DISTINCT track_id FROM reproducciones WHERE played_at >= date('now', '{filtro}')
@@ -836,9 +839,9 @@ def obtener_radar_filtrado(rango: str = "MAX"):
         else:
             cursor.execute('''
                 SELECT 
-                    SUM(CASE WHEN puntos_fatiga < 30 THEN 1 ELSE 0 END) as fresh,
-                    SUM(CASE WHEN puntos_fatiga >= 30 AND puntos_fatiga < 65 THEN 1 ELSE 0 END) as warning,
-                    SUM(CASE WHEN puntos_fatiga >= 65 THEN 1 ELSE 0 END) as burnout
+                    SUM(CASE WHEN overrate < 30 THEN 1 ELSE 0 END) as fresh,
+                    SUM(CASE WHEN overrate >= 30 AND overrate < 65 THEN 1 ELSE 0 END) as warning,
+                    SUM(CASE WHEN overrate >= 65 THEN 1 ELSE 0 END) as burnout
                 FROM fatiga_actual
             ''')
             
