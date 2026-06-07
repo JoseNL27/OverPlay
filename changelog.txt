@@ -18,3 +18,8 @@
 31/05
     Se adapta calcular_fatiga.py para usar el sistema multiuser.
     Se dejan placeholders en core_matematico.py hasta adaptarlo a las nuevas tablas de la base de datos.
+7/06
+    Se modifican las conexiones de la API con SQLite para realizarlo a través de un Context Manager llamado db_session.
+    Saneo del código y funciones inutilizadas en api.py
+    Implementación de Ngrok para permitir el acceso a la API desde el exterior.
+    Se implementa la primera prueba de soporte multiusuario en api.py en el endpoint /radar.
