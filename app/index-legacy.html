@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OverPlay</title>
+
+    <link rel="stylesheet" href="/static/design.css?v=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/app.js?v=9" defer></script>
+</head>
+
+<body>
+
+    <section id="pantalla-bienvenida" class="pantalla-bienvenida-full">
+
+        <div class="bienvenida-centro">
+
+            <div class="bienvenida-brand animate-fade-in">
+                <div class="logo-svg-wrapper logo-maxi"></div>
+                <h1 class="brand-title brand-maxi">OVER<span>PLAY</span></h1>
+                <p class="brand-subtitle subtitle-maxi">Control de Fatiga Musical</p>
+            </div>
+
+            <div class="bienvenida-acciones">
+                <button class="btn-login-spotify glass-panel-accent-glow" onclick="window.location.href='/login'">
+                    <i class="fab fa-spotify"></i> Conectar con Spotify
+                </button>
+
+                <div class="info-trigger-container">
+                    <span class="text-link-subdued">¿Qué es OverPlay?</span>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="app-container">
+
+        <header class="header">
+            <div class="header-logo-container">
+
+                <div class="logo-svg-wrapper"></div>
+
+                <div class="header-text">
+                    <h1 id="app-titulo" class="brand-title">OVER<span>PLAY</span></h1>
+                    <p id="app-subtitulo" class="brand-subtitle">Análisis de Fatiga Musical</p>
+                </div>
+
+            </div>
+        </header>
+
+        <section id="pantalla-dashboard" class="pantalla activa">
+            <div class="dashboard-grid">
+
+                <div id="banner-saturacion"></div>
+
+                <div class="widget-card radar-card">
+                    <div class="widget-header" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+                        <h3>RADAR DE BIBLIOTECA</h3>
+                        <div class="radar-filtros">
+                            <button class="btn-rango activo" onclick="cambiarRangoRadar('MAX')">MAX</button>
+                            <button class="btn-rango" onclick="cambiarRangoRadar('1A')">1A</button>
+                            <button class="btn-rango" onclick="cambiarRangoRadar('1M')">1M</button>
+                            <button class="btn-rango" onclick="cambiarRangoRadar('1S')">1S</button>
+                        </div>
+                    </div>
+
+                    <div class="radar-container" style="position: relative; height: 180px; width: 100%;">
+                        <canvas id="grafica-ecosistema"></canvas>
+                        <div id="radar-total" class="radar-center-text"></div>
+                    </div>
+                </div>
+
+                <div id="contenedor-joya"></div>
+
+                <div class="widget-container">
+                    <div class="widget-title">🔥 Artistas Quemados</div>
+                    <div id="widget-artistas-quemados" class="scroll-horizontal"></div>
+                </div>
+
+                <div class="widget-container">
+                    <div class="widget-title">🧊 Artistas Fríos</div>
+                    <div id="widget-artistas-frios" class="scroll-horizontal"></div>
+                </div>
+
+                <div class="widget-container">
+                    <div class="widget-title">🚀 Canciones en Racha</div>
+                    <div id="widget-en-racha" class="scroll-horizontal"></div>
+                </div>
+
+                <div class="widget-container">
+                    <div class="widget-title">☢️ Canciones Quemadas</div>
+                    <div id="widget-quemadas" class="scroll-horizontal"></div>
+                </div>
+
+                <div class="widget-container">
+                    <div class="widget-title">💎 Joyas Olvidadas</div>
+                    <div id="widget-olvidadas" class="scroll-horizontal"></div>
+                </div>
+
+                <div class="widget-container">
+                    <div class="widget-title">🎧 Escuchadas Recientemente</div>
+                    <div id="widget-recientes" class="scroll-horizontal"></div>
+                </div>
+
+            </div>
+
+            <button id="btn-cargar-playlists" class="btn-principal">
+                🎵 Analizar mis playlists
+            </button>
+        </section>
+
+        <section id="pantalla-playlists" class="pantalla hidden">
+            <div class="section-header">
+                <h2>Tus playlists</h2>
+                <p>Ordenadas por actividad reciente</p>
+            </div>
+            <div id="lista-playlists" class="lista-playlists">
+                <div class="loader">Conectando con Spotify...</div>
+            </div>
+        </section>
+
+        <section id="pantalla-analisis" class="pantalla hidden">
+
+            <div id="resumen-playlist" class="resumen-card hidden">
+                <div class="resumen-top">
+                    <div class="resumen-bloque">
+                        <span class="resumen-label">Índice de Fatiga</span>
+                        <div id="resumen-fatiga" class="fatiga-score">0</div>
+                    </div>
+                    <div class="resumen-bloque right">
+                        <span class="resumen-label">Canciones</span>
+                        <div id="resumen-total" class="resumen-total">0</div>
+                    </div>
+                </div>
+
+                <div class="joyas-container">
+                    <div class="joyas-title">✨ Joyas olvidadas recomendadas</div>
+                    <div id="resumen-recomendadas" class="joyas-lista"></div>
+                </div>
+            </div>
+
+            <div id="resultados-playlist" class="resultados-grid"></div>
+
+        </section>
+
+        <section id="pantalla-buscar" class="pantalla hidden">
+            <div class="search-header">
+                <input type="text" id="input-buscador" class="input-cyber" placeholder="Busca un track o artista... 🛰️"
+                    oninput="ejecutarBusqueda()">
+            </div>
+
+            <div id="resultados-busqueda" class="widget-lista" style="margin-top: 15px; padding-bottom: 80px;">
+                <div style="text-align: center; color: #666; font-size: 13px; margin-top: 40px;">
+                    Iniciando escáner global...
+                </div>
+            </div>
+        </section>
+
+        <section id="vista-perfil" class="pantalla vista-oculta contenedor-principal">
+
+            <div class="perfil-header glass-panel">
+                <div class="avatar-container">
+                    <img src="https://ui-avatars.com/api/?name=Jose+NL&background=1DB954&color=fff&size=128"
+                        alt="Avatar" class="avatar-img">
+                </div>
+                <div class="perfil-info">
+                    <h2 id="nombre-usuario" class="perfil-nombre">JoseNL27</h2>
+                    <div class="perfil-badges">
+                        <span class="badge admin-badge">👑 Admin</span>
+                        <span class="badge ovr-badge">🔥 O.V.R. Activo</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ajustes-seccion">
+                <h3 class="seccion-titulo">Motor Algorítmico</h3>
+
+                <div class="ajuste-item glass-panel">
+                    <div class="ajuste-texto">
+                        <h4>Sensibilidad de Fatiga</h4>
+                        <p>Ajusta cómo de rápido se queman las canciones.</p>
+                    </div>
+                    <input type="range" min="1" max="100" value="50" class="slider-neon">
+                </div>
+
+                <div class="ajuste-item glass-panel">
+                    <div class="ajuste-texto">
+                        <h4>Modo Amnistía</h4>
+                        <p>Resetea el O.V.R. de tracks inactivos.</p>
+                    </div>
+                    <button class="btn-amnistia">Activar</button>
+                </div>
+            </div>
+
+            <div class="zona-peligrosa">
+                <button class="btn-logout glass-panel-danger" onclick="window.location.href='/logout'"">
+                    <i class=" fas fa-sign-out-alt"></i> Cerrar Sesión
+                </button>
+            </div>
+
+        </section>
+
+    </div>
+    <section id="pantalla-detalle" class="pantalla-detalle hidden">
+        <div class="detalle-overlay" onclick="cerrarDetalle()"></div>
+
+        <div class="detalle-panel">
+            <div class="detalle-header">
+                <button class="btn-close" onclick="cerrarDetalle()">✕</button>
+            </div>
+
+            <div class="detalle-main">
+                <img id="det-portada" class="detalle-portada" src="" alt="Portada canción" />
+                <h2 id="det-titulo" class="detalle-titulo"></h2>
+                <p id="det-artista" class="detalle-artista"></p>
+
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="label">Total</span>
+                        <span id="stat-total" class="value">-</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="label">Pico</span>
+                        <span id="stat-pico" class="value">-</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="label">Gap</span>
+                        <span id="stat-gap" class="value">-</span>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-title">Evolución de fatiga</div>
+                    <div class="chart-container">
+                        <canvas id="graficaFatiga"></canvas>
+                    </div>
+                </div>
+
+                <div class="detalle-fechas">
+                    <div class="fecha-item">
+                        <span>📅 Descubierta:</span>
+                        <strong id="det-primera"></strong>
+                    </div>
+                    <div class="fecha-item">
+                        <span>🎧 Última escucha:</span>
+                        <strong id="det-ultima"></strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <nav class="bottom-nav">
+        <button class="nav-item activa" id="nav-inicio">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">Inicio</span>
+        </button>
+        <button class="nav-item" id="nav-playlists">
+            <span class="nav-icon">🎵</span>
+            <span class="nav-label">Playlists</span>
+        </button>
+        <button class="nav-item" id="nav-buscar">
+            <span class="nav-icon">🔍</span>
+            <span class="nav-label">Buscar</span>
+        </button>
+        <button class="nav-item" id="nav-perfil" onclick="cambiarPestaña('perfil')">
+            <i class="fas fa-user nav-icon" style="font-size: 1.2rem; margin-bottom: 3px;"></i>
+            <span class="nav-label">Tú</span>
+        </button>
+    </nav>
+
+</body>
+
+</html>
