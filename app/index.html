@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OverPlay</title>
-    <link rel="stylesheet" href="/css/design.css">
+    <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -26,30 +26,111 @@
 
     <div class="app-container"> <!-- Contenedor de todo el layout de la app -->
         <header>
-            <img src="/OverPlay.svg" alt="OverPlay">
-            <h1>OverPlay</h1>
+            <div class="header-logo">
+                <img src="/OverPlay.svg" alt="OverPlay">
+                <h1>OverPlay</h1>
+            </div>
+            <div class="header-profile">
+                <img src="" alt="Foto de perfil">
+            </div>
         </header>
+        <main>
+            <section id="home-screen" class="screen"> <!-- Pantalla de inicio -->
+                <h1>Hola, <span class="user-name"></span></h1>
+                <!-- Aquí irá el contenido de la pantalla de inicio -->
+                <div class="overview">
+                    <h2>Estado de tus escuchas</h2>
+                    <div class="overview-content"> <!-- Flexbox con dos columnas -->
+                        <div class="ovr-overview"> <!-- Columna izquierda -->
+                            <h3>OVR Actual</h3>
+                            <div class="ovr-overview-content"> <!-- Flexbox con dos columnas -->
+                                <div class="ovr-overview-left">
 
-        <section id="home-screen" class="screen"> <!-- Pantalla de inicio -->
-            <h1>Home</h1>
-            <!-- Aquí irá el contenido de la pantalla de inicio -->
-            <!-- <div class="dashboard-grid"></div> -->
-        </section>
+                                </div>
 
-        <section id="playlists-screen" class="screen"> <!-- Pantalla de playlists -->
-            <h1>Playlists</h1>
-            <!-- Aquí irá el contenido de la pantalla de playlists -->
-        </section>
+                                <div class="ovr-overview-right">
 
-        <section id="search-screen" class="screen"> <!-- Pantalla de búsqueda -->
-            <h1>Búsqueda</h1>
-            <!-- Aquí irá el contenido de la pantalla de búsqueda -->
-        </section>
+                                </div>
+                            </div>
+                        </div>
 
-        <section id="settings-screen" class="screen"> <!-- Pantalla de configuración -->
-            <h1>Configuración</h1>
-            <!-- Aquí irá el contenido de la pantalla de configuración -->
-        </section>
+                        <div class="library-summary"> <!-- Columna derecha -->
+                            <h3>Resumen de tu biblioteca</h3>
+                            <div class="library-summary-content">
+                                <div class="library-graph">
+                                    <canvas id="library-graph-canvas"></canvas>
+                                </div>
+                                <div class="library-graph-buttons">
+                                    <button id="library-graph-btn-7d">7D</button>
+                                    <button id="library-graph-btn-1m">1M</button>
+                                    <button id="library-graph-btn-1y">1Y</button>
+                                    <button id="library-graph-btn-all">ALL</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="musical-temperature">
+                    <h2>Tu temperatura musical</h2>
+                    <div class="musical-temperature-content">
+                        <div class="musical-temperature-graph">
+                            <canvas id="musical-temperature-graph-canvas"></canvas>
+                        </div>
+                        <div class="musical-temperature-items">
+                            <article class="musical-temperature-item">
+                                <img src="" alt="">
+                                <h3></h3>
+                                <p></p>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="forgotten-gem">
+                    <h2>Tu joya musical olvidada</h2>
+                    <div class="forgotten-gem-content">
+
+                    </div>
+                </div>
+
+                <div class="widget-profile">
+                    <h2>¿Quieres saber más sobre ti?</h2>
+                    <div class="widget-profile-content">
+
+                    </div>
+                </div>
+
+            </section>
+
+            <section id="playlists-screen" class="screen"> <!-- Pantalla de playlists -->
+                <h1>Tus Playlists</h1>
+                <div class="playlists-content">
+                    <!-- Aquí saldrán las playlists en formato grid -->
+                </div>
+            </section>
+
+            <section id="search-screen" class="screen"> <!-- Pantalla de búsqueda -->
+                <h1>Búsqueda</h1>
+                <div class="search-box">
+                    <input id="search-input" type="search" placeholder="Buscar">
+                    <button id="search-btn">Buscar</button>
+                </div>
+                <div class="search-results">
+                    <!-- Aquí irá el contenido de la pantalla de búsqueda. Empieza oculto y se muestra al buscar -->
+                </div>
+            </section>
+
+            <section id="settings-screen" class="screen"> <!-- Pantalla de configuración -->
+                <header class="settings-header">
+                    <img src="" alt="Foto de perfil">
+                    <h2><span class="user-name"></span></h2>
+                </header>
+                <div class="settings-content">
+                    <!-- Aquí saldrán las configuraciones en formato lista -->
+                </div>
+            </section>
+        </main>
     </div>
 
     <section id="detail-modal" class="modal">
