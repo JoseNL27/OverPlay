@@ -23,3 +23,10 @@
     Saneo del código y funciones inutilizadas en api.py
     Implementación de Ngrok para permitir el acceso a la API desde el exterior.
     Se implementa la primera prueba de soporte multiusuario en api.py en el endpoint /radar.
+12/08
+    Reescritura completa del Frontend.
+    Creada una nueva arquitectura base para el frontend, separando la aplicación en pantallas independientes y definiendo una estructura clara para la navegación y los distintos componentes de la interfaz.
+    Creada la nueva estructura HTML de la aplicación siguiendo una organización semántica y modular, separando las vistas de Home, Playlists, Búsqueda y Perfil.
+    Rediseñada la Home desde cero siguiendo una filosofía Mobile-First y MVP, definiendo la jerarquía de información y los principales componentes: saludo, O.V.R., resumen de biblioteca, temperatura musical, joyas olvidadas y acceso al perfil.
+    Separada la estructura de presentación de la lógica de aplicación, preparando el frontend para una futura reorganización del código JavaScript y evitando la arquitectura monolítica del frontend anterior.
+    Iniciada la planificación de los componentes dinámicos y su futura integración con los datos proporcionados por la API.
