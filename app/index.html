@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OverPlay</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -43,15 +43,17 @@
                     <div class="overview-content"> <!-- Flexbox con dos columnas -->
                         <div class="ovr-overview"> <!-- Columna izquierda -->
                             <h3>OVR Actual</h3>
-                            <div class="ovr-overview-content"> <!-- Flexbox con dos columnas -->
-                                <div class="ovr-overview-left">
-
-                                </div>
-
-                                <div class="ovr-overview-right">
-
+                            <div class="ovr-overview-content">
+                                <span id="ovr-overview-score">76</span>
+                                <div class="ovr-overview-description">
+                                    <p>ALTO</p>
                                 </div>
                             </div>
+                            <div class="ovr-overview-graph">
+                                <p>Tendencia</p>
+                                <canvas id="ovr-overview-graph-canvas"></canvas>
+                            </div>
+
                         </div>
 
                         <div class="library-summary"> <!-- Columna derecha -->
@@ -61,10 +63,10 @@
                                     <canvas id="library-graph-canvas"></canvas>
                                 </div>
                                 <div class="library-graph-buttons">
-                                    <button id="library-graph-btn-7d">7D</button>
-                                    <button id="library-graph-btn-1m">1M</button>
-                                    <button id="library-graph-btn-1y">1Y</button>
-                                    <button id="library-graph-btn-all">ALL</button>
+                                    <button id="graph-range-btn" data-range="7d">7D</button>
+                                    <button id="graph-range-btn" data-range="1m">1M</button>
+                                    <button id="graph-range-btn" data-range="1y">1Y</button>
+                                    <button id="graph-range-btn" data-range="all">ALL</button>
                                 </div>
                             </div>
                         </div>

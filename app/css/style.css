@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid green;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: 2px solid green;
+}
+
+main {
+    border: 2px solid black;
+}
+
+.screen {
+    border: 2px solid red;
+}
+
+.overview {
+    border: 2px solid green;
+}
+
+.overview-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 2px solid green;
+
+    @media (width < 400px) {
+        flex-direction: column;
+    }
+}
+
+.ovr-overview {
+    border: 2px solid green;
+}
+
+.ovr-overview-content {
+    display: flex;
+    border: 2px solid green;
+}
+
+#ovr-overview-score {
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+.ovr-overview-graph {
+    border: 2px solid green;
+}
+
+.library-summary {
+    border: 2px solid green;
+}
