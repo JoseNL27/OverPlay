@@ -8,32 +8,45 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 2px solid green;
+    outline: 2px solid green;
 }
 
 .header-logo {
     display: flex;
     align-items: center;
     gap: 5px;
-    border: 2px solid green;
+    outline: 2px solid green;
 }
 
 main {
-    border: 2px solid black;
+    outline: 2px solid black;
+    padding-bottom: 0px;
+    /* Espacio para que la barra de navegación no tape el contenido */
 }
 
 .screen {
-    border: 2px solid red;
+    display: none;
+    outline: 2px solid red;
+}
+
+.screen.active {
+    display: block;
+    outline: 2px solid red;
+}
+
+.modal {
+    display: none;
+    outline: 2px solid red;
 }
 
 .overview {
-    border: 2px solid green;
+    outline: 2px solid green;
 }
 
 .overview-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    border: 2px solid green;
+    outline: 2px solid green;
 
     @media (width < 600px) {
         grid-template-columns: 1fr;
@@ -41,12 +54,12 @@ main {
 }
 
 .ovr-overview {
-    border: 2px solid green;
+    outline: 2px solid green;
 }
 
 .ovr-overview-content {
     display: flex;
-    border: 2px solid green;
+    outline: 2px solid green;
 }
 
 #ovr-overview-score {
@@ -55,23 +68,23 @@ main {
 }
 
 .ovr-overview-graph {
-    border: 2px solid green;
+    outline: 2px solid green;
 }
 
 .library-summary {
-    border: 2px solid green;
+    outline: 2px solid green;
 }
 
 .library-graph {
     display: flex;
     flex-direction: row;
-    border: 2px solid green;
+    outline: 2px solid green;
 }
 
 .library-graph-legend {
     display: flex;
     flex-direction: column;
-    border: 2px solid green;
+    outline: 2px solid green;
 
     list-style: none;
 }
@@ -79,7 +92,7 @@ main {
 .library-graph-buttons {
     display: flex;
     flex-direction: row;
-    border: 2px solid green;
+    outline: 2px solid green;
 
     justify-content: center;
     gap: 10px;
@@ -89,17 +102,17 @@ main {
 .detail-content {
     display: flex;
     flex-direction: column;
-    border: 2px solid green;
+    outline: 2px solid green;
 }
 
 .detail-header {
     display: grid;
     justify-items: center;
-    border: 2px solid green;
+    outline: 2px solid green;
 }
 
 #detail-close-btn {
-    border: 2px solid green;
+    outline: 2px solid green;
 
     justify-self: end;
     width: 20px;
@@ -108,11 +121,28 @@ main {
 }
 
 .detail-cover-wrapper {
-    border: 2px solid green;
+    outline: 2px solid green;
 }
 
 .detail-tabs {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    border: 2px solid green;
+    outline: 2px solid green;
+}
+
+.nav-bar {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+    outline: 2px solid green;
+
+    /* @media (width >=800px) {
+        .nav-bar {
+             convertirla en sidebar 
+        }
+    } */
 }

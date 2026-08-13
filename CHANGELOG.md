@@ -43,3 +43,6 @@
  * **Reestructuración del componente "Resumen de tu biblioteca"** dentro del Overview, incluyendo la estructura de la gráfica, leyenda y controles de rango temporal.
  * **Creada la estructura HTML y CSS inicial del modal de detalle**, preparado para mostrar información tanto de canciones como de artistas.
  * **Reestructuración de los widgets del frontend** mediante una clase común para establecer una base de diseño y estructura compartida entre los distintos componentes.
+ * **Comienzo de la reescritura del código JavaScript**
+ * **Añadida la funcionalidad de navegación entre pantallas** mediante la barra de navegación inferior.
+ * **La nueva rama (frontend-v2) se convierte en la rama principal** y la antigua (main) se renombra a legacy.

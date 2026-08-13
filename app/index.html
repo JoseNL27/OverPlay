@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/js/app.js" defer></script>
+    <script src="js/script.js" defer></script>
 </head>
 
 <body>
@@ -35,7 +35,7 @@
             </div>
         </header>
         <main>
-            <section id="home-screen" class="screen"> <!-- Pantalla de inicio -->
+            <section id="home-screen" class="screen active"> <!-- Pantalla de inicio -->
                 <h1>Hola, <span class="user-name"></span></h1>
                 <!-- Aquí irá el contenido de la pantalla de inicio -->
                 <div id="overview" class="widget">
@@ -82,10 +82,10 @@
                                     </ul>
                                 </div>
                                 <div class="library-graph-buttons"> <!-- Botones para cambiar el rango de la gráfica -->
-                                    <button id="graph-range-btn" data-range="7d">7D</button>
-                                    <button id="graph-range-btn" data-range="1m">1M</button>
-                                    <button id="graph-range-btn" data-range="1y">1Y</button>
-                                    <button id="graph-range-btn" data-range="all">ALL</button>
+                                    <button class="graph-range-btn" data-range="7d">7D</button>
+                                    <button class="graph-range-btn" data-range="1m">1M</button>
+                                    <button class="graph-range-btn" data-range="1y">1Y</button>
+                                    <button class="graph-range-btn" data-range="all">ALL</button>
                                 </div>
                             </div>
                         </div>
@@ -166,8 +166,8 @@
         </div>
         <div class="detail-content">
             <div class="detail-tabs">
-                <button id="detail-tab-btn" data-tab="info">Información</button>
-                <button id="detail-tab-btn" data-tab="stats">Estadísticas</button>
+                <button class="detail-tab-btn" data-tab="info">Información</button>
+                <button class="detail-tab-btn" data-tab="stats">Estadísticas</button>
             </div>
             <div class="detail-tab-wrapper">
                 <div id="tab-info" class="detail-tab-content">
@@ -182,10 +182,10 @@
 
     <nav class="nav-bar">
         <!-- Barra de navegación. Se deja fuera de app-container para que se muestre sobre el contenido principal -->
-        <button id="nav-home" class="nav-btn">Home</button>
-        <button id="nav-playlists" class="nav-btn">Playlists</button>
-        <button id="nav-search" class="nav-btn">Búsqueda</button>
-        <button id="nav-settings" class="nav-btn">Configuración</button>
+        <button id="nav-home" class="nav-btn" data-screen="home-screen">Home</button>
+        <button id="nav-playlists" class="nav-btn" data-screen="playlists-screen">Playlists</button>
+        <button id="nav-search" class="nav-btn" data-screen="search-screen">Búsqueda</button>
+        <button id="nav-settings" class="nav-btn" data-screen="settings-screen">Configuración</button>
     </nav>
 
 </body>
