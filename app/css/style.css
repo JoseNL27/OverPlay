@@ -31,13 +31,12 @@ main {
 }
 
 .overview-content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     border: 2px solid green;
 
-    @media (width < 400px) {
-        flex-direction: column;
+    @media (width < 600px) {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -60,5 +59,60 @@ main {
 }
 
 .library-summary {
+    border: 2px solid green;
+}
+
+.library-graph {
+    display: flex;
+    flex-direction: row;
+    border: 2px solid green;
+}
+
+.library-graph-legend {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid green;
+
+    list-style: none;
+}
+
+.library-graph-buttons {
+    display: flex;
+    flex-direction: row;
+    border: 2px solid green;
+
+    justify-content: center;
+    gap: 10px;
+}
+
+
+.detail-content {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid green;
+}
+
+.detail-header {
+    display: grid;
+    justify-items: center;
+    border: 2px solid green;
+}
+
+#detail-close-btn {
+    border: 2px solid green;
+
+    justify-self: end;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.detail-cover-wrapper {
+    border: 2px solid green;
+}
+
+.detail-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     border: 2px solid green;
 }

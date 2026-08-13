@@ -38,31 +38,50 @@
             <section id="home-screen" class="screen"> <!-- Pantalla de inicio -->
                 <h1>Hola, <span class="user-name"></span></h1>
                 <!-- Aquí irá el contenido de la pantalla de inicio -->
-                <div class="overview">
+                <div id="overview" class="widget">
                     <h2>Estado de tus escuchas</h2>
                     <div class="overview-content"> <!-- Flexbox con dos columnas -->
-                        <div class="ovr-overview"> <!-- Columna izquierda -->
+                        <div class="ovr-overview"> <!-- Resumen del OVR -->
                             <h3>OVR Actual</h3>
-                            <div class="ovr-overview-content">
+                            <div class="ovr-overview-content"> <!-- OVR SCORE y descripción-->
                                 <span id="ovr-overview-score">76</span>
                                 <div class="ovr-overview-description">
-                                    <p>ALTO</p>
+                                    <h4 id="ovr-overview-level">ALTO</h4>
+                                    <p>Tu nivel de fatiga musical es alto.</p>
                                 </div>
                             </div>
-                            <div class="ovr-overview-graph">
-                                <p>Tendencia</p>
+                            <div class="ovr-overview-graph"> <!-- Tendencia del OVR -->
+                                <p>Tendencia últimos 7 días</p>
                                 <canvas id="ovr-overview-graph-canvas"></canvas>
                             </div>
-
                         </div>
 
-                        <div class="library-summary"> <!-- Columna derecha -->
+                        <div class="library-summary"> <!-- Resumen de la biblioteca del usuario -->
                             <h3>Resumen de tu biblioteca</h3>
                             <div class="library-summary-content">
-                                <div class="library-graph">
+                                <div class="library-graph"> <!-- Gráfica de la biblioteca (grafico de tartas) -->
                                     <canvas id="library-graph-canvas"></canvas>
+                                    <ul class="library-graph-legend">
+                                        <!-- Leyenda de la gráfica. Los nombres son placeholders. -->
+                                        <li class="legend-item">
+                                            <span class="legend-color" data-status="overplayed"></span>
+                                            <span class="legend-text">Overplayed</span>
+                                        </li>
+                                        <li class="legend-item">
+                                            <span class="legend-color" data-status="danger"></span>
+                                            <span class="legend-text">Peligro</span>
+                                        </li>
+                                        <li class="legend-item">
+                                            <span class="legend-color" data-status="normal"></span>
+                                            <span class="legend-text">Normal</span>
+                                        </li>
+                                        <li class="legend-item">
+                                            <span class="legend-color" data-status="discovery"></span>
+                                            <span class="legend-text">Descubrimiento</span>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <div class="library-graph-buttons">
+                                <div class="library-graph-buttons"> <!-- Botones para cambiar el rango de la gráfica -->
                                     <button id="graph-range-btn" data-range="7d">7D</button>
                                     <button id="graph-range-btn" data-range="1m">1M</button>
                                     <button id="graph-range-btn" data-range="1y">1Y</button>
@@ -73,7 +92,7 @@
                     </div>
                 </div>
 
-                <div class="musical-temperature">
+                <div id="musical-temperature" class="widget">
                     <h2>Tu temperatura musical</h2>
                     <div class="musical-temperature-content">
                         <div class="musical-temperature-graph">
@@ -89,14 +108,14 @@
                     </div>
                 </div>
 
-                <div class="forgotten-gem">
+                <div id="forgotten-gem" class="widget">
                     <h2>Tu joya musical olvidada</h2>
                     <div class="forgotten-gem-content">
 
                     </div>
                 </div>
 
-                <div class="widget-profile">
+                <div id="profile-widget" class="widget">
                     <h2>¿Quieres saber más sobre ti?</h2>
                     <div class="widget-profile-content">
 
@@ -124,10 +143,10 @@
             </section>
 
             <section id="settings-screen" class="screen"> <!-- Pantalla de configuración -->
-                <header class="settings-header">
+                <div class="settings-header">
                     <img src="" alt="Foto de perfil">
                     <h2><span class="user-name"></span></h2>
-                </header>
+                </div>
                 <div class="settings-content">
                     <!-- Aquí saldrán las configuraciones en formato lista -->
                 </div>
@@ -137,8 +156,28 @@
 
     <section id="detail-modal" class="modal">
         <!-- Pantalla de detalle. la dejamos fuera de app-container para que se muestre sobre el contenido principal -->
-        <h1>Detalle</h1>
-        <!-- Aquí irá el contenido de la pantalla de detalle -->
+        <div class="detail-header">
+            <button type="button" id="detail-close-btn">X</button>
+            <div class="detail-cover-wrapper">
+                <img class="detail-cover" src="" alt="cover">
+            </div>
+            <h2 class="detail-title">Titulo</h2>
+            <h3 class="detail-subtitle">Subtitulo</h3>
+        </div>
+        <div class="detail-content">
+            <div class="detail-tabs">
+                <button id="detail-tab-btn" data-tab="info">Información</button>
+                <button id="detail-tab-btn" data-tab="stats">Estadísticas</button>
+            </div>
+            <div class="detail-tab-wrapper">
+                <div id="tab-info" class="detail-tab-content">
+
+                </div>
+                <div id="tab-stats" class="detail-tab-content">
+
+                </div>
+            </div>
+        </div>
     </section>
 
     <nav class="nav-bar">

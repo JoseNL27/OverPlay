@@ -26,7 +26,7 @@
 
 # frontend-v2
 
-## 12/08
+## 11/08
  * **Reescritura completa del Frontend.**
  * **Creada una nueva arquitectura base para el frontend**, separando la aplicación en pantallas independientes y definiendo una estructura clara para la navegación y los distintos componentes de la interfaz.
  * **Creada la nueva estructura HTML de la aplicación** siguiendo una organización semántica y modular, separando las vistas de Home, Playlists, Búsqueda y Perfil.
@@ -34,7 +34,12 @@
  * **Separada la estructura de presentación de la lógica de aplicación**, preparando el frontend para una futura reorganización del código JavaScript y evitando la arquitectura monolítica del frontend anterior.
  * **Iniciada la planificación de los componentes dinámicos** y su futura integración con los datos proporcionados por la API.
 
-## 13/08
+## 12/08
  * **Primera iteración para la nueva arquitectura del css** Añadiendo bordes a modo de debug para identificar los componentes.
  * **Añadido el O.V.R. Overview** a la Home.
  * **Cambiada la extensión de changelog.txt por CHANGELOG.md** para seguir el estándar de GitHub.
+
+## 13/08
+ * **Reestructuración del componente "Resumen de tu biblioteca"** dentro del Overview, incluyendo la estructura de la gráfica, leyenda y controles de rango temporal.
+ * **Creada la estructura HTML y CSS inicial del modal de detalle**, preparado para mostrar información tanto de canciones como de artistas.
+ * **Reestructuración de los widgets del frontend** mediante una clase común para establecer una base de diseño y estructura compartida entre los distintos componentes.
