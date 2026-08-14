@@ -146,3 +146,42 @@ main {
         }
     } */
 }
+
+.playlists-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    outline: 2px solid green;
+    gap: 10px;
+
+    @media (width < 440px) {
+        /* Los números para aplicar el responsive son meras pruebas, no son definitivos*/
+        grid-template-columns: 1fr;
+    }
+}
+
+.playlist-card {
+    display: grid;
+    grid-template-rows: 3fr 1fr;
+    width: 200px;
+    height: 300px;
+    outline: 2px solid green;
+
+}
+
+.playlist-card-image {
+    outline: 2px solid green;
+}
+
+.playlist-card-content {
+    display: grid;
+    justify-items: center;
+    gap: 5px;
+}
+
+.playlist-card-ovr {
+    display: flex;
+    outline: 2px solid green;
+    height: 50px;
+    overflow: hidden;
+}

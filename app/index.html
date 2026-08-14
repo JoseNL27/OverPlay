@@ -127,7 +127,51 @@
             <section id="playlists-screen" class="screen"> <!-- Pantalla de playlists -->
                 <h1>Tus Playlists</h1>
                 <div class="playlists-content">
-                    <!-- Aquí saldrán las playlists en formato grid -->
+                    <!-- A continuación se dejan 2  placeholder playlist para maquetar -->
+
+                    <article class="playlist-card"> <!-- Placeholder playlist 1 -->
+                        <div class="playlist-card-content">
+                            <div class="playlist-card-image">
+                                <img src="" alt="Playlist cover">
+                            </div>
+                            <h3 class="playlist-card-title">Nombre playlist</h3>
+                            <p class="playlist-card-description">Descripción playlist</p>
+                        </div>
+                        <div class="playlist-card-ovr">
+                            <span class="ovr-level">OVR</span>
+                            <canvas class="playlist-card-ovr-canvas"></canvas>
+                        </div>
+                    </article>
+
+                    <article class="playlist-card"> <!-- Placeholder playlist 2 -->
+                        <div class="playlist-card-content">
+                            <div class="playlist-card-image">
+                                <img src="" alt="Playlist cover">
+                            </div>
+                            <h3 class="playlist-card-title">Nombre playlist</h3>
+                            <p class="playlist-card-description">Descripción playlist</p>
+                        </div>
+                        <div class="playlist-card-ovr">
+                            <span class="ovr-level">OVR</span>
+                            <canvas class="playlist-card-ovr-canvas"></canvas>
+                        </div>
+                    </article>
+
+                    <template id="playlist-card-template">
+                        <article class="playlist-card">
+                            <div class="playlist-card-content">
+                                <div class="playlist-card-image">
+                                    <img src="" alt="Playlist cover">
+                                </div>
+                                <h3 class="playlist-card-title">Nombre playlist</h3>
+                                <p class="playlist-card-description">Descripción playlist</p>
+                            </div>
+                            <div class="playlist-card-ovr">
+                                <span class="ovr-level">OVR</span>
+                                <canvas class="playlist-card-ovr-canvas"></canvas>
+                            </div>
+                        </article>
+                    </template>
                 </div>
             </section>
 
