@@ -48,5 +48,7 @@
  * **La nueva rama (frontend-v2) se convierte en la rama principal** y la antigua (main) se renombra a legacy.
 
 ## 14/08
- * **Hecha la estructura de la pantalla de Playlist** (actualmente solo con placeholders)
+ * **Hecha la estructura de la pantalla de Playlist** usando placeholders para maquetación.
+ * **Hecha la estructura de la pantalla de Búsqueda** usando placeholders para maquetación.
+
  

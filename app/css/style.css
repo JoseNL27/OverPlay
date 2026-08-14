@@ -39,6 +39,13 @@ main {
     outline: 2px solid red;
 }
 
+.widget {
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    outline: 2px solid green;
+}
+
 .overview {
     outline: 2px solid green;
 }
@@ -239,4 +246,19 @@ main {
     justify-content: center;
     align-items: center;
     outline: 2px solid green;
+}
+
+.account-info {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    align-items: center;
+    outline: 2px solid green;
+    gap: 10px;
+}
+
+#settings-data {
+    display: flex;
+    flex-direction: column;
+    outline: 2px solid green;
+    gap: 10px;
 }

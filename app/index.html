@@ -189,14 +189,14 @@
                             </div>
 
                             <div class="search-result-info">
-                                <div class="search-result-info-header">
-                                    <h3 class="search-result-title"></h3>
-                                    <canvas class="search-result-ovr-canvas"></canvas>
-                                </div>
-                                <p class="search-result-subtitle"></p>
+                                <h3 class="search-result-title">Titulo</h3>
+                                <p class="search-result-subtitle">Subtitulo</p>
+                                <span class="search-result-type">Tipo</span>
                             </div>
 
-                            <span class="search-result-type"></span>
+                            <div class="search-result-ovr">
+                                <span class="ovr-level">OVR</span>
+                            </div>
                         </article>
                     </template>
 
@@ -236,13 +236,52 @@
                 </div>
             </section>
 
-            <section id="settings-screen" class="screen"> <!-- Pantalla de configuración -->
-                <div class="settings-header">
-                    <img src="" alt="Foto de perfil">
-                    <h2><span class="user-name"></span></h2>
-                </div>
+            <section id="settings-screen" class="screen">
+                <!-- Pantalla de configuración. Esta sección está totalmente en formato placeholder hasta que se implemente el backend-->
                 <div class="settings-content">
-                    <!-- Aquí saldrán las configuraciones en formato lista -->
+                    <h1 class="settings-main-title">Configuración</h1>
+
+
+                    <div id="settings-account" class="widget">
+                        <h2 class="widget-title">Cuenta</h2>
+                        <div class="account-info">
+                            <div class="account-avatar">
+                                <img src="" alt="">
+                            </div>
+                            <div class="account-details">
+                                <div class="account-name">Username</div>
+                                <div class="account-status">Conectado con Spotify</div>
+                            </div>
+                        </div>
+                        <div class="account-actions">
+                            <button class="account-action-btn" id="logout-spotify-btn">Cerrar sesión con
+                                Spotify</button>
+                            <button class="account-action-btn" id="logout-overplay-btn">Cerrar sesión en
+                                OverPlay</button>
+                        </div>
+                    </div>
+
+                    <div id="settings-appearance" class="widget">
+                        <h2 class="widget-title">Apariencia</h2>
+                        <div class="appearance-options">
+                            <!-- Por decidir-->
+                        </div>
+                    </div>
+
+                    <div id="settings-data" class="widget">
+                        <h2 class="widget-title">Datos</h2>
+                        <button class="data-btn" id="export-data-btn">Exportar datos</button>
+                        <button class="data-btn" id="import-data-btn">Importar datos</button>
+                        <button class="data-btn" id="delete-data-btn">Eliminar datos</button>
+                    </div>
+
+                    <div id="settings-about" class="widget">
+                        <h2 class="widget-title">Sobre OverPlay</h2>
+                        <p>OverPlay es una aplicación de análisis de hábitos musicales.</p>
+                        <p><a href="https://github.com/JoseNL27">Desarrollado por JoseNL27</a></p>
+                        <p>Versión: 0.0.1 (Beta)</p>
+                    </div>
+
                 </div>
             </section>
         </main>
