@@ -127,7 +127,51 @@
             <section id="playlists-screen" class="screen"> <!-- Pantalla de playlists -->
                 <h1>Tus Playlists</h1>
                 <div class="playlists-content">
-                    <!-- Aquí saldrán las playlists en formato grid -->
+                    <!-- A continuación se dejan 2  placeholder playlist para maquetar -->
+
+                    <article class="playlist-card"> <!-- Placeholder playlist 1 -->
+                        <div class="playlist-card-content">
+                            <div class="playlist-card-image">
+                                <img src="" alt="Playlist cover">
+                            </div>
+                            <h3 class="playlist-card-title">Nombre playlist</h3>
+                            <p class="playlist-card-description">Descripción playlist</p>
+                        </div>
+                        <div class="playlist-card-ovr">
+                            <span class="ovr-level">OVR</span>
+                            <canvas class="playlist-card-ovr-canvas"></canvas>
+                        </div>
+                    </article>
+
+                    <article class="playlist-card"> <!-- Placeholder playlist 2 -->
+                        <div class="playlist-card-content">
+                            <div class="playlist-card-image">
+                                <img src="" alt="Playlist cover">
+                            </div>
+                            <h3 class="playlist-card-title">Nombre playlist</h3>
+                            <p class="playlist-card-description">Descripción playlist</p>
+                        </div>
+                        <div class="playlist-card-ovr">
+                            <span class="ovr-level">OVR</span>
+                            <canvas class="playlist-card-ovr-canvas"></canvas>
+                        </div>
+                    </article>
+
+                    <template id="playlist-card-template">
+                        <article class="playlist-card">
+                            <div class="playlist-card-content">
+                                <div class="playlist-card-image">
+                                    <img src="" alt="Playlist cover">
+                                </div>
+                                <h3 class="playlist-card-title">Nombre playlist</h3>
+                                <p class="playlist-card-description">Descripción playlist</p>
+                            </div>
+                            <div class="playlist-card-ovr">
+                                <span class="ovr-level">OVR</span>
+                                <canvas class="playlist-card-ovr-canvas"></canvas>
+                            </div>
+                        </article>
+                    </template>
                 </div>
             </section>
 
@@ -137,18 +181,107 @@
                     <input id="search-input" type="search" placeholder="Buscar">
                     <button id="search-btn">Buscar</button>
                 </div>
-                <div class="search-results">
-                    <!-- Aquí irá el contenido de la pantalla de búsqueda. Empieza oculto y se muestra al buscar -->
+                <div class="search-results-list">
+                    <template id="search-result-template">
+                        <article class="search-result">
+                            <div class="search-result-image-wrapper">
+                                <img class="search-result-image" src="" alt="">
+                            </div>
+
+                            <div class="search-result-info">
+                                <h3 class="search-result-title">Titulo</h3>
+                                <p class="search-result-subtitle">Subtitulo</p>
+                                <span class="search-result-type">Tipo</span>
+                            </div>
+
+                            <div class="search-result-ovr">
+                                <span class="ovr-level">OVR</span>
+                            </div>
+                        </article>
+                    </template>
+
+                    <!-- Placeholders de search result para la maquetación -->
+                    <article class="search-result">
+                        <div class="search-result-image-wrapper">
+                            <img class="search-result-image" src="" alt="">
+                        </div>
+
+                        <div class="search-result-info">
+                            <h3 class="search-result-title">Titulo</h3>
+                            <p class="search-result-subtitle">Subtitulo</p>
+                            <span class="search-result-type">Tipo</span>
+                        </div>
+
+                        <div class="search-result-ovr">
+                            <span class="ovr-level">OVR</span>
+                        </div>
+                    </article>
+
+                    <article class="search-result">
+                        <div class="search-result-image-wrapper">
+                            <img class="search-result-image" src="" alt="">
+                        </div>
+
+                        <div class="search-result-info">
+                            <h3 class="search-result-title">Titulo</h3>
+                            <p class="search-result-subtitle">Subtitulo</p>
+                            <span class="search-result-type">Tipo</span>
+                        </div>
+
+                        <div class="search-result-ovr">
+                            <span class="ovr-level">OVR</span>
+                        </div>
+                    </article>
+
                 </div>
             </section>
 
-            <section id="settings-screen" class="screen"> <!-- Pantalla de configuración -->
-                <div class="settings-header">
-                    <img src="" alt="Foto de perfil">
-                    <h2><span class="user-name"></span></h2>
-                </div>
+            <section id="settings-screen" class="screen">
+                <!-- Pantalla de configuración. Esta sección está totalmente en formato placeholder hasta que se implemente el backend-->
                 <div class="settings-content">
-                    <!-- Aquí saldrán las configuraciones en formato lista -->
+                    <h1 class="settings-main-title">Configuración</h1>
+
+
+                    <div id="settings-account" class="widget">
+                        <h2 class="widget-title">Cuenta</h2>
+                        <div class="account-info">
+                            <div class="account-avatar">
+                                <img src="" alt="">
+                            </div>
+                            <div class="account-details">
+                                <div class="account-name">Username</div>
+                                <div class="account-status">Conectado con Spotify</div>
+                            </div>
+                        </div>
+                        <div class="account-actions">
+                            <button class="account-action-btn" id="logout-spotify-btn">Cerrar sesión con
+                                Spotify</button>
+                            <button class="account-action-btn" id="logout-overplay-btn">Cerrar sesión en
+                                OverPlay</button>
+                        </div>
+                    </div>
+
+                    <div id="settings-appearance" class="widget">
+                        <h2 class="widget-title">Apariencia</h2>
+                        <div class="appearance-options">
+                            <!-- Por decidir-->
+                        </div>
+                    </div>
+
+                    <div id="settings-data" class="widget">
+                        <h2 class="widget-title">Datos</h2>
+                        <button class="data-btn" id="export-data-btn">Exportar datos</button>
+                        <button class="data-btn" id="import-data-btn">Importar datos</button>
+                        <button class="data-btn" id="delete-data-btn">Eliminar datos</button>
+                    </div>
+
+                    <div id="settings-about" class="widget">
+                        <h2 class="widget-title">Sobre OverPlay</h2>
+                        <p>OverPlay es una aplicación de análisis de hábitos musicales.</p>
+                        <p><a href="https://github.com/JoseNL27">Desarrollado por JoseNL27</a></p>
+                        <p>Versión: 0.0.1 (Beta)</p>
+                    </div>
+
                 </div>
             </section>
         </main>

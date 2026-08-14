@@ -39,6 +39,13 @@ main {
     outline: 2px solid red;
 }
 
+.widget {
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    outline: 2px solid green;
+}
+
 .overview {
     outline: 2px solid green;
 }
@@ -145,4 +152,113 @@ main {
              convertirla en sidebar 
         }
     } */
+}
+
+.playlists-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    outline: 2px solid green;
+    gap: 10px;
+
+    @media (width < 440px) {
+        /* Los números para aplicar el responsive son meras pruebas, no son definitivos*/
+        grid-template-columns: 1fr;
+    }
+}
+
+.playlist-card {
+    display: grid;
+    grid-template-rows: 3fr 1fr;
+    width: 200px;
+    height: 300px;
+    outline: 2px solid green;
+
+}
+
+.playlist-card-image {
+    outline: 2px solid green;
+}
+
+.playlist-card-content {
+    display: grid;
+    justify-items: center;
+    gap: 5px;
+}
+
+.playlist-card-ovr {
+    display: flex;
+    outline: 2px solid green;
+    height: 50px;
+    overflow: hidden;
+}
+
+.search-results-list {
+    display: flex;
+    flex-direction: column;
+    outline: 2px solid green;
+    /* gap: 10px; */
+}
+
+.search-result {
+    display: grid;
+    grid-template-columns: 80px 1fr 80px;
+    height: 80px;
+    outline: 2px solid green;
+    margin-inline: 10px;
+}
+
+.search-result-image-wrapper {
+    display: flex;
+    outline: 2px solid green;
+    justify-self: center;
+    align-self: center;
+}
+
+.search-result-image {
+    outline: 2px solid green;
+    width: 70px;
+    height: 70px;
+}
+
+.search-result-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    outline: 2px solid green;
+}
+
+
+.search-result-title {
+    outline: 2px solid green;
+}
+
+.search-result-subtitle {
+    outline: 2px solid green;
+}
+
+.search-result-type {
+    outline: 2px solid green;
+}
+
+.search-result-ovr {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: 2px solid green;
+}
+
+.account-info {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    align-items: center;
+    outline: 2px solid green;
+    gap: 10px;
+}
+
+#settings-data {
+    display: flex;
+    flex-direction: column;
+    outline: 2px solid green;
+    gap: 10px;
 }
