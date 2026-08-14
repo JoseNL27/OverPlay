@@ -181,8 +181,58 @@
                     <input id="search-input" type="search" placeholder="Buscar">
                     <button id="search-btn">Buscar</button>
                 </div>
-                <div class="search-results">
-                    <!-- Aquí irá el contenido de la pantalla de búsqueda. Empieza oculto y se muestra al buscar -->
+                <div class="search-results-list">
+                    <template id="search-result-template">
+                        <article class="search-result">
+                            <div class="search-result-image-wrapper">
+                                <img class="search-result-image" src="" alt="">
+                            </div>
+
+                            <div class="search-result-info">
+                                <div class="search-result-info-header">
+                                    <h3 class="search-result-title"></h3>
+                                    <canvas class="search-result-ovr-canvas"></canvas>
+                                </div>
+                                <p class="search-result-subtitle"></p>
+                            </div>
+
+                            <span class="search-result-type"></span>
+                        </article>
+                    </template>
+
+                    <!-- Placeholders de search result para la maquetación -->
+                    <article class="search-result">
+                        <div class="search-result-image-wrapper">
+                            <img class="search-result-image" src="" alt="">
+                        </div>
+
+                        <div class="search-result-info">
+                            <h3 class="search-result-title">Titulo</h3>
+                            <p class="search-result-subtitle">Subtitulo</p>
+                            <span class="search-result-type">Tipo</span>
+                        </div>
+
+                        <div class="search-result-ovr">
+                            <span class="ovr-level">OVR</span>
+                        </div>
+                    </article>
+
+                    <article class="search-result">
+                        <div class="search-result-image-wrapper">
+                            <img class="search-result-image" src="" alt="">
+                        </div>
+
+                        <div class="search-result-info">
+                            <h3 class="search-result-title">Titulo</h3>
+                            <p class="search-result-subtitle">Subtitulo</p>
+                            <span class="search-result-type">Tipo</span>
+                        </div>
+
+                        <div class="search-result-ovr">
+                            <span class="ovr-level">OVR</span>
+                        </div>
+                    </article>
+
                 </div>
             </section>
 
