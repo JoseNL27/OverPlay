@@ -1,0 +1,47 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+
+main {
+    padding-bottom: 0px;
+    /* Espacio para que la barra de navegación no tape el contenido */
+}
+
+.screen {
+    display: none;
+
+}
+
+.screen.active {
+    display: block;
+}
+
+.modal {
+    display: none;
+}
+
+.nav-bar {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+
+    /* @media (width >=800px) {
+        .nav-bar {
+             convertirla en sidebar 
+        }
+    } */
+}

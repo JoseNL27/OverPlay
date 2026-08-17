@@ -1,0 +1,18 @@
+.playlist-card {
+    display: grid;
+    grid-template-rows: 3fr 1fr;
+    width: 200px;
+    height: 300px;
+}
+
+.playlist-card-content {
+    display: grid;
+    justify-items: center;
+    gap: 5px;
+}
+
+.playlist-card-ovr {
+    display: flex;
+    height: 50px;
+    overflow: hidden;
+}

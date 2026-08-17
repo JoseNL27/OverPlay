@@ -1,119 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Reset de estilos reset.css*/
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-}
-
-.header-logo {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-main {
-    padding-bottom: 0px;
-    /* Espacio para que la barra de navegación no tape el contenido */
-}
-
-.screen {
-    display: none;
-
-}
-
-.screen.active {
-    display: block;
-}
-
-.modal {
-    display: none;
-}
-
-
-.overview-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-
-    @media (width < 600px) {
-        grid-template-columns: 1fr;
-    }
-}
-
-.ovr-overview-content {
-    display: flex;
-}
-
-#ovr-overview-score {
-    font-size: 4rem;
-    font-weight: bold;
-}
-
-.library-graph {
-    display: flex;
-    flex-direction: row;
-}
-
-.library-graph-legend {
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-}
-
-.library-graph-buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 10px;
-}
-
-
-.detail-content {
-    display: flex;
-    flex-direction: column;
-}
-
-.detail-header {
-    display: grid;
-    justify-items: center;
-}
-
-#detail-close-btn {
-    justify-self: end;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-}
-
-
-.detail-tabs {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
-.nav-bar {
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    justify-content: space-evenly;
-    align-items: center;
-
-    /* @media (width >=800px) {
-        .nav-bar {
-             convertirla en sidebar 
-        }
-    } */
-}
-
 .playlists-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -126,24 +10,7 @@ main {
     }
 }
 
-.playlist-card {
-    display: grid;
-    grid-template-rows: 3fr 1fr;
-    width: 200px;
-    height: 300px;
-}
 
-.playlist-card-content {
-    display: grid;
-    justify-items: center;
-    gap: 5px;
-}
-
-.playlist-card-ovr {
-    display: flex;
-    height: 50px;
-    overflow: hidden;
-}
 
 .search-results-list {
     display: flex;
@@ -151,37 +18,7 @@ main {
     /* gap: 10px; */
 }
 
-.search-result {
-    display: grid;
-    grid-template-columns: 80px 1fr 80px;
-    height: 80px;
-    outline: 2px solid green;
-    margin-inline: 10px;
-}
 
-.search-result-image-wrapper {
-    display: flex;
-    justify-self: center;
-    align-self: center;
-}
-
-.search-result-image {
-    width: 70px;
-    height: 70px;
-}
-
-.search-result-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-
-.search-result-ovr {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 .account-info {
     display: grid;
