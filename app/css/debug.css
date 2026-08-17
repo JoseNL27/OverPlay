@@ -1,0 +1,156 @@
+header {
+    outline: 2px solid yellow;
+}
+
+.header-logo {
+    outline: 2px solid green;
+}
+
+main {
+    outline: 2px solid green;
+}
+
+.screen {
+    outline: 2px solid red;
+}
+
+.screen.active {
+    outline: 2px solid red;
+}
+
+.widget {
+    outline: 2px solid green;
+}
+
+.overview {
+    outline: 2px solid green;
+}
+
+.ovr-overview {
+    outline: 2px solid green;
+}
+
+.library-summary {
+    outline: 2px solid green;
+}
+
+.library-graph {
+    outline: 2px solid green;
+}
+
+.library-graph-legend {
+    outline: 2px solid green;
+}
+
+.library-graph-buttons {
+    outline: 2px solid green;
+}
+
+.detail-header {
+    outline: 2px solid green;
+}
+
+.detail-content {
+    outline: 2px solid green;
+}
+
+.detail-tabs {
+    outline: 2px solid green;
+}
+
+.detail-cover-wrapper {
+    outline: 2px solid green;
+}
+
+
+.playlists-content {
+    outline: 2px solid green;
+}
+
+.playlist-card {
+    outline: 2px solid green;
+}
+
+.playlist-card-image {
+    outline: 2px solid green;
+}
+
+.playlist-card-content {
+    outline: 2px solid green;
+}
+
+.playlist-card-ovr {
+    outline: 2px solid green;
+}
+
+.search-results-list {
+    outline: 2px solid green;
+}
+
+.search-result {
+    outline: 2px solid green;
+}
+
+.search-result-image-wrapper {
+    outline: 2px solid green;
+}
+
+.search-result-image {
+    outline: 2px solid green;
+}
+
+.search-result-info {
+    outline: 2px solid green;
+}
+
+.search-result-title {
+    outline: 2px solid green;
+}
+
+.search-result-subtitle {
+    outline: 2px solid green;
+}
+
+.search-result-type {
+    outline: 2px solid green;
+}
+
+.search-result-ovr {
+    outline: 2px solid green;
+}
+
+.account-info {
+    outline: 2px solid green;
+}
+
+#settings-data {
+    outline: 2px solid green;
+}
+
+.modal {
+    outline: 2px solid red;
+}
+
+#detail-close-btn {
+    outline: 2px solid red;
+}
+
+#detail-cover-wrapper {
+    outline: 2px solid red;
+}
+
+#ovr-overview-score {
+    outline: 2px solid red;
+}
+
+#ovr-overview-graph {
+    outline: 2px solid red;
+}
+
+nav {
+    outline: 2px solid blue;
+}
+
+section {
+    outline: 2px solid orange;
+}

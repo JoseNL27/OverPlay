@@ -1,0 +1,16 @@
+:root {
+    --color-background: ...;
+    --color-surface: ...;
+    --color-primary: ...;
+    --color-text: ...;
+    --color-text-secondary: ...;
+
+    --spacing-xs: ...;
+    --spacing-sm: ...;
+    --spacing-md: ...;
+    --spacing-lg: ...;
+
+    --radius-sm: ...;
+    --radius-md: ...;
+    --radius-lg: ...;
+}

@@ -50,5 +50,14 @@
 ## 14/08
  * **Hecha la estructura de la pantalla de Playlist** usando placeholders para maquetación.
  * **Hecha la estructura de la pantalla de Búsqueda** usando placeholders para maquetación.
+ * **Hecha la estructura de la pantalla de Configuración** usando placeholders para maquetación.
+
+## 17/08
+ * **Reestructuracón de todo el CSS en carpetas**, siguiendo la estructura:
+    - base
+    - layout
+    - components
+    - screens
+    - debug
 
  
