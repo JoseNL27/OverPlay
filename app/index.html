@@ -313,6 +313,47 @@
         </div>
     </section>
 
+    <section id="playlist-modal" class="modal">
+        <!-- Pantalla de playlists. la dejamos fuera de app-container para que se muestre sobre el contenido principal -->
+        <div class="detail-header">
+            <button type="button" id="detail-close-btn">X</button>
+            <div class="detail-cover-wrapper">
+                <img class="detail-cover" src="" alt="cover">
+            </div>
+            <h2 class="detail-title">Titulo</h2>
+            <h3 class="detail-subtitle">Subtitulo</h3>
+        </div>
+        <div class="detail-content">
+            <div class="detail-tabs">
+                <button class="detail-tab-btn" data-tab="info">Información</button>
+                <button class="detail-tab-btn" data-tab="songs">Canciones</button>
+            </div>
+            <div class="detail-tab-wrapper">
+                <div id="tab-playlist-info" class="detail-tab-content">
+
+                </div>
+                <div id="tab-playlist-songs" class="detail-tab-content">
+
+                    <article class="search-result">
+                        <div class="search-result-image-wrapper">
+                            <img class="search-result-image" src="" alt="">
+                        </div>
+
+                        <div class="search-result-info">
+                            <h3 class="search-result-title">Titulo</h3>
+                            <p class="search-result-subtitle">Subtitulo</p>
+                        </div>
+
+                        <div class="search-result-ovr">
+                            <span class="ovr-level">OVR</span>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
     <nav class="nav-bar">
         <!-- Barra de navegación. Se deja fuera de app-container para que se muestre sobre el contenido principal -->
         <button id="nav-home" class="nav-btn" data-screen="home-screen">Home</button>
