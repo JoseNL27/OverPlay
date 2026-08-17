@@ -167,6 +167,10 @@ main {
     outline: 2px solid red;
 }
 
+.modal-info-item {
+    outline: 1px solid yellowgreen;
+}
+
 #detail-close-btn {
     outline: 2px solid red;
 }
