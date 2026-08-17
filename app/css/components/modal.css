@@ -14,3 +14,35 @@
 .modal.active {
     display: block;
 }
+
+.modal-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-block-end: 20px;
+}
+
+.modal-header button {
+    align-self: flex-end;
+    padding: 5px 10px;
+    margin: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.modal-cover-wrapper {
+    height: 300px;
+    width: 300px;
+    margin-block-end: 20px;
+}
+
+.modal-cover {
+    height: 100%;
+    width: 100%;
+}
+
+.modal-tabs {
+    display: flex;
+    justify-content: space-around;
+}

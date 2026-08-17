@@ -289,24 +289,24 @@
 
     <section id="detail-modal" class="modal">
         <!-- Pantalla de detalle. la dejamos fuera de app-container para que se muestre sobre el contenido principal -->
-        <div class="detail-header">
-            <button type="button" id="detail-close-btn">X</button>
-            <div class="detail-cover-wrapper">
-                <img class="detail-cover" src="" alt="cover">
+        <div class="modal-header">
+            <button type="button" id="detail-modal-close-btn">X</button>
+            <div class="modal-cover-wrapper">
+                <img class="modal-cover" src="" alt="cover">
             </div>
-            <h2 class="detail-title">Titulo</h2>
-            <h3 class="detail-subtitle">Subtitulo</h3>
+            <h2 class="modal-title">Titulo</h2>
+            <h3 class="modal-subtitle">Subtitulo</h3>
         </div>
-        <div class="detail-content">
-            <div class="detail-tabs">
-                <button class="detail-tab-btn" data-tab="info">Información</button>
-                <button class="detail-tab-btn" data-tab="stats">Estadísticas</button>
+        <div class="modal-content">
+            <div class="modal-tabs">
+                <button class="modal-tab-btn" data-tab="info">Información</button>
+                <button class="modal-tab-btn" data-tab="stats">Estadísticas</button>
             </div>
-            <div class="detail-tab-wrapper">
-                <div id="tab-info" class="detail-tab-content">
+            <div class="modal-tab-wrapper">
+                <div id="tab-info" class="modal-tab-content">
 
                 </div>
-                <div id="tab-stats" class="detail-tab-content">
+                <div id="tab-stats" class="modal-tab-content">
 
                 </div>
             </div>
@@ -315,24 +315,24 @@
 
     <section id="playlist-modal" class="modal active">
         <!-- Pantalla de playlists. la dejamos fuera de app-container para que se muestre sobre el contenido principal -->
-        <div class="detail-header">
-            <button type="button" id="detail-close-btn">X</button>
-            <div class="detail-cover-wrapper">
-                <img class="detail-cover" src="" alt="cover">
+        <div class="modal-header">
+            <button type="button" id="playlist-modal-close-btn">X</button>
+            <div class="modal-cover-wrapper">
+                <img class="modal-cover" src="" alt="cover">
             </div>
-            <h2 class="detail-title">Titulo</h2>
-            <h3 class="detail-subtitle">Subtitulo</h3>
+            <h2 class="modal-title">Titulo</h2>
+            <h3 class="modal-subtitle">Subtitulo</h3>
         </div>
-        <div class="detail-content">
-            <div class="detail-tabs">
-                <button class="detail-tab-btn" data-tab="info">Información</button>
-                <button class="detail-tab-btn" data-tab="songs">Canciones</button>
+        <div class="modal-content">
+            <div class="modal-tabs">
+                <button class="modal-tab-btn" data-tab="info">Información</button>
+                <button class="modal-tab-btn" data-tab="songs">Canciones</button>
             </div>
-            <div class="detail-tab-wrapper">
-                <div id="tab-playlist-info" class="detail-tab-content">
+            <div class="modal-tab-wrapper">
+                <div id="tab-playlist-info" class="modal-tab-content">
 
                 </div>
-                <div id="tab-playlist-songs" class="detail-tab-content">
+                <div id="tab-playlist-songs" class="modal-tab-content">
                     <!--Reutilizo el componente de search-result para mostrar las canciones de la playlist. Pongo 2 placeholders abajo a modo de debug-->
                     <template id="search-result-template">
                         <article class="search-result">

@@ -131,6 +131,42 @@ main {
     outline: 2px solid red;
 }
 
+.modal-header {
+    outline: 2px solid rgb(25, 0, 255);
+}
+
+.modal-cover-wrapper {
+    outline: 2px solid rgb(25, 0, 255);
+}
+
+.modal-cover {
+    outline: 2px solid rgb(25, 0, 255);
+}
+
+.modal-title {
+    outline: 2px solid red;
+}
+
+.modal-subtitle {
+    outline: 2px solid red;
+}
+
+.modal-content {
+    outline: 2px solid red;
+}
+
+.modal-tabs {
+    outline: 2px solid red;
+}
+
+.modal-tab-wrapper {
+    outline: 2px solid red;
+}
+
+.modal-tab-content {
+    outline: 2px solid red;
+}
+
 #detail-close-btn {
     outline: 2px solid red;
 }
