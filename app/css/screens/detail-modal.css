@@ -1,0 +1,22 @@
+.detail-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-header {
+    display: grid;
+    justify-items: center;
+}
+
+#detail-close-btn {
+    justify-self: end;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+
+.detail-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
