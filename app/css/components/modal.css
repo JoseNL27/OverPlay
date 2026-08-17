@@ -1,13 +1,13 @@
 .modal {
     display: none;
     position: fixed;
-    top: 2%;
-    left: 2%;
-    width: 96%;
-    height: 96%;
+    position: fixed;
+    inset: 2%;
+    width: auto;
+    height: auto;
+    overflow-y: auto;
     background-color: var(--color-background);
     z-index: 1000;
-
     border-radius: 20px;
 }
 
@@ -75,5 +75,5 @@
 }
 
 .modal-info-item-value {
-    color: var(--color-text-secundary);
+    color: var(--color-text-secondary);
 }

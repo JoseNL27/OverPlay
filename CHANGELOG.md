@@ -61,6 +61,8 @@
     - debug
  * **Se elimina styles.css y desing-legacy.css**
  * **Añadida tipografía provisional CSS**
+ * **Creado el modal de playlist.**
+ * **Reescritura del código CSS del Modal** para hacerlo reutilizable.
  
 
  
