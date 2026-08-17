@@ -1,0 +1,16 @@
+.modal {
+    display: none;
+    position: fixed;
+    top: 2%;
+    left: 2%;
+    width: 96%;
+    height: 96%;
+    background-color: var(--color-background);
+    z-index: 1000;
+
+    border-radius: 20px;
+}
+
+.modal.active {
+    display: block;
+}
