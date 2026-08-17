@@ -27,10 +27,6 @@ main {
     display: block;
 }
 
-.modal {
-    display: none;
-}
-
 .nav-bar {
     display: flex;
     position: fixed;

@@ -288,25 +288,152 @@
     </div>
 
     <section id="detail-modal" class="modal">
-        <!-- Pantalla de detalle. la dejamos fuera de app-container para que se muestre sobre el contenido principal -->
-        <div class="detail-header">
-            <button type="button" id="detail-close-btn">X</button>
-            <div class="detail-cover-wrapper">
-                <img class="detail-cover" src="" alt="cover">
+        <!-- EL DETAIL MODAL ENGLOBA CANCIONES, ARTISTAS Y ALBUMES -->
+        <div class="modal-header">
+            <button type="button" id="detail-modal-close-btn">X</button>
+            <div class="modal-cover-wrapper">
+                <img class="modal-cover" src="" alt="cover">
             </div>
-            <h2 class="detail-title">Titulo</h2>
-            <h3 class="detail-subtitle">Subtitulo</h3>
+            <h2 class="modal-title">Titulo</h2>
+            <h3 class="modal-subtitle">Subtitulo</h3>
         </div>
-        <div class="detail-content">
-            <div class="detail-tabs">
-                <button class="detail-tab-btn" data-tab="info">Información</button>
-                <button class="detail-tab-btn" data-tab="stats">Estadísticas</button>
+        <div class="modal-content">
+            <div class="modal-tabs">
+                <button class="modal-tab-btn" data-tab="info">Información</button>
+                <button class="modal-tab-btn" data-tab="stats">Estadísticas</button>
             </div>
-            <div class="detail-tab-wrapper">
-                <div id="tab-info" class="detail-tab-content">
+            <div class="modal-tab-wrapper">
+                <div id="tab-info" class="modal-tab-content">
+                    <div id="detail-info" class="modal-info-grid">
+                        <!-- Los valores que se muestran aquí son provisionales hasta que se revise el backend-->
+                        <div class="modal-info-item">
+                            <span class="modal-info-item-label">Fecha de creación:</span>
+                            <span id="detail-creation-date" class="modal-info-item-value">XX/XX/XXXX</span>
+                        </div>
+
+                        <div class="modal-info-item">
+                            <span class="modal-info-item-label">Fecha de última modificación:</span>
+                            <span id="detail-last-modified" class="modal-info-item-value">XX/XX/XXXX</span>
+                        </div>
+
+                        <div class="modal-info-item">
+                            <span class="modal-info-item-label">Descripción:</span>
+                            <span id="detail-description" class="modal-info-item-value">Descripción</span>
+                        </div>
+
+                        <div class="modal-info-item">
+                            <span class="modal-info-item-label">Tipo:</span>
+                            <span id="detail-type" class="modal-info-item-value">Tipo</span>
+                        </div>
+                    </div>
 
                 </div>
-                <div id="tab-stats" class="detail-tab-content">
+                <div id="tab-stats" class="modal-tab-content">
+                    <!-- TODO : IMPLEMENTAR PESTAÑA DE ESTADÍSTICAS (GRÁFICAS ETC) CUANDO SE REVISE BACKEND -->
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="playlist-modal" class="modal">
+        <!-- Pantalla de playlists. la dejamos fuera de app-container para que se muestre sobre el contenido principal -->
+        <div class="modal-header">
+            <button type="button" id="playlist-modal-close-btn">X</button>
+            <div class="modal-cover-wrapper">
+                <img class="modal-cover" src="" alt="cover">
+            </div>
+            <h2 class="modal-title">Titulo</h2>
+            <h3 class="modal-subtitle">Subtitulo</h3>
+        </div>
+        <div class="modal-content">
+            <div class="modal-tabs">
+                <button class="modal-tab-btn" data-tab="info">Información</button>
+                <button class="modal-tab-btn" data-tab="songs">Canciones</button>
+            </div>
+            <div class="modal-tab-wrapper">
+                <div id="tab-playlist-info" class="modal-tab-content active">
+
+                    <div id="playlist-info" class="modal-info-grid">
+                        <!-- Los valores que se muestran aquí son provisionales hasta que se revise el backend-->
+
+                        <div class="modal-info-item">
+                            <span class="modal-info-item-label">Creada por:</span>
+                            <span id="modal-playlist-owner" class="modal-info-item-value">Username</span>
+                        </div>
+
+                        <div class="modal-info-item">
+                            <span class="modal-info-item-label">Fecha de creación</span>
+                            <span id="modal-playlist-creation-date" class="modal-info-item-value">XX/XX/XXXX</span>
+                        </div>
+
+                        <div class="modal-info-item">
+                            <span class="modal-info-item-label">Canciones</span>
+                            <span id="modal-playlist-track-count" class="modal-info-item-value">100</span>
+                        </div>
+
+                        <div class="modal-info-item">
+                            <span class="modal-info-item-label">Duración</span>
+                            <span id="modal-playlist-duration" class="modal-info-item-value">100</span>
+                        </div>
+
+                        <div class="modal-info-item">
+                            <span class="modal-info-item-label">Popularidad</span>
+                            <span id="modal-playlist-popularity" class="modal-info-item-value">100</span>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div id="tab-playlist-songs" class="modal-tab-content">
+                    <!--Reutilizo el componente de search-result para mostrar las canciones de la playlist. Pongo 2 placeholders abajo a modo de debug-->
+                    <template id="search-result-template">
+                        <article class="search-result">
+                            <div class="search-result-image-wrapper">
+                                <img class="search-result-image" src="" alt="">
+                            </div>
+
+                            <div class="search-result-info">
+                                <h3 class="search-result-title">Titulo</h3>
+                                <p class="search-result-subtitle">Subtitulo</p>
+                            </div>
+
+                            <div class="search-result-ovr">
+                                <span class="ovr-level">OVR</span>
+                            </div>
+                        </article>
+
+                    </template>
+
+                    <article class="search-result">
+                        <div class="search-result-image-wrapper">
+                            <img class="search-result-image" src="" alt="">
+                        </div>
+
+                        <div class="search-result-info">
+                            <h3 class="search-result-title">Titulo</h3>
+                            <p class="search-result-subtitle">Subtitulo</p>
+                        </div>
+
+                        <div class="search-result-ovr">
+                            <span class="ovr-level">OVR</span>
+                        </div>
+                    </article>
+
+                    <article class="search-result">
+                        <div class="search-result-image-wrapper">
+                            <img class="search-result-image" src="" alt="">
+                        </div>
+
+                        <div class="search-result-info">
+                            <h3 class="search-result-title">Titulo</h3>
+                            <p class="search-result-subtitle">Subtitulo</p>
+                        </div>
+
+                        <div class="search-result-ovr">
+                            <span class="ovr-level">OVR</span>
+                        </div>
+                    </article>
 
                 </div>
             </div>
