@@ -59,5 +59,6 @@
     - components
     - screens
     - debug
+ * **Se elimina styles.css y desing-legacy.css**
 
  
