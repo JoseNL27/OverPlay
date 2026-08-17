@@ -6,7 +6,7 @@ The project started as a way to experiment with my own Spotify listening data an
 
 > 🚧 **Currently being refactored**
 >
-> I'm currently restructuring the frontend and improving the project architecture. Some parts of the application may change or be incomplete while this work is in progress.
+> I'm currently restructuring the frontend and improving the project architecture.
 
 ## What does it do?
 
@@ -44,6 +44,12 @@ The project is currently being reorganized, so the structure is still changing.
 
 ```text
 OverPlay/
-├── Backend/
-├── app/
+├── README.md
+├── CHANGELOG.md
+├── Backend/ (future refactor)
+├── app/ (Refactoring)
+       ├──index.html
+       ├── css/
+       ├── data/
+       └── js/
 └── ...
