@@ -30,12 +30,20 @@ main {
     outline: 2px solid green;
 }
 
+.ovr-overview-graph canvas {
+    outline: 2px solid red;
+}
+
 .library-summary {
     outline: 2px solid green;
 }
 
 .library-graph {
     outline: 2px solid green;
+}
+
+.library-graph canvas {
+    outline: 2px solid rgb(128, 0, 0);
 }
 
 .library-graph-legend {

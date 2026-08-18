@@ -1,10 +1,6 @@
 .overview-content {
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-
-    @media (width < 575px) {
-        grid-template-columns: 1fr;
-    }
 }
 
 .ovr-overview {
@@ -40,13 +36,12 @@
     grid-area: graph;
     display: flex;
     align-items: center;
-    gap: 15px;
     min-width: 0;
 }
 
 .library-graph canvas {
-    max-width: 100%;
-    height: auto;
+    width: min(50%, 250px);
+    aspect-ratio: 1;
 }
 
 .library-graph-legend {
