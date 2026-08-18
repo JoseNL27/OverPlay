@@ -63,6 +63,7 @@
  * **Añadida tipografía provisional CSS**
  * **Creado el modal de playlist.**
  * **Reescritura del código CSS del Modal** para hacerlo reutilizable.
+ * **Eliminado legacy-index.html**
  
 
  

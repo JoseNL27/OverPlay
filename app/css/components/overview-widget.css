@@ -1,14 +1,25 @@
 .overview-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
 
-    @media (width < 600px) {
+    @media (width < 575px) {
         grid-template-columns: 1fr;
     }
 }
 
+.ovr-overview {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 10px;
+    gap: 10px;
+}
+
 .ovr-overview-content {
     display: flex;
+    align-items: flex-end;
+
+    gap: 10px;
 }
 
 #ovr-overview-score {
@@ -16,20 +27,52 @@
     font-weight: bold;
 }
 
+.library-summary-content {
+    display: grid;
+    grid-template-areas:
+        "graph"
+        "buttons"
+        "legend";
+    gap: 15px;
+}
+
 .library-graph {
+    grid-area: graph;
     display: flex;
-    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    min-width: 0;
+}
+
+.library-graph canvas {
+    max-width: 100%;
+    height: auto;
 }
 
 .library-graph-legend {
     display: flex;
     flex-direction: column;
     list-style: none;
+    grid-area: legend;
 }
 
 .library-graph-buttons {
+    grid-area: buttons;
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 10px;
+}
+
+@media (width < 575px) {
+    .overview-content {
+        grid-template-columns: 1fr;
+    }
+
+    .library-summary-content {
+        grid-template-areas:
+            "graph"
+            "legend"
+            "buttons";
+    }
 }
