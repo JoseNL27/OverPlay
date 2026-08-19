@@ -107,6 +107,22 @@ main {
     outline: 2px solid red;
 }
 
+.featured-insight-info {
+    outline: 2px solid red;
+}
+
+.featured-insight-data {
+    outline: 2px solid green;
+}
+
+.featured-insight-cover {
+    outline: 2px solid rgb(128, 0, 0);
+}
+
+.featured-insight-cover img {
+    outline: 2px solid green;
+}
+
 .user-resume {
     outline: 2px solid green;
 }
