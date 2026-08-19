@@ -73,6 +73,7 @@
  * **Diseñado el widget de musical-temperature.**
  * **Diseñado el widget de perfil (profile-widget)**
  * **Introducida la funcionalidad de "Insights"**, será desarrollada en profundidad posteriormente.
+ * **Diseñado el widget de "Featured Insight"** en sustitución de "Forgotten Gem".
  
 
  

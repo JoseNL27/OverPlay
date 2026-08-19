@@ -99,6 +99,14 @@ main {
     outline: 2px solid green;
 }
 
+.featured-insight {
+    outline: 2px solid red;
+}
+
+.featured-insight-content {
+    outline: 2px solid red;
+}
+
 .user-resume {
     outline: 2px solid green;
 }
