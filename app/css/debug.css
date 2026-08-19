@@ -99,6 +99,46 @@ main {
     outline: 2px solid green;
 }
 
+.user-resume {
+    outline: 2px solid green;
+}
+
+.user-resume-image {
+    outline: 2px solid red;
+}
+
+.user-resume-image img {
+    outline: 2px solid rgb(128, 0, 0);
+}
+
+.user-resume-info {
+    outline: 2px solid red;
+}
+
+.user-name {
+    outline: 2px solid red;
+}
+
+.user-insights {
+    outline: 2px solid green;
+}
+
+.mini-insight {
+    outline: 2px solid green;
+}
+
+.insight-icon {
+    outline: 2px solid green;
+}
+
+.insight-title {
+    outline: 2px solid green;
+}
+
+.insight-value {
+    outline: 2px solid green;
+}
+
 .search-results-list {
     outline: 2px solid green;
 }

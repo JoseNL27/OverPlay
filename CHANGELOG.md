@@ -69,7 +69,10 @@
  * **Algunos tests minoritarios en .overview-widget.css**
 
 ## 19/08
- * **Se convierte la clase playlist-card en un  componente global reutilizable** (media-card.css)
+ * **Se convierte la clase playlist-card en un componente global reutilizable** (media-card.css)
+ * **Diseñado el widget de musical-temperature.**
+ * **Diseñado el widget de perfil (profile-widget)**
+ * **Introducida la funcionalidad de "Insights"**, será desarrollada en profundidad posteriormente.
  
 
  

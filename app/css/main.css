@@ -10,6 +10,7 @@
 @import url("./components/media-card.css");
 @import url("./components/search-result.css");
 @import url("./components/musical-temperature.css");
+@import url("./components/profile-widget.css");
 
 @import url("./screens/home.css");
 @import url("./screens/playlists.css");
