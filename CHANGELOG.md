@@ -63,6 +63,17 @@
  * **Añadida tipografía provisional CSS**
  * **Creado el modal de playlist.**
  * **Reescritura del código CSS del Modal** para hacerlo reutilizable.
+ * **Eliminado legacy-index.html**
+
+## 18/08
+ * **Algunos tests minoritarios en .overview-widget.css**
+
+## 19/08
+ * **Se convierte la clase playlist-card en un componente global reutilizable** (media-card.css)
+ * **Diseñado el widget de musical-temperature.**
+ * **Diseñado el widget de perfil (profile-widget)**
+ * **Introducida la funcionalidad de "Insights"**, será desarrollada en profundidad posteriormente.
+ * **Diseñado el widget de "Featured Insight"** en sustitución de "Forgotten Gem".
  
 
  

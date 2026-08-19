@@ -1,0 +1,32 @@
+.featured-insight-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.featured-insight-content button {
+    align-self: flex-end;
+}
+
+.featured-insight-info {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+
+}
+
+.featured-insight-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+    aspect-ratio: 1;
+}
+
+.featured-insight-data {
+    display: flex;
+    flex-direction: column;
+    padding-inline-start: 10px;
+}

@@ -95,30 +95,145 @@
                 <div id="musical-temperature" class="widget">
                     <h2>Tu temperatura musical</h2>
                     <div class="musical-temperature-content">
-                        <div class="musical-temperature-graph">
-                            <canvas id="musical-temperature-graph-canvas"></canvas>
+                        <div class="musical-temperature-controls">
+                            <div class="musical-temperature-buttons">
+                                <button class="graph-range-btn" data-range="7d">7D</button>
+                                <button class="graph-range-btn" data-range="1m">1M</button>
+                                <button class="graph-range-btn" data-range="1y">1Y</button>
+                                <button class="graph-range-btn" data-range="all">ALL</button>
+                            </div>
+                            <div class="musical-temperature-sort-button">
+                                <label for="temperature-type">Mostrar:</label>
+
+                                <select id="temperature-type">
+                                    <option value="tracks">Canciones</option>
+                                    <option value="artists">Artistas</option>
+                                    <option value="albums">Álbumes</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="musical-temperature-items">
-                            <article class="musical-temperature-item">
-                                <img src="" alt="">
-                                <h3></h3>
-                                <p></p>
+                            <!-- ESTOS ARTICLES SON TEMPORALES, JS COLOCARÁ LAS CARDS DESDE SU TEMPLATE CORRESPONDIENTE -->
+                            <article class="media-card"> <!-- Placeholder playlist 1 -->
+                                <div class="media-card-content">
+                                    <div class="media-card-image">
+                                        <img src="" alt="Playlist cover">
+                                    </div>
+                                    <h3 class="media-card-title">Nombre item</h3>
+                                    <p class="media-card-description">Descripción item</p>
+                                </div>
+                                <div class="media-card-ovr">
+                                    <span class="ovr-level">OVR</span>
+                                    <canvas class="media-card-ovr-canvas"></canvas>
+                                </div>
+                            </article>
+
+                            <article class="media-card"> <!-- Placeholder playlist 1 -->
+                                <div class="media-card-content">
+                                    <div class="media-card-image">
+                                        <img src="" alt="Playlist cover">
+                                    </div>
+                                    <h3 class="media-card-title">Nombre item</h3>
+                                    <p class="media-card-description">Descripción item</p>
+                                </div>
+                                <div class="media-card-ovr">
+                                    <span class="ovr-level">OVR</span>
+                                    <canvas class="media-card-ovr-canvas"></canvas>
+                                </div>
+                            </article>
+
+                            <article class="media-card"> <!-- Placeholder playlist 1 -->
+                                <div class="media-card-content">
+                                    <div class="media-card-image">
+                                        <img src="" alt="Playlist cover">
+                                    </div>
+                                    <h3 class="media-card-title">Nombre item</h3>
+                                    <p class="media-card-description">Descripción item</p>
+                                </div>
+                                <div class="media-card-ovr">
+                                    <span class="ovr-level">OVR</span>
+                                    <canvas class="media-card-ovr-canvas"></canvas>
+                                </div>
+                            </article>
+
+                            <article class="media-card"> <!-- Placeholder playlist 1 -->
+                                <div class="media-card-content">
+                                    <div class="media-card-image">
+                                        <img src="" alt="Playlist cover">
+                                    </div>
+                                    <h3 class="media-card-title">Nombre item</h3>
+                                    <p class="media-card-description">Descripción item</p>
+                                </div>
+                                <div class="media-card-ovr">
+                                    <span class="ovr-level">OVR</span>
+                                    <canvas class="media-card-ovr-canvas"></canvas>
+                                </div>
                             </article>
                         </div>
                     </div>
                 </div>
 
-                <div id="forgotten-gem" class="widget">
-                    <h2>Tu joya musical olvidada</h2>
-                    <div class="forgotten-gem-content">
-
+                <div id="featured-insight" class="widget">
+                    <h2>Featured insight</h2>
+                    <div class="featured-insight-content">
+                        <h3 class="featured-insight-title">Titulo Insight</h3>
+                        <div class="featured-insight-info">
+                            <div class="featured-insight-cover">
+                                <img src="" alt="Album/Playlist cover">
+                            </div>
+                            <div class="featured-insight-data">
+                                <span class="featured-insight-data-title">Nombre item</span>
+                                <span class="featured-insight-data-subtitle">Subtitulo</span>
+                                <span class="featured-insight-data-detail-1">Descripción item</span>
+                            </div>
+                        </div>
+                        <button>Ver más</button>
                     </div>
                 </div>
 
                 <div id="profile-widget" class="widget">
                     <h2>¿Quieres saber más sobre ti?</h2>
-                    <div class="widget-profile-content">
-
+                    <div class="profile-widget-content">
+                        <div class="user-resume">
+                            <div class="user-resume-image">
+                                <img src="" alt="User image">
+                            </div>
+                            <div class="user-resume-info">
+                                <h3 class="user-resume-name user-name">Usuario</h3>
+                                <button class="">Ver perfil</button>
+                            </div>
+                        </div>
+                        <div class="user-insights">
+                            <!-- ESTOS ARTICLES SON TEMPORALES, JS COLOCARÁ LAS CARDS DESDE SU TEMPLATE CORRESPONDIENTE -->
+                            <article class="mini-insight">
+                                <span class="insight-title">Titulo Insight</span>
+                                <div class="insight-content">
+                                    <span class="insight-context">Contexto</span>
+                                    <span class="insight-value">Valor Insight</span>
+                                </div>
+                            </article>
+                            <article class="mini-insight">
+                                <span class="insight-title">Titulo Insight</span>
+                                <div class="insight-content">
+                                    <span class="insight-context">Contexto</span>
+                                    <span class="insight-value">Valor Insight</span>
+                                </div>
+                            </article>
+                            <article class="mini-insight">
+                                <span class="insight-title">Titulo Insight</span>
+                                <div class="insight-content">
+                                    <span class="insight-context">Contexto</span>
+                                    <span class="insight-value">Valor Insight</span>
+                                </div>
+                            </article>
+                            <article class="mini-insight">
+                                <span class="insight-title">Titulo Insight</span>
+                                <div class="insight-content">
+                                    <span class="insight-context">Contexto</span>
+                                    <span class="insight-value">Valor Insight</span>
+                                </div>
+                            </article>
+                        </div>
                     </div>
                 </div>
 
@@ -129,46 +244,46 @@
                 <div class="playlists-content">
                     <!-- A continuación se dejan 2  placeholder playlist para maquetar -->
 
-                    <article class="playlist-card"> <!-- Placeholder playlist 1 -->
-                        <div class="playlist-card-content">
-                            <div class="playlist-card-image">
+                    <article class="media-card"> <!-- Placeholder playlist 1 -->
+                        <div class="media-card-content">
+                            <div class="media-card-image">
                                 <img src="" alt="Playlist cover">
                             </div>
-                            <h3 class="playlist-card-title">Nombre playlist</h3>
-                            <p class="playlist-card-description">Descripción playlist</p>
+                            <h3 class="media-card-title">Nombre playlist</h3>
+                            <p class="media-card-description">Descripción playlist</p>
                         </div>
-                        <div class="playlist-card-ovr">
+                        <div class="media-card-ovr">
                             <span class="ovr-level">OVR</span>
-                            <canvas class="playlist-card-ovr-canvas"></canvas>
+                            <canvas class="media-card-ovr-canvas"></canvas>
                         </div>
                     </article>
 
-                    <article class="playlist-card"> <!-- Placeholder playlist 2 -->
-                        <div class="playlist-card-content">
-                            <div class="playlist-card-image">
+                    <article class="media-card"> <!-- Placeholder playlist 2 -->
+                        <div class="media-card-content">
+                            <div class="media-card-image">
                                 <img src="" alt="Playlist cover">
                             </div>
-                            <h3 class="playlist-card-title">Nombre playlist</h3>
-                            <p class="playlist-card-description">Descripción playlist</p>
+                            <h3 class="media-card-title">Nombre playlist</h3>
+                            <p class="media-card-description">Descripción playlist</p>
                         </div>
-                        <div class="playlist-card-ovr">
+                        <div class="media-card-ovr">
                             <span class="ovr-level">OVR</span>
-                            <canvas class="playlist-card-ovr-canvas"></canvas>
+                            <canvas class="media-card-ovr-canvas"></canvas>
                         </div>
                     </article>
 
-                    <template id="playlist-card-template">
-                        <article class="playlist-card">
-                            <div class="playlist-card-content">
-                                <div class="playlist-card-image">
+                    <template id="media-card-template">
+                        <article class="media-card">
+                            <div class="media-card-content">
+                                <div class="media-card-image">
                                     <img src="" alt="Playlist cover">
                                 </div>
-                                <h3 class="playlist-card-title">Nombre playlist</h3>
-                                <p class="playlist-card-description">Descripción playlist</p>
+                                <h3 class="media-card-title">Nombre playlist</h3>
+                                <p class="media-card-description">Descripción playlist</p>
                             </div>
-                            <div class="playlist-card-ovr">
+                            <div class="media-card-ovr">
                                 <span class="ovr-level">OVR</span>
-                                <canvas class="playlist-card-ovr-canvas"></canvas>
+                                <canvas class="media-card-ovr-canvas"></canvas>
                             </div>
                         </article>
                     </template>

@@ -30,6 +30,10 @@ main {
     outline: 2px solid green;
 }
 
+.ovr-overview-graph canvas {
+    outline: 2px solid red;
+}
+
 .library-summary {
     outline: 2px solid green;
 }
@@ -38,12 +42,24 @@ main {
     outline: 2px solid green;
 }
 
+.library-graph canvas {
+    outline: 2px solid rgb(128, 0, 0);
+}
+
 .library-graph-legend {
     outline: 2px solid green;
 }
 
 .library-graph-buttons {
     outline: 2px solid green;
+}
+
+.musical-temperature-graph {
+    outline: 2px solid green;
+}
+
+.musical-temperature-canvas {
+    outline: 2px solid red;
 }
 
 .detail-header {
@@ -67,19 +83,83 @@ main {
     outline: 2px solid green;
 }
 
-.playlist-card {
+.media-card {
     outline: 2px solid green;
 }
 
-.playlist-card-image {
+.media-card-image {
     outline: 2px solid green;
 }
 
-.playlist-card-content {
+.media-card-content {
     outline: 2px solid green;
 }
 
-.playlist-card-ovr {
+.media-card-ovr {
+    outline: 2px solid green;
+}
+
+.featured-insight {
+    outline: 2px solid red;
+}
+
+.featured-insight-content {
+    outline: 2px solid red;
+}
+
+.featured-insight-info {
+    outline: 2px solid red;
+}
+
+.featured-insight-data {
+    outline: 2px solid green;
+}
+
+.featured-insight-cover {
+    outline: 2px solid rgb(128, 0, 0);
+}
+
+.featured-insight-cover img {
+    outline: 2px solid green;
+}
+
+.user-resume {
+    outline: 2px solid green;
+}
+
+.user-resume-image {
+    outline: 2px solid red;
+}
+
+.user-resume-image img {
+    outline: 2px solid rgb(128, 0, 0);
+}
+
+.user-resume-info {
+    outline: 2px solid red;
+}
+
+.user-name {
+    outline: 2px solid red;
+}
+
+.user-insights {
+    outline: 2px solid green;
+}
+
+.mini-insight {
+    outline: 2px solid green;
+}
+
+.insight-icon {
+    outline: 2px solid green;
+}
+
+.insight-title {
+    outline: 2px solid green;
+}
+
+.insight-value {
     outline: 2px solid green;
 }
 
