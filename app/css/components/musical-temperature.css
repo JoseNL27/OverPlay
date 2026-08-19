@@ -1,0 +1,28 @@
+#musical-temperature {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.musical-temperature-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+.musical-temperature-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.musical-temperature-items {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    gap: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+}

@@ -54,6 +54,14 @@ main {
     outline: 2px solid green;
 }
 
+.musical-temperature-graph {
+    outline: 2px solid green;
+}
+
+.musical-temperature-canvas {
+    outline: 2px solid red;
+}
+
 .detail-header {
     outline: 2px solid green;
 }
@@ -75,19 +83,19 @@ main {
     outline: 2px solid green;
 }
 
-.playlist-card {
+.media-card {
     outline: 2px solid green;
 }
 
-.playlist-card-image {
+.media-card-image {
     outline: 2px solid green;
 }
 
-.playlist-card-content {
+.media-card-content {
     outline: 2px solid green;
 }
 
-.playlist-card-ovr {
+.media-card-ovr {
     outline: 2px solid green;
 }
 

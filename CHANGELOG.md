@@ -64,6 +64,12 @@
  * **Creado el modal de playlist.**
  * **Reescritura del código CSS del Modal** para hacerlo reutilizable.
  * **Eliminado legacy-index.html**
+
+## 18/08
+ * **Algunos tests minoritarios en .overview-widget.css**
+
+## 19/08
+ * **Se convierte la clase playlist-card en un  componente global reutilizable** (media-card.css)
  
 
  

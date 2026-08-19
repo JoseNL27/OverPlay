@@ -1,17 +1,19 @@
-.playlist-card {
+.media-card {
     display: grid;
     grid-template-rows: 3fr 1fr;
     width: 200px;
     height: 300px;
+    border-radius: 10px;
+    flex: 0 0 200px;
 }
 
-.playlist-card-content {
+.media-card-content {
     display: grid;
     justify-items: center;
     gap: 5px;
 }
 
-.playlist-card-ovr {
+.media-card-ovr {
     display: flex;
     height: 50px;
     overflow: hidden;
