@@ -12,6 +12,15 @@
     --color-text-secondary: #A5ADA7;
     --color-text-tertiary: #6F7771;
 
+    --font-size-section-title: 1.1rem;
+    --font-weight-section-title: 700;
+
+    --font-size-section-subtitle: 0.95rem;
+    --font-weight-section-subtitle: 600;
+
+    --font-size-section-content-title: 0.8rem;
+    --font-weight-section-content-title: 400;
+
     /* BRAND */
 
     --color-brand: #B7F34A;

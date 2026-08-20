@@ -74,6 +74,10 @@
  * **Diseñado el widget de perfil (profile-widget)**
  * **Introducida la funcionalidad de "Insights"**, será desarrollada en profundidad posteriormente.
  * **Diseñado el widget de "Featured Insight"** en sustitución de "Forgotten Gem".
- 
+
+## 20/08
+* **Configuración de las variables globales del CSS**
+* **Añadida una versión temprana del diseño del componente .media-card**
+
 
  
