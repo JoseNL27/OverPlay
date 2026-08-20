@@ -1,9 +1,22 @@
 :root {
-    --color-background: ;
-    --color-surface: ...;
-    --color-primary: ...;
-    --color-text: ...;
-    --color-text-secondary: ...;
+    --color-background: #0B0D0C;
+    --color-surface: #121614;
+    --color-surface-hover: #202520;
+    --color-surface-elevated: #191D1A;
+
+    --color-border: #292E2A;
+
+    /* TEXTO */
+
+    --color-text-primary: #F2F4F2;
+    --color-text-secondary: #A5ADA7;
+    --color-text-tertiary: #6F7771;
+
+    /* BRAND */
+
+    --color-brand: #B7F34A;
+
+
 
     --spacing-xs: ...;
     --spacing-sm: ...;

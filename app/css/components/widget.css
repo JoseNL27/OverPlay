@@ -2,4 +2,14 @@
     border-radius: 10px;
     padding: 10px;
     margin: 10px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+}
+
+.widget>div {
+    background-color: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
 }
