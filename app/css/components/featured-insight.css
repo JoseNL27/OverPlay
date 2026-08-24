@@ -1,19 +1,44 @@
 .featured-insight-content {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    border-radius: 10px;
-    padding: 10px;
+    gap: 8px;
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid rgba(183, 243, 74, 0.08);
+    background: linear-gradient(200deg,
+            var(--bg-card) 0%,
+            rgba(137, 47, 155, 0.08) 70%);
+}
+
+.featured-insight-title {
+    border-bottom: 1px solid var(--border-soft);
+    padding-bottom: 4px;
+    margin-bottom: 8px;
 }
 
 .featured-insight-content button {
+    /* Se elimina el botón de ver más del HTML hasta decidir si lo dejamos, se deja el estilo por si acaso */
     align-self: flex-end;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    padding: 4px 8px;
 }
 
 .featured-insight-info {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+}
 
+.featured-insight-cover {
+    box-shadow: 0 0px 16px 0px rgba(221, 108, 255, 0.15);
+    width: 30%;
+    max-width: 110px;
+    flex-shrink: 0;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 8px;
 }
 
 .featured-insight-cover img {
@@ -21,12 +46,27 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
-    border-radius: 10px;
-    aspect-ratio: 1;
+    display: block;
 }
 
 .featured-insight-data {
     display: flex;
     flex-direction: column;
-    padding-inline-start: 10px;
+    justify-content: center;
+}
+
+.featured-insight-data-title {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.featured-insight-data-subtitle {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.featured-insight-data-detail-1 {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--color-text-secondary);
 }

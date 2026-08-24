@@ -79,5 +79,11 @@
 * **Configuración de las variables globales del CSS**
 * **Añadida una versión temprana del diseño del componente .media-card**
 
+## 24/08
+* **Añadido Background general**
+* **Añadido diseño blur a header y navbar**
+* **Refinado el diseño del componente .widget**
+* **Añadido el diseño de .featured-insight**
+
 
  
