@@ -10,7 +10,11 @@ h1,
 h2,
 h3,
 h4,
-p {
+p,
+ul,
+li,
+span,
+a {
     margin: 0;
     color: var(--color-text-secondary);
 }
@@ -22,6 +26,7 @@ h1 {
 }
 
 h2 {
+    color: var(--color-text-primary);
     font-size: var(--font-size-section-title);
     font-weight: var(--font-weight-section-title);
 }
@@ -50,4 +55,5 @@ button,
 input {
     font: inherit;
     background-color: var(--color-surface-elevated);
+    color: var(--color-text-secondary);
 }
