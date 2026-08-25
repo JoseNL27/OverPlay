@@ -18,8 +18,8 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
-    backdrop-filter: blur(5px);
+    background: radial-gradient(ellipse 140% 10vh at top center, rgba(47, 94, 38, 0.596) 0%, rgba(11, 15, 11, 0.493) 70%);
+    backdrop-filter: blur(15px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.03);
     position: sticky;
     top: 0;

@@ -6,12 +6,25 @@
     padding: 12px;
     background:
         linear-gradient(180deg,
-            rgba(255, 80, 80, .08),
-            rgba(15, 18, 17, 1) 65%);
+            rgba(255, 144, 80, 0.08),
+            rgba(15, 18, 17, 0.767) 85%);
+    /* Aquí JS pondrá el color predominante de la portada*/
     border: 1px solid rgba(255, 255, 255, .06);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 0px 14px rgba(2, 255, 23, 0.219);
     /* Sombra elegante, nada de neón */
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#warning {
+    /* Tarjeta con alerta de sobreescucha. En pruebas. Ignorar */
+    box-shadow: 0 0px 14px rgba(247, 170, 28, 0.219);
+}
+
+#warning .ovr-level {
+    /* Tarjeta con alerta de sobreescucha. En pruebas. Ignorar */
+    color: #fcc52f;
+    border: 1px solid rgba(215, 181, 30, 0.3);
+    background: rgba(10, 20, 15, 0.637);
 }
 
 .media-card:hover {
@@ -22,13 +35,13 @@
 .media-card-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 4px;
-    padding-top: 8px;
-    text-align: center;
+    padding-top: 4px;
 }
 
 .media-card-image {
+    position: relative;
     width: 100%;
     aspect-ratio: 1 / 1;
     overflow: hidden;
@@ -42,11 +55,22 @@
     display: block;
 }
 
+.media-card-type {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--text-secondary, #ccc);
+    letter-spacing: 0.08em;
+
+    margin-block: var(--spacing-xs);
+}
+
 .media-card-title {
     font-size: 0.95rem;
     font-weight: 700;
     color: #ffffff;
-    margin-top: 6px;
+    line-height: 1;
+
 }
 
 .media-card-description {
@@ -56,21 +80,20 @@
 }
 
 .media-card-ovr {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 10px;
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    z-index: 2;
+
 }
 
 .ovr-level {
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 700;
     color: #1ed760;
     border: 1px solid rgba(30, 215, 96, 0.3);
-    background-color: rgba(30, 215, 96, 0.1);
-    /* Fondo sutil */
-    padding: 4px 10px;
-    /* Para que el texto respire */
-    border-radius: 20px;
-    /* Formato pill moderno */
+    background: rgba(10, 20, 15, 0.637);
+    padding: 4px 8px;
+    border-radius: 8px;
+    backdrop-filter: blur(6px);
 }
