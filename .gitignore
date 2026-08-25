@@ -16,6 +16,8 @@ __pycache__/
 *.pyc
 .DS_Store
 
+*.jpg
+app/host.py
 Backend/a.py
 Backend/cirugia.py
 Backend/entrenar_algoritmo.py

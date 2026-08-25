@@ -85,5 +85,8 @@
 * **Refinado el diseño del componente .widget**
 * **Añadido el diseño de .featured-insight**
 
+## 25/08
+* **Refinamiento del componenete .widget y .featured-insight.**
+
 
  

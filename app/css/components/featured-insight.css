@@ -1,4 +1,4 @@
-.featured-insight-content {
+.widget .featured-insight-content {
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -7,7 +7,7 @@
     border: 1px solid rgba(183, 243, 74, 0.08);
     background: linear-gradient(200deg,
             var(--bg-card) 0%,
-            rgba(137, 47, 155, 0.08) 70%);
+            rgba(137, 47, 155, 0.171) 70%);
 }
 
 .featured-insight-title {

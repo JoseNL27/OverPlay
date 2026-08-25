@@ -18,13 +18,13 @@
     --color-text-secondary: #A5ADA7;
     --color-text-tertiary: #6F7771;
 
-    --font-size-section-title: 1.1rem;
-    --font-weight-section-title: 700;
+    --font-size-section-title: 1.4rem;
+    --font-weight-section-title: 600;
 
-    --font-size-section-subtitle: 0.95rem;
+    --font-size-section-subtitle: 1rem;
     --font-weight-section-subtitle: 600;
 
-    --font-size-section-content-title: 0.8rem;
+    --font-size-section-content-title: 0.9rem;
     --font-weight-section-content-title: 400;
 
     /* BRAND */
@@ -33,12 +33,13 @@
 
 
 
-    --spacing-xs: ...;
-    --spacing-sm: ...;
-    --spacing-md: ...;
-    --spacing-lg: ...;
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 24px;
 
-    --radius-sm: ...;
-    --radius-md: ...;
-    --radius-lg: ...;
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
 }

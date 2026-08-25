@@ -1,27 +1,21 @@
 .widget {
-    border-radius: 10px;
-    padding: 12px;
-    margin: 16px 12px;
-
-
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-
-    border: 1px solid var(--border-soft);
-
+    margin: var(--spacing-xl) var(--spacing-sm);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
 }
 
 .widget>h2 {
     border-bottom: 1px solid var(--border-soft);
-    padding-bottom: 12px;
-    margin-bottom: 12px;
+    padding-bottom: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
 }
 
 .widget>div {
-    background-color: var(--bg-card);
-    border-radius: 12px;
-    padding: 12px;
-    margin: 12x;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    margin: var(--spacing-md);
 }
