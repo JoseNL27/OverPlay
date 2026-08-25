@@ -3,10 +3,109 @@
     flex-direction: column;
 }
 
+
 .musical-temperature-controls {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-inline: 4px;
+}
+
+.time-range-buttons {
+    display: flex;
+    background: rgba(255, 255, 255, 0.05);
+    /* Fondo oscuro general */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.time-range-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary, #a7a7a7);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.time-range-btn.active {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.time-range-btn:not(:first-child) {
+    position: relative;
+}
+
+.time-range-btn:not(:first-child)::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(-100%, -50%);
+    /* centra la línea en el hueco entre botones */
+    width: 1px;
+    height: 80%;
+    /* altura de la línea, ajusta a gusto */
+    background-color: var(--border-soft);
+    opacity: 1;
+    /* para que sea sutil */
+}
+
+
+.musical-temperature-sort-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.musical-temperature-sort-button label {
+    font-size: 0.75rem;
+    color: var(--text-secondary, #a7a7a7);
+    font-weight: 500;
+}
+
+#temperature-type {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 6px 28px 6px 12px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+
+    /* Flecha custom en SVG inyectada directamente en el CSS*/
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}
+
+/* Brillo on hover calcado al active de los otros botones */
+#temperature-type:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* 3. Estilo de las opciones desplegadas (Solo afecta en PC) */
+#temperature-type option {
+    background-color: #121212;
+    /* Evita que salgan con fondo blanco radiactivo */
+    color: #ffffff;
 }
 
 
@@ -17,7 +116,7 @@
 }
 
 
-.musical-temperature-items {
+.carousel-container {
     display: flex;
     flex-direction: row;
     padding: 10px;
