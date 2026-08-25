@@ -1,3 +1,19 @@
+/* Quita las barras en toda la web manteniendo el scroll funcionando */
+html,
+body,
+* {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+    display: none;
+
+}
+
 header {
     display: flex;
     justify-content: space-between;

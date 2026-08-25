@@ -87,6 +87,8 @@
 
 ## 25/08
 * **Refinamiento del componenete .widget y .featured-insight.**
+* **Diseño de nav-bar terminado.**
+* **Añadido host.py para acceder a la app en local.**
 
 
  

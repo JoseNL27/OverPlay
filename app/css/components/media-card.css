@@ -4,8 +4,11 @@
     border-radius: 12px;
     flex: 0 0 180px;
     padding: 12px;
-    background-color: var(--color-surface-elevated, #181818);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background:
+        linear-gradient(180deg,
+            rgba(255, 80, 80, .08),
+            rgba(15, 18, 17, 1) 65%);
+    border: 1px solid rgba(255, 255, 255, .06);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
     /* Sombra elegante, nada de neón */
     transition: transform 0.2s ease, box-shadow 0.2s ease;
