@@ -98,7 +98,9 @@
 * **Terminado el diseño del componente media-card.**
 
 ## 26/08
-
+* **Añadido diseño global para todos los button.**
+* **Diseño del widget profile-widget terminado.**
+* **Añadido logo beta de OverPlay**
 
 
  
