@@ -10,23 +10,62 @@ h1,
 h2,
 h3,
 h4,
-p {
+p,
+ul,
+li,
+span,
+a {
     margin: 0;
+    color: var(--color-text-secondary);
 }
 
 h1 {
     font-size: 2rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
 }
 
 h2 {
-    font-size: 1.5rem;
+    color: var(--color-text-primary);
+    font-size: var(--font-size-section-title);
+    font-weight: var(--font-weight-section-title);
 }
 
 h3 {
-    font-size: 1.25rem;
+    font-size: var(--font-size-section-subtitle);
+    font-weight: var(--font-weight-section-subtitle);
+}
+
+h4 {
+    font-size: var(--font-size-section-content-title);
+    font-weight: var(--font-weight-section-content-title);
+}
+
+p {
+    font-size: var(--font-size-section-content-title);
+    font-weight: var(--font-weight-section-content-title);
+}
+
+.brand {
+    color: var(--color-brand);
+    font-weight: 800;
 }
 
 button,
 input {
     font: inherit;
+    background-color: var(--color-surface-elevated);
+    color: var(--color-text-secondary);
+}
+
+button {
+    background: transparent;
+    color: var(--text-secondary, #a7a7a7);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border: 1px solid var(--border-soft);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }

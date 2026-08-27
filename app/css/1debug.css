@@ -1,10 +1,6 @@
-header {
-    outline: 2px solid yellow;
-}
+header {}
 
-.header-logo {
-    outline: 2px solid green;
-}
+.header-logo {}
 
 main {
     outline: 2px solid green;
@@ -18,9 +14,7 @@ main {
     outline: 2px solid red;
 }
 
-.widget {
-    outline: 2px solid green;
-}
+.widget {}
 
 .overview {
     outline: 2px solid green;

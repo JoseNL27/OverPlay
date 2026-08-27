@@ -1,20 +1,99 @@
 .media-card {
-    display: grid;
-    grid-template-rows: 3fr 1fr;
-    width: 200px;
-    height: 300px;
-    border-radius: 10px;
-    flex: 0 0 200px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    flex: 0 0 180px;
+    padding: 12px;
+    background:
+        linear-gradient(180deg,
+            rgba(255, 144, 80, 0.08),
+            rgba(15, 18, 17, 0.767) 85%);
+    /* Aquí JS pondrá el color predominante de la portada*/
+    border: 1px solid rgba(255, 255, 255, .06);
+    box-shadow: 0 0px 14px rgba(2, 255, 23, 0.219);
+    /* Sombra elegante, nada de neón */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#warning {
+    /* Tarjeta con alerta de sobreescucha. En pruebas. Ignorar */
+    box-shadow: 0 0px 14px rgba(247, 170, 28, 0.219);
+}
+
+#warning .ovr-level {
+    /* Tarjeta con alerta de sobreescucha. En pruebas. Ignorar */
+    color: #fcc52f;
+    border: 1px solid rgba(215, 181, 30, 0.3);
+    background: rgba(10, 20, 15, 0.637);
+}
+
+.media-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
 }
 
 .media-card-content {
-    display: grid;
-    justify-items: center;
-    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding-top: 4px;
+}
+
+.media-card-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.media-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.media-card-type {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--text-secondary, #ccc);
+    letter-spacing: 0.08em;
+
+    margin-block: var(--spacing-xs);
+}
+
+.media-card-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1;
+
+}
+
+.media-card-description {
+    font-size: 0.8rem;
+    color: #a7a7a7;
+    /* Gris claro para legibilidad */
 }
 
 .media-card-ovr {
-    display: flex;
-    height: 50px;
-    overflow: hidden;
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    z-index: 2;
+
+}
+
+.ovr-level {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #1ed760;
+    border: 1px solid rgba(30, 215, 96, 0.3);
+    background: rgba(10, 20, 15, 0.637);
+    padding: 4px 8px;
+    border-radius: 8px;
+    backdrop-filter: blur(6px);
 }

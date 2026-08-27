@@ -1,16 +1,45 @@
 :root {
-    --color-background: ;
-    --color-surface: ...;
-    --color-primary: ...;
-    --color-text: ...;
-    --color-text-secondary: ...;
+    --color-background: #0B0D0C;
+    --color-surface: #121614;
+    --color-surface-hover: #202520;
+    --color-surface-elevated: #191D1A;
 
-    --spacing-xs: ...;
-    --spacing-sm: ...;
-    --spacing-md: ...;
-    --spacing-lg: ...;
+    --color-border: #292E2A;
 
-    --radius-sm: ...;
-    --radius-md: ...;
-    --radius-lg: ...;
+    --bg-main: #0b0b0c;
+    --bg-card: #1b241c77;
+    --bg-card-hover: #1c1c1f;
+    --bg-soft: rgba(255, 255, 255, 0.04);
+    --border-soft: rgba(255, 255, 255, 0.08);
+
+    /* TEXTO */
+
+    --color-text-primary: #F2F4F2;
+    --color-text-secondary: #bebebe;
+    --color-text-tertiary: #838383;
+
+    --font-size-section-title: 1.4rem;
+    --font-weight-section-title: 600;
+
+    --font-size-section-subtitle: 1rem;
+    --font-weight-section-subtitle: 600;
+
+    --font-size-section-content-title: 0.9rem;
+    --font-weight-section-content-title: 400;
+
+    /* BRAND */
+
+    --color-brand: #B7F34A;
+
+
+
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 24px;
+
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
 }

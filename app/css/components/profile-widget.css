@@ -1,14 +1,33 @@
-.profile-widget-content {
+.widget .profile-widget-content {
     display: grid;
     grid-template-columns: 1fr 3fr;
+    background: linear-gradient(260deg, var(--bg-card) 0%, rgba(9, 74, 112, 0.281) 90%);
+    /*JS pondrá aqui el color predominante del user-profile*/
+
 }
 
 .user-resume {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    padding: 10px;
+    gap: 12px;
+    padding: 12px 18px 12px 12px;
+}
+
+.user-resume::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(-100%, -50%);
+    /* centra la línea en el hueco entre botones */
+    width: 1px;
+    height: 100%;
+    /* altura de la línea, ajusta a gusto */
+    background-color: var(--border-soft);
+    opacity: 1;
+    /* para que sea sutil */
 }
 
 .user-resume-info {
@@ -16,7 +35,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 4px;
+}
+
+.user-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-bottom: 1px solid var(--border-soft);
+    padding-bottom: 4px;
+    margin-bottom: 8px;
 }
 
 .user-resume-image {
@@ -29,13 +56,15 @@
     width: 100px;
     aspect-ratio: 1;
     border-radius: 50%;
+    box-shadow: 0 0 16px 0px rgba(183, 108, 255, 0.22);
+    border: 2px solid var(--border-soft);
 }
 
 .user-insights {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 10px;
+    gap: 8px;
+    padding: 12px;
     max-height: 200px;
 
     overflow-y: auto;
@@ -45,7 +74,22 @@
 .mini-insight {
     display: flex;
     flex-direction: column;
-    gap: 5px;
     padding: 5px;
+    background: radial-gradient(ellipse at center, rgba(119, 119, 119, 0.075) 0%, var(--bg-card) 100%);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 6px;
+    border: 1px solid var(--border-soft);
 
+}
+
+.insight-title {
+    color: var(--color-text-secondary);
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.insight-content {
+    color: var(--color-text-tertiary);
+    font-size: 0.75rem;
 }

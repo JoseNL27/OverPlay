@@ -1,0 +1,93 @@
+.nav-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    position: fixed;
+    bottom: 12px;
+    left: 12px;
+    width: calc(100% - 24px);
+    background-color: rgba(53, 53, 53, 0.349);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-soft);
+    padding: 4px;
+
+
+    /* @media (width >=800px) {
+        .nav-bar {
+             convertirla en sidebar 
+        }
+    } */
+}
+
+.nav-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    position: relative;
+    padding-top: 28px;
+    background: none;
+    border: none;
+    color: var(--text-secondary, #ccc);
+    /* color base del icono/texto */
+    cursor: pointer;
+}
+
+.nav-btn::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    /* separación desde arriba del botón */
+    width: 22px;
+    height: 22px;
+    background-color: currentColor;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+}
+
+.nav-btn:not(:first-child) {
+    position: relative;
+}
+
+.nav-btn:not(:first-child)::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(-100%, -50%);
+    /* centra la línea en el hueco entre botones */
+    width: 1px;
+    height: 80%;
+    /* altura de la línea, ajusta a gusto */
+    background-color: var(--border-soft);
+    opacity: 1;
+    /* para que sea sutil */
+}
+
+#nav-home::before {
+    mask-image: url("../../data/icons/home.svg");
+    -webkit-mask-image: url("../../data/icons/home.svg");
+}
+
+#nav-playlists::before {
+    mask-image: url("../../data/icons/playlists.svg");
+    -webkit-mask-image: url("../../data/icons/playlists.svg");
+}
+
+#nav-search::before {
+    mask-image: url("../../data/icons/search.svg");
+    -webkit-mask-image: url("../../data/icons/search.svg");
+}
+
+#nav-settings::before {
+    mask-image: url("../../data/icons/settings.svg");
+    -webkit-mask-image: url("../../data/icons/settings.svg");
+}

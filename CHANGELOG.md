@@ -1,28 +1,33 @@
 ## 24/05
-    * Añadidas las rutas de la API: /logout y api/me
-    * Se le da funcionalidad al login o logout de OverPlay.
-    * Funcion async function verificarSesion() en app.js para controlar los logins a través del /me.
-    * Añadido el COLD START INTELIGENTE en /callback, capturando los datos del endpoint de spotify /v1/me/top/artists para generar patrones de escucha de nuevos usuarios. Estos datos se guardan en la tabla perfiles_usuario y van ligados a cada user_id. Asimismo, se crea la tabla fatiga_artistas en la que se guarda el estado "Transitorio", "Artista Ancla" y el multiplicador de fatiga de cada artista de los devueltos por el endpoint antes mencionado.
-    * Asimismo, se añade el calculo de O.V.R. de los top_tracks (mapear_top_tracks_cold_start) de nuevos usuarios, usando una lógica similar a la de la funcion de mapear_top_artistas_cold_start.
-    * Arreglo del endpoint /dashboard para rellenar las tablas vacías en caso de Cold Start.
+* **Añadidas las rutas de la API: /logout y api/me**
+* **Se le da funcionalidad al login o logout de OverPlay.**
+* **Funcion async function verificarSesion() en app.js para controlar los logins a través del /me.**
+* **Añadido el COLD START INTELIGENTE en /callback**, capturando los datos del endpoint de spotify /v1/me/top/artists para generar patrones de escucha de nuevos usuarios. Estos datos se guardan en la tabla perfiles_usuario y van ligados a cada user_id. Asimismo, se crea la tabla fatiga_artistas en la que se guarda el estado "Transitorio", "Artista Ancla" y el multiplicador de fatiga de cada artista de los devueltos por el endpoint antes mencionado.
+* Asimismo, **se añade el calculo de O.V.R. de los top_tracks** (mapear_top_tracks_cold_start) de nuevos usuarios, usando una lógica similar a la de la funcion de mapear_top_artistas_cold_start.
+* **Arreglo del endpoint /dashboard para rellenar las tablas vacías en caso de Cold Start.**
+
 ## 25/05
-    * Migración desde Termux completada.
-    * Añadido requeriments.txt
+* **Migración desde Termux completada.**
+* **Añadido requeriments.txt**
+
 ## 26/05
-    * Comenzada la reestructuración del Backend completamente.
+* **Comenzada la reestructuración del Backend completamente.**
+
 ## 28/05
-    * Reescritura completa del scout.py
-    * Añadido soporte para múltiples usuarios.
-    * Añadidos los scripts auth.py y db.py con el objetivo de descentralizar y compartimentar el Backend.
-    *Queda pendiente adaptar el resto de los scripts del Backend para aprovechar el nuevo sistema de autenticación y conexión a la base de datos.*
+* **Reescritura completa del scout.py**
+* **Añadido soporte para múltiples usuarios.**
+* **Añadidos los scripts auth.py y db.py** con el objetivo de descentralizar y compartimentar el Backend. 
+*Queda pendiente adaptar el resto de los scripts del Backend para aprovechar el nuevo sistema de autenticación y conexión a la base de datos.*
+
 ## 31/05
-    * Se adapta calcular_fatiga.py para usar el sistema multiuser.
-    * Se dejan placeholders en core_matematico.py hasta adaptarlo a las nuevas tablas de la base de datos.
+* **Se adapta calcular_fatiga.py para usar el sistema multiuser.**
+* **Se dejan placeholders en core_matematico.py hasta adaptarlo a las nuevas tablas de la base de datos.**
+
 ## 7/06
- * **Se modifican las conexiones de la API** con SQLite para realizarlo a través de un Context Manager llamado db_session.
- * **Saneo del código** y funciones inutilizadas en api.py
- * **Implementación de Ngrok** para permitir el acceso a la API desde el exterior.
- * **Se implementa la primera prueba de soporte multiusuario** en api.py en el endpoint /radar.
+* **Se modifican las conexiones de la API con SQLite** para realizarlo a través de un Context Manager llamado db_session.
+* **Saneo del código y funciones inutilizadas en api.py**
+* **Implementación de Ngrok** para permitir el acceso a la API desde el exterior.
+* **Se implementa la primera prueba de soporte multiusuario** en api.py en el endpoint /radar.
 
 # frontend-v2
 
@@ -74,6 +79,28 @@
  * **Diseñado el widget de perfil (profile-widget)**
  * **Introducida la funcionalidad de "Insights"**, será desarrollada en profundidad posteriormente.
  * **Diseñado el widget de "Featured Insight"** en sustitución de "Forgotten Gem".
- 
+
+## 20/08
+* **Configuración de las variables globales del CSS**
+* **Añadida una versión temprana del diseño del componente .media-card**
+
+## 24/08
+* **Añadido Background general**
+* **Añadido diseño blur a header y navbar**
+* **Refinado el diseño del componente .widget**
+* **Añadido el diseño de .featured-insight**
+
+## 25/08
+* **Refinamiento del componenete .widget y .featured-insight.**
+* **Diseño de nav-bar terminado.**
+* **Añadido host.py para acceder a la app en local.**
+* **Completado el diseño de .musical-temperature.**
+* **Terminado el diseño del componente media-card.**
+
+## 26/08
+* **Añadido diseño global para todos los button.**
+* **Diseño del widget profile-widget terminado.**
+* **Añadido logo beta de OverPlay**
+
 
  
