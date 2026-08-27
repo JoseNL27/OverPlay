@@ -4,6 +4,8 @@ OverPlay is a personal project for analyzing Spotify listening history and detec
 
 The project started as a way to experiment with my own Spotify listening data and has gradually grown into a full-stack application.
 
+![OverPlay Preview](docs/overplay-preview.jpg)
+
 > 🚧 **Currently being refactored**
 >
 > I'm currently restructuring the frontend and improving the project architecture.
