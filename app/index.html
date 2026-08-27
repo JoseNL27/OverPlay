@@ -17,7 +17,7 @@
     <meta name="theme-color" content="#000000">
 
     <link rel="stylesheet" href="css/main.css?v=2.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/script.js" defer></script>
@@ -47,13 +47,13 @@
         </header>
         <main>
             <section id="home-screen" class="screen active"> <!-- Pantalla de inicio -->
-                <h1>Hola, <span class="user-name"></span></h1>
+                <h1>Hola, <span id="user-name-h1" class="user-name">username</span></h1>
                 <!-- Aquí irá el contenido de la pantalla de inicio -->
                 <div id="overview" class="widget">
                     <h2>Estado de tus escuchas</h2>
                     <div class="overview-container">
                         <div id="overview-time-range" class="time-range-buttons">
-                            <button class="time-range-btn active" data-range="7d">7D</button>
+                            <button class="time-range-btn" data-range="7d">7D</button>
                             <button class="time-range-btn" data-range="1m">1M</button>
                             <button class="time-range-btn" data-range="1y">1Y</button>
                             <button class="time-range-btn" data-range="all">ALL</button>
@@ -64,6 +64,7 @@
                                 <div class="ovr-overview-content"> <!-- OVR SCORE y descripción-->
                                     <span id="ovr-overview-score">25</span>
                                     <h4 id="ovr-overview-status">BAJO</h4>
+                                    <span id="ovr-overview-evolution" class="tag"> +5%</span>
                                 </div>
                             </div>
 

@@ -62,6 +62,7 @@ body {
 }
 
 main {
+    padding-top: var(--spacing-lg);
     padding-bottom: 64px;
 }
 

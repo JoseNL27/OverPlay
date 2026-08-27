@@ -4,19 +4,36 @@
 }
 
 #overview-time-range {
+    /*Diseño NO definitivo. Objetivo: animación que da anchura extra a la pestaña activa*/
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
-    align-self: flex-start;
+    position: relative;
+    margin-bottom: var(--spacing-md);
 }
+
 
 .overview-grid {
     display: grid;
+    position: relative;
     grid-template-columns: 1fr 2fr;
     gap: var(--spacing-md);
     margin-top: var(--spacing-md);
+}
+
+
+.overview-grid::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 100%;
+    transform: translate(0%, -50%);
+    width: 100%;
+    height: 1px;
+    background-color: var(--border-soft);
+    opacity: 1;
 }
 
 .overview-grid h3 {
@@ -30,6 +47,18 @@
     flex-direction: column;
     position: relative;
 
+}
+
+.ovr-overview::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(100%, 0%);
+    width: 1px;
+    height: 90%;
+    background-color: var(--border-soft);
+    opacity: 1;
 }
 
 .ovr-overview-content {
@@ -46,9 +75,24 @@
 
 #ovr-overview-score {
     font-size: 4rem;
-    font-weight: bold;
+    font-weight: 1000;
     color: rgb(24, 199, 68);
+    line-height: 1.2;
     /*color provisional*/
+    text-shadow: 0 0 10px rgba(24, 199, 68, 0.26);
+}
+
+#ovr-overview-status {
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgb(154, 219, 171);
+}
+
+#ovr-overview-evolution {
+    padding-top: var(--spacing-md);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgb(24, 199, 68);
 }
 
 .library-graph {
@@ -90,5 +134,6 @@
 .ovr-overview-graph {
     width: 100%;
     height: 210px;
-    padding-block: var(--spacing-lg);
+    padding-top: var(--spacing-md);
+    padding-bottom: var(--spacing-xl);
 }

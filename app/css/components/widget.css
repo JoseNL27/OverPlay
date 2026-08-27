@@ -1,5 +1,5 @@
 .widget {
-    margin: var(--spacing-xl) var(--spacing-sm);
+    margin: var(--spacing-xxl) var(--spacing-sm);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
 }
 
