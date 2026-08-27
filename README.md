@@ -24,6 +24,8 @@ Some of the current features include:
 - Personal dashboard
 
 ## Tech stack
+- PWA
+- ngrok
 
 ### Frontend
 - HTML
