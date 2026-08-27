@@ -53,7 +53,7 @@
                     <h2>Estado de tus escuchas</h2>
                     <div class="overview-container">
                         <div id="overview-time-range" class="time-range-buttons">
-                            <button class="time-range-btn" data-range="7d">7D</button>
+                            <button class="time-range-btn active" data-range="7d">7D</button>
                             <button class="time-range-btn" data-range="1m">1M</button>
                             <button class="time-range-btn" data-range="1y">1Y</button>
                             <button class="time-range-btn" data-range="all">ALL</button>
@@ -62,26 +62,123 @@
                             <div class="ovr-overview"> <!-- Resumen del OVR -->
                                 <h3>OVR Actual</h3>
                                 <div class="ovr-overview-content"> <!-- OVR SCORE y descripción-->
-                                    <span id="ovr-overview-score">76</span>
-                                    <h4 id="ovr-overview-status">ALTO</h4>
+                                    <span id="ovr-overview-score">25</span>
+                                    <h4 id="ovr-overview-status">BAJO</h4>
                                 </div>
                             </div>
 
                             <div class="library-summary"> <!-- Resumen de la biblioteca del usuario -->
                                 <h3>Resumen de tu biblioteca</h3>
-                                <div class="library-summary-content">
-                                    <div class="library-graph">
-                                        <!-- Gráfica de la biblioteca (grafico de tartas) -->
-                                        <canvas id="library-graph-canvas"></canvas>
+                                <div class="library-graph">
+                                    <div id="library-graph-label" class="label">
+                                        <span id="library-graph-value">128</span>
+                                        <span>tracks</span>
                                     </div>
+                                    <!-- Gráfica de la biblioteca (grafico de tartas) -->
+                                    <canvas id="library-graph-canvas"></canvas>
+                                    <script>
+                                        const libraryCtx = document
+                                            .getElementById('library-graph-canvas')
+                                            .getContext('2d');
+
+                                        new Chart(libraryCtx, {
+                                            type: 'doughnut',
+
+                                            data: {
+                                                labels: [
+                                                    'Discovery',
+                                                    'Fresh',
+                                                    'Warning',
+                                                    'Overplayed'
+                                                ],
+
+                                                datasets: [{
+                                                    data: [2, 27, 19, 12],
+                                                    borderWidth: 0.5,
+                                                    backgroundColor: [
+                                                        '#88dfff',
+                                                        '#8aff99',
+                                                        '#ffc952',
+                                                        '#ff5353'
+                                                    ],
+                                                    borderColor: '#1a1a1a'
+
+                                                }]
+                                            },
+
+                                            options: {
+                                                responsive: true,
+                                                maintainAspectRatio: false,
+
+                                                plugins: {
+                                                    legend: false
+                                                }
+                                            }
+                                        });
+                                    </script>
                                 </div>
                             </div>
 
                         </div>
 
                         <div class="ovr-overview-graph"> <!-- Tendencia del OVR -->
-                            <p>Tendencia de tu OVR</p>
+                            <h3>Tendencia de tu OVR</h3>
                             <canvas id="ovr-overview-graph-canvas"></canvas>
+                            <script>
+                                const ovrCtx = document
+                                    .getElementById('ovr-overview-graph-canvas')
+                                    .getContext('2d');
+
+                                new Chart(ovrCtx, {
+                                    type: 'line',
+
+                                    data: {
+                                        labels: [
+                                            '18 Ago',
+                                            '19 Ago',
+                                            '20 Ago',
+                                            '21 Ago',
+                                            '22 Ago',
+                                            '23 Ago',
+                                            '24 Ago',
+                                            '25 Ago',
+                                            '26 Ago',
+                                            '27 Ago'
+                                        ],
+
+                                        datasets: [{
+                                            label: 'OVR',
+                                            data: [12, 53, 69, 73, 59, 41, 35, 28, 19, 25],
+
+                                            borderWidth: 1,
+                                            pointRadius: 3,
+                                            pointHoverRadius: 5,
+
+                                            tension: 0.2,
+
+                                            fill: true
+                                        }]
+                                    },
+
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+
+                                        scales: {
+                                            y: {
+                                                min: 0,
+                                                max: 100
+                                            }
+                                        },
+
+                                        plugins: {
+                                            legend: {
+                                                display: false
+                                            }
+                                        }
+                                    }
+                                });
+                            </script>
                         </div>
 
                     </div>
@@ -92,7 +189,7 @@
                     <div class="musical-temperature-content">
                         <div class="musical-temperature-controls">
                             <div id="mt-time-range" class="time-range-buttons">
-                                <button class="time-range-btn" data-range="7d">7D</button>
+                                <button class="time-range-btn active" data-range="7d">7D</button>
                                 <button class="time-range-btn" data-range="1m">1M</button>
                                 <button class="time-range-btn" data-range="1y">1Y</button>
                                 <button class="time-range-btn" data-range="all">ALL</button>
@@ -117,7 +214,7 @@
                                         </div>
                                         <img src="./data/cover.jpg" alt="Playlist cover">
                                     </div>
-                                    <span class="media-card-type">Track</span>
+                                    <span id="media-card-type" class="label">Track</span>
                                     <h3 class="media-card-title">Un Verano Sin Tí</h3>
                                     <p class="media-card-description">Bad Bunny</p>
                                 </div>
@@ -131,7 +228,7 @@
                                         </div>
                                         <img src="./data/cover2.jpg" alt="Playlist cover">
                                     </div>
-                                    <span class="media-card-type">Track</span>
+                                    <span id="media-card-type" class="label">Track</span>
                                     <h3 class="media-card-title">Ferxxo 100</h3>
                                     <p class="media-card-description">Feid</p>
                                 </div>
@@ -144,7 +241,7 @@
                                         </div>
                                         <img src="./data/cover2.jpg" alt="Playlist cover">
                                     </div>
-                                    <span class="media-card-type">Track</span>
+                                    <span id="media-card-type" class="label">Track</span>
                                     <h3 class="media-card-title">Ferxxo 100</h3>
                                     <p class="media-card-description">Feid</p>
                                 </div>
@@ -157,7 +254,7 @@
                                         </div>
                                         <img src="./data/cover2.jpg" alt="Playlist cover">
                                     </div>
-                                    <span class="media-card-type">Track</span>
+                                    <span id="media-card-type" class="label">Track</span>
                                     <h3 class="media-card-title">Ferxxo 100</h3>
                                     <p class="media-card-description">Feid</p>
                                 </div>

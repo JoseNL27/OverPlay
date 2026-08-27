@@ -105,5 +105,8 @@
 ## 27/08
 * **Añadido manifest.json para que OverPlay sea PWA**
 * **Añadidos iconos de la app**
+* **Nuevo diseño del widget .overview**
+* **Creado el componente global de label**
+* **Creado el componente global time-range-buttons**
 
  

@@ -3,11 +3,13 @@
     flex-direction: column;
 }
 
-.library-graph-buttons {
+#overview-time-range {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    gap: 10px;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    align-self: flex-start;
 }
 
 .overview-grid {
@@ -17,18 +19,76 @@
     margin-top: var(--spacing-md);
 }
 
+.overview-grid h3 {
+    align-self: center;
+    justify-self: center;
+
+}
+
+.ovr-overview {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+}
+
+.ovr-overview-content {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
 
 #ovr-overview-score {
-    font-size: 3rem;
+    font-size: 4rem;
     font-weight: bold;
-    color: rgb(199, 24, 24);
+    color: rgb(24, 199, 68);
     /*color provisional*/
 }
 
+.library-graph {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-lg);
+    position: relative;
+}
+
+#library-graph-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    pointer-events: none;
+    font-weight: 700;
+}
+
+#library-graph-value {
+    font-size: 1.4rem;
+    font-weight: 900;
+    line-height: 1;
+}
+
 #library-graph-canvas {
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
     aspect-ratio: 1;
     object-fit: cover;
     object-position: center;
+}
+
+.ovr-overview-graph {
+    width: 100%;
+    height: 210px;
+    padding-block: var(--spacing-lg);
 }
