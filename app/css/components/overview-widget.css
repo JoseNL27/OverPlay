@@ -1,73 +1,34 @@
-.overview-content {
-    display: grid;
-    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-}
-
-.ovr-overview {
+.overview-container {
     display: flex;
     flex-direction: column;
-    min-width: 0;
-    padding: 10px;
-    gap: 10px;
-}
-
-.ovr-overview-content {
-    display: flex;
-    align-items: flex-end;
-
-    gap: 10px;
-}
-
-#ovr-overview-score {
-    font-size: 4rem;
-    font-weight: bold;
-}
-
-.library-summary-content {
-    display: grid;
-    grid-template-areas:
-        "graph"
-        "buttons"
-        "legend";
-    gap: 15px;
-}
-
-.library-graph {
-    grid-area: graph;
-    display: flex;
-    align-items: center;
-    min-width: 0;
-}
-
-.library-graph canvas {
-    width: min(50%, 250px);
-    aspect-ratio: 1;
-}
-
-.library-graph-legend {
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-    grid-area: legend;
 }
 
 .library-graph-buttons {
-    grid-area: buttons;
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 10px;
 }
 
-@media (width < 575px) {
-    .overview-content {
-        grid-template-columns: 1fr;
-    }
+.overview-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
 
-    .library-summary-content {
-        grid-template-areas:
-            "graph"
-            "legend"
-            "buttons";
-    }
+
+#ovr-overview-score {
+    font-size: 3rem;
+    font-weight: bold;
+    color: rgb(199, 24, 24);
+    /*color provisional*/
+}
+
+#library-graph-canvas {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    object-position: center;
 }

@@ -102,5 +102,8 @@
 * **Diseño del widget profile-widget terminado.**
 * **Añadido logo beta de OverPlay**
 
+## 27/08
+* **Añadido manifest.json para que OverPlay sea PWA**
+* **Añadidos iconos de la app**
 
  

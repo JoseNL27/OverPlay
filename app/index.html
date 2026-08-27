@@ -51,55 +51,39 @@
                 <!-- Aquí irá el contenido de la pantalla de inicio -->
                 <div id="overview" class="widget">
                     <h2>Estado de tus escuchas</h2>
-                    <div class="overview-content"> <!-- Flexbox con dos columnas -->
-                        <div class="ovr-overview"> <!-- Resumen del OVR -->
-                            <h3>OVR Actual</h3>
-                            <div class="ovr-overview-content"> <!-- OVR SCORE y descripción-->
-                                <span id="ovr-overview-score">76</span>
-                                <div class="ovr-overview-description">
-                                    <h4 id="ovr-overview-level">ALTO</h4>
-                                    <p>Tu nivel de fatiga musical es alto.</p>
+                    <div class="overview-container">
+                        <div id="overview-time-range" class="time-range-buttons">
+                            <button class="time-range-btn" data-range="7d">7D</button>
+                            <button class="time-range-btn" data-range="1m">1M</button>
+                            <button class="time-range-btn" data-range="1y">1Y</button>
+                            <button class="time-range-btn" data-range="all">ALL</button>
+                        </div>
+                        <div class="overview-grid">
+                            <div class="ovr-overview"> <!-- Resumen del OVR -->
+                                <h3>OVR Actual</h3>
+                                <div class="ovr-overview-content"> <!-- OVR SCORE y descripción-->
+                                    <span id="ovr-overview-score">76</span>
+                                    <h4 id="ovr-overview-status">ALTO</h4>
                                 </div>
                             </div>
-                            <div class="ovr-overview-graph"> <!-- Tendencia del OVR -->
-                                <p>Tendencia últimos 7 días</p>
-                                <canvas id="ovr-overview-graph-canvas"></canvas>
+
+                            <div class="library-summary"> <!-- Resumen de la biblioteca del usuario -->
+                                <h3>Resumen de tu biblioteca</h3>
+                                <div class="library-summary-content">
+                                    <div class="library-graph">
+                                        <!-- Gráfica de la biblioteca (grafico de tartas) -->
+                                        <canvas id="library-graph-canvas"></canvas>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
 
-                        <div class="library-summary"> <!-- Resumen de la biblioteca del usuario -->
-                            <h3>Resumen de tu biblioteca</h3>
-                            <div class="library-summary-content">
-                                <div class="library-graph"> <!-- Gráfica de la biblioteca (grafico de tartas) -->
-                                    <canvas id="library-graph-canvas"></canvas>
-                                    <ul class="library-graph-legend">
-                                        <!-- Leyenda de la gráfica. Los nombres son placeholders. -->
-                                        <li class="legend-item">
-                                            <span class="legend-color" data-status="overplayed"></span>
-                                            <span class="legend-text">Overplayed</span>
-                                        </li>
-                                        <li class="legend-item">
-                                            <span class="legend-color" data-status="danger"></span>
-                                            <span class="legend-text">Peligro</span>
-                                        </li>
-                                        <li class="legend-item">
-                                            <span class="legend-color" data-status="normal"></span>
-                                            <span class="legend-text">Normal</span>
-                                        </li>
-                                        <li class="legend-item">
-                                            <span class="legend-color" data-status="discovery"></span>
-                                            <span class="legend-text">Descubrimiento</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="library-graph-buttons"> <!-- Botones para cambiar el rango de la gráfica -->
-                                    <button class="graph-range-btn" data-range="7d">7D</button>
-                                    <button class="graph-range-btn" data-range="1m">1M</button>
-                                    <button class="graph-range-btn" data-range="1y">1Y</button>
-                                    <button class="graph-range-btn" data-range="all">ALL</button>
-                                </div>
-                            </div>
+                        <div class="ovr-overview-graph"> <!-- Tendencia del OVR -->
+                            <p>Tendencia de tu OVR</p>
+                            <canvas id="ovr-overview-graph-canvas"></canvas>
                         </div>
+
                     </div>
                 </div>
 
@@ -107,7 +91,7 @@
                     <h2>Tu temperatura musical</h2>
                     <div class="musical-temperature-content">
                         <div class="musical-temperature-controls">
-                            <div class="time-range-buttons">
+                            <div id="mt-time-range" class="time-range-buttons">
                                 <button class="time-range-btn" data-range="7d">7D</button>
                                 <button class="time-range-btn" data-range="1m">1M</button>
                                 <button class="time-range-btn" data-range="1y">1Y</button>
