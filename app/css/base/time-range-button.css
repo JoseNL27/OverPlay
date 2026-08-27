@@ -1,0 +1,47 @@
+.time-range-buttons {
+    display: flex;
+    background: rgba(255, 255, 255, 0.05);
+    /* Fondo oscuro general */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 8px;
+    padding: 4px;
+}
+
+
+.time-range-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary, #a7a7a7);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.time-range-btn.active {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.time-range-btn:not(:first-child) {
+    position: relative;
+}
+
+.time-range-btn:not(:first-child)::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(-100%, -50%);
+    /* centra la línea en el hueco entre botones */
+    width: 1px;
+    height: 80%;
+    /* altura de la línea, ajusta a gusto */
+    background-color: var(--border-soft);
+    opacity: 1;
+    /* para que sea sutil */
+}

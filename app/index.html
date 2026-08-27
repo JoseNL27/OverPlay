@@ -6,8 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OverPlay</title>
     <link rel="icon" href="data/icons/logo.png">
+
+    <!-- iOS: icono para "Añadir a inicio" -->
+    <link rel="apple-touch-icon" href="data/icons/logo-touch.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Android/Chrome: usa manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+
     <link rel="stylesheet" href="css/main.css?v=2.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/script.js" defer></script>
@@ -28,7 +38,7 @@
     <div class="app-container"> <!-- Contenedor de todo el layout de la app -->
         <header>
             <div class="header-logo">
-                <img src="./data/icons/logo.png" alt="OverPlay">
+                <img src="./data/icons/logo-header.png" alt="OverPlay">
                 <h1>Over<span class="brand">Play</span></h1>
             </div>
             <div class="header-profile">
@@ -37,59 +47,141 @@
         </header>
         <main>
             <section id="home-screen" class="screen active"> <!-- Pantalla de inicio -->
-                <h1>Hola, <span class="user-name"></span></h1>
+                <h1>Hola, <span id="user-name-h1" class="user-name">username</span></h1>
                 <!-- Aquí irá el contenido de la pantalla de inicio -->
                 <div id="overview" class="widget">
                     <h2>Estado de tus escuchas</h2>
-                    <div class="overview-content"> <!-- Flexbox con dos columnas -->
-                        <div class="ovr-overview"> <!-- Resumen del OVR -->
-                            <h3>OVR Actual</h3>
-                            <div class="ovr-overview-content"> <!-- OVR SCORE y descripción-->
-                                <span id="ovr-overview-score">76</span>
-                                <div class="ovr-overview-description">
-                                    <h4 id="ovr-overview-level">ALTO</h4>
-                                    <p>Tu nivel de fatiga musical es alto.</p>
+                    <div class="overview-container">
+                        <div id="overview-time-range" class="time-range-buttons">
+                            <button class="time-range-btn" data-range="7d">7D</button>
+                            <button class="time-range-btn" data-range="1m">1M</button>
+                            <button class="time-range-btn" data-range="1y">1Y</button>
+                            <button class="time-range-btn" data-range="all">ALL</button>
+                        </div>
+                        <div class="overview-grid">
+                            <div class="ovr-overview"> <!-- Resumen del OVR -->
+                                <h3>OVR Actual</h3>
+                                <div class="ovr-overview-content"> <!-- OVR SCORE y descripción-->
+                                    <span id="ovr-overview-score">25</span>
+                                    <h4 id="ovr-overview-status">BAJO</h4>
+                                    <span id="ovr-overview-evolution" class="tag"> +5%</span>
                                 </div>
                             </div>
-                            <div class="ovr-overview-graph"> <!-- Tendencia del OVR -->
-                                <p>Tendencia últimos 7 días</p>
-                                <canvas id="ovr-overview-graph-canvas"></canvas>
+
+                            <div class="library-summary"> <!-- Resumen de la biblioteca del usuario -->
+                                <h3>Resumen de tu biblioteca</h3>
+                                <div class="library-graph">
+                                    <div id="library-graph-label" class="label">
+                                        <span id="library-graph-value">128</span>
+                                        <span>tracks</span>
+                                    </div>
+                                    <!-- Gráfica de la biblioteca (grafico de tartas) -->
+                                    <canvas id="library-graph-canvas"></canvas>
+                                    <script>
+                                        const libraryCtx = document
+                                            .getElementById('library-graph-canvas')
+                                            .getContext('2d');
+
+                                        new Chart(libraryCtx, {
+                                            type: 'doughnut',
+
+                                            data: {
+                                                labels: [
+                                                    'Discovery',
+                                                    'Fresh',
+                                                    'Warning',
+                                                    'Overplayed'
+                                                ],
+
+                                                datasets: [{
+                                                    data: [2, 27, 19, 12],
+                                                    borderWidth: 0.5,
+                                                    backgroundColor: [
+                                                        '#88dfff',
+                                                        '#8aff99',
+                                                        '#ffc952',
+                                                        '#ff5353'
+                                                    ],
+                                                    borderColor: '#1a1a1a'
+
+                                                }]
+                                            },
+
+                                            options: {
+                                                responsive: true,
+                                                maintainAspectRatio: false,
+
+                                                plugins: {
+                                                    legend: false
+                                                }
+                                            }
+                                        });
+                                    </script>
+                                </div>
                             </div>
+
                         </div>
 
-                        <div class="library-summary"> <!-- Resumen de la biblioteca del usuario -->
-                            <h3>Resumen de tu biblioteca</h3>
-                            <div class="library-summary-content">
-                                <div class="library-graph"> <!-- Gráfica de la biblioteca (grafico de tartas) -->
-                                    <canvas id="library-graph-canvas"></canvas>
-                                    <ul class="library-graph-legend">
-                                        <!-- Leyenda de la gráfica. Los nombres son placeholders. -->
-                                        <li class="legend-item">
-                                            <span class="legend-color" data-status="overplayed"></span>
-                                            <span class="legend-text">Overplayed</span>
-                                        </li>
-                                        <li class="legend-item">
-                                            <span class="legend-color" data-status="danger"></span>
-                                            <span class="legend-text">Peligro</span>
-                                        </li>
-                                        <li class="legend-item">
-                                            <span class="legend-color" data-status="normal"></span>
-                                            <span class="legend-text">Normal</span>
-                                        </li>
-                                        <li class="legend-item">
-                                            <span class="legend-color" data-status="discovery"></span>
-                                            <span class="legend-text">Descubrimiento</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="library-graph-buttons"> <!-- Botones para cambiar el rango de la gráfica -->
-                                    <button class="graph-range-btn" data-range="7d">7D</button>
-                                    <button class="graph-range-btn" data-range="1m">1M</button>
-                                    <button class="graph-range-btn" data-range="1y">1Y</button>
-                                    <button class="graph-range-btn" data-range="all">ALL</button>
-                                </div>
-                            </div>
+                        <div class="ovr-overview-graph"> <!-- Tendencia del OVR -->
+                            <h3>Tendencia de tu OVR</h3>
+                            <canvas id="ovr-overview-graph-canvas"></canvas>
+                            <script>
+                                const ovrCtx = document
+                                    .getElementById('ovr-overview-graph-canvas')
+                                    .getContext('2d');
+
+                                new Chart(ovrCtx, {
+                                    type: 'line',
+
+                                    data: {
+                                        labels: [
+                                            '18 Ago',
+                                            '19 Ago',
+                                            '20 Ago',
+                                            '21 Ago',
+                                            '22 Ago',
+                                            '23 Ago',
+                                            '24 Ago',
+                                            '25 Ago',
+                                            '26 Ago',
+                                            '27 Ago'
+                                        ],
+
+                                        datasets: [{
+                                            label: 'OVR',
+                                            data: [12, 53, 69, 73, 59, 41, 35, 28, 19, 25],
+
+                                            borderWidth: 1,
+                                            pointRadius: 3,
+                                            pointHoverRadius: 5,
+
+                                            tension: 0.2,
+
+                                            fill: true
+                                        }]
+                                    },
+
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+
+                                        scales: {
+                                            y: {
+                                                min: 0,
+                                                max: 100
+                                            }
+                                        },
+
+                                        plugins: {
+                                            legend: {
+                                                display: false
+                                            }
+                                        }
+                                    }
+                                });
+                            </script>
                         </div>
+
                     </div>
                 </div>
 
@@ -97,8 +189,8 @@
                     <h2>Tu temperatura musical</h2>
                     <div class="musical-temperature-content">
                         <div class="musical-temperature-controls">
-                            <div class="time-range-buttons">
-                                <button class="time-range-btn" data-range="7d">7D</button>
+                            <div id="mt-time-range" class="time-range-buttons">
+                                <button class="time-range-btn active" data-range="7d">7D</button>
                                 <button class="time-range-btn" data-range="1m">1M</button>
                                 <button class="time-range-btn" data-range="1y">1Y</button>
                                 <button class="time-range-btn" data-range="all">ALL</button>
@@ -123,7 +215,7 @@
                                         </div>
                                         <img src="./data/cover.jpg" alt="Playlist cover">
                                     </div>
-                                    <span class="media-card-type">Track</span>
+                                    <span id="media-card-type" class="label">Track</span>
                                     <h3 class="media-card-title">Un Verano Sin Tí</h3>
                                     <p class="media-card-description">Bad Bunny</p>
                                 </div>
@@ -137,7 +229,7 @@
                                         </div>
                                         <img src="./data/cover2.jpg" alt="Playlist cover">
                                     </div>
-                                    <span class="media-card-type">Track</span>
+                                    <span id="media-card-type" class="label">Track</span>
                                     <h3 class="media-card-title">Ferxxo 100</h3>
                                     <p class="media-card-description">Feid</p>
                                 </div>
@@ -150,7 +242,7 @@
                                         </div>
                                         <img src="./data/cover2.jpg" alt="Playlist cover">
                                     </div>
-                                    <span class="media-card-type">Track</span>
+                                    <span id="media-card-type" class="label">Track</span>
                                     <h3 class="media-card-title">Ferxxo 100</h3>
                                     <p class="media-card-description">Feid</p>
                                 </div>
@@ -163,7 +255,7 @@
                                         </div>
                                         <img src="./data/cover2.jpg" alt="Playlist cover">
                                     </div>
-                                    <span class="media-card-type">Track</span>
+                                    <span id="media-card-type" class="label">Track</span>
                                     <h3 class="media-card-title">Ferxxo 100</h3>
                                     <p class="media-card-description">Feid</p>
                                 </div>

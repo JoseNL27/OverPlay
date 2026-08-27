@@ -1,0 +1,7 @@
+.label {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--text-secondary, #ccc);
+    letter-spacing: 0.08em;
+}

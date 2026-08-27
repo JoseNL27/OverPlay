@@ -102,5 +102,14 @@
 * **Diseño del widget profile-widget terminado.**
 * **Añadido logo beta de OverPlay**
 
+## 27/08
+* **Añadido manifest.json para que OverPlay sea PWA**
+* **Añadidos iconos de la app**
+* **Nuevo diseño del widget .overview** [PENDIENTE DE REFINAR LOS DETALLES]
+* **Creado el componente global de label**
+* **Creado el componente global time-range-buttons**
+* **Pequeños retoques en la tipografía de la Home.**
+
+* ### TERMINADO EL DISEÑO GENERAL DE LA HOME
 
  
