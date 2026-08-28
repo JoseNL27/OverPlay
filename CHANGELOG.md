@@ -109,7 +109,11 @@
 * **Creado el componente global de label**
 * **Creado el componente global time-range-buttons**
 * **Pequeños retoques en la tipografía de la Home.**
-
 * ### TERMINADO EL DISEÑO GENERAL DE LA HOME
+* **Integración con ngrok re-activada**
+
+## 28/08
+* **Cambiada carpeta "data" por "assets"**
+* **Cambiado el nombre de la pestaña "Playlists" por la futura pestaña de "Música"**
 
  

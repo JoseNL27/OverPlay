@@ -73,21 +73,21 @@
 }
 
 #nav-home::before {
-    mask-image: url("../../data/icons/home.svg");
-    -webkit-mask-image: url("../../data/icons/home.svg");
+    mask-image: url("../../assets/icons/home.svg");
+    -webkit-mask-image: url("../../assets/icons/home.svg");
 }
 
 #nav-playlists::before {
-    mask-image: url("../../data/icons/playlists.svg");
-    -webkit-mask-image: url("../../data/icons/playlists.svg");
+    mask-image: url("../../assets/icons/playlists.svg");
+    -webkit-mask-image: url("../../assets/icons/playlists.svg");
 }
 
 #nav-search::before {
-    mask-image: url("../../data/icons/search.svg");
-    -webkit-mask-image: url("../../data/icons/search.svg");
+    mask-image: url("../../assets/icons/search.svg");
+    -webkit-mask-image: url("../../assets/icons/search.svg");
 }
 
 #nav-settings::before {
-    mask-image: url("../../data/icons/settings.svg");
-    -webkit-mask-image: url("../../data/icons/settings.svg");
+    mask-image: url("../../assets/icons/settings.svg");
+    -webkit-mask-image: url("../../assets/icons/settings.svg");
 }
