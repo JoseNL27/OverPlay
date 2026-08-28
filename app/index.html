@@ -47,7 +47,7 @@
             </div>
         </header>
         <main>
-            <section id="home-screen" class="screen active"> <!-- Pantalla de inicio -->
+            <section id="home-screen" class="screen"> <!-- Pantalla de inicio -->
                 <h1>Hola, <span id="user-name-h1" class="user-name">username</span></h1>
                 <!-- Aquí irá el contenido de la pantalla de inicio -->
                 <div id="overview" class="widget">
@@ -384,7 +384,7 @@
                 </div>
             </section>
 
-            <section id="search-screen" class="screen"> <!-- Pantalla de búsqueda -->
+            <section id="search-screen" class="screen active"> <!-- Pantalla de búsqueda -->
                 <h1>Búsqueda</h1>
                 <div class="search-box">
                     <input id="search-input" type="search" placeholder="Buscar">
@@ -394,13 +394,13 @@
                     <template id="search-result-template">
                         <article class="search-result">
                             <div class="search-result-image-wrapper">
-                                <img class="search-result-image" src="" alt="">
+                                <img class="search-result-image" src="/assets/artist.jpg" alt="">
                             </div>
 
                             <div class="search-result-info">
-                                <h3 class="search-result-title">Titulo</h3>
-                                <p class="search-result-subtitle">Subtitulo</p>
-                                <span class="search-result-type">Tipo</span>
+                                <h3 class="search-result-title">SAIKO</h3>
+                                <p class="search-result-subtitle"></p>
+                                <span id="search-result-type" class="label">label</span>
                             </div>
 
                             <div class="search-result-ovr">
@@ -412,33 +412,52 @@
                     <!-- Placeholders de search result para la maquetación -->
                     <article class="search-result">
                         <div class="search-result-image-wrapper">
-                            <img class="search-result-image" src="" alt="">
+                            <img class="search-result-image" src="assets/cover2.jpg" alt="">
                         </div>
 
                         <div class="search-result-info">
-                            <h3 class="search-result-title">Titulo</h3>
-                            <p class="search-result-subtitle">Subtitulo</p>
-                            <span class="search-result-type">Tipo</span>
+                            <h3 class="search-result-title">Ferxxo 100</h3>
+                            <p class="search-result-subtitle">Feid</p>
+                            <span id="search-result-type" class="label">Track</span>
                         </div>
 
                         <div class="search-result-ovr">
-                            <span class="ovr-level">OVR</span>
+                            <span class="search-result-ovr-level">28.9</span>
+                            <span class="search-result-ovr-label">OVR</span>
                         </div>
                     </article>
 
                     <article class="search-result">
                         <div class="search-result-image-wrapper">
-                            <img class="search-result-image" src="" alt="">
+                            <img id="artist-img" class="search-result-image" src="/assets/1artist.jpg" alt="">
                         </div>
 
                         <div class="search-result-info">
-                            <h3 class="search-result-title">Titulo</h3>
-                            <p class="search-result-subtitle">Subtitulo</p>
-                            <span class="search-result-type">Tipo</span>
+                            <h3 class="search-result-title">Feid</h3>
+                            <p class="search-result-subtitle"></p>
+                            <span id="search-result-type" class="label">Artist</span>
                         </div>
 
                         <div class="search-result-ovr">
-                            <span class="ovr-level">OVR</span>
+                            <span class="search-result-ovr-level">35.4</span>
+                            <span class="search-result-ovr-label">OVR</span>
+                        </div>
+                    </article>
+
+                    <article class="search-result">
+                        <div class="search-result-image-wrapper">
+                            <img class="search-result-image" src="/assets/cover2.jpg" alt="">
+                        </div>
+
+                        <div class="search-result-info">
+                            <h3 class="search-result-title">FELIZ CUMPLEAÑOS FERXXO TE PIRATEAMOS EL ALBUM</h3>
+                            <p class="search-result-subtitle">Feid</p>
+                            <span id="search-result-type" class="label">Álbum</span>
+                        </div>
+
+                        <div class="search-result-ovr">
+                            <span class="search-result-ovr-level">35</span>
+                            <span class="search-result-ovr-label">OVR</span>
                         </div>
                     </article>
 

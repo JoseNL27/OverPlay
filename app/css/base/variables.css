@@ -12,6 +12,8 @@
     --bg-soft: rgba(255, 255, 255, 0.04);
     --border-soft: rgba(255, 255, 255, 0.08);
 
+    --bg-blur-widget: linear-gradient(145deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
+
     /* TEXTO */
 
     --color-text-primary: #F2F4F2;
