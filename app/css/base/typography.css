@@ -23,6 +23,7 @@ h1 {
     font-size: 2rem;
     font-weight: 600;
     color: var(--color-text-primary);
+    margin-inline-start: var(--spacing-sm);
 }
 
 #user-name-h1 {

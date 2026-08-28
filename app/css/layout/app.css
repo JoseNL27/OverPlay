@@ -27,6 +27,10 @@ header {
 
 }
 
+.header-logo h1 {
+    margin-inline-start: 0;
+}
+
 .header-logo {
     display: flex;
 
