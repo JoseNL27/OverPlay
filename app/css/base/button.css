@@ -1,0 +1,20 @@
+button {
+    background: transparent;
+    color: var(--text-secondary, #a7a7a7);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border: 1px solid var(--border-soft);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+
+.search-filter-btn:active,
+.search-filter-btn.active,
+.time-range-btn.active {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}

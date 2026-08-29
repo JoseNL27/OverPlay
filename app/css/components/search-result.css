@@ -1,31 +1,95 @@
 .search-result {
     display: grid;
-    grid-template-columns: 80px 1fr 80px;
-    height: 80px;
-    outline: 2px solid green;
-    margin-inline: 10px;
+    grid-template-columns: 90px minmax(0, 1fr) 90px;
+    height: 90px;
+    margin-inline: var(--spacing-md);
+    margin-block: var(--spacing-xs);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-soft);
+    background:
+        linear-gradient(90deg,
+            rgba(109, 255, 80, 0.08),
+            rgba(22, 29, 22, 0.514) 85%);
+    /* Aquí JS pondrá el color predominante de la portada*/
+    border: 1px solid rgba(255, 255, 255, .06);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(25px);
 }
 
 .search-result-image-wrapper {
     display: flex;
+
     justify-self: center;
     align-self: center;
 }
 
+
 .search-result-image {
     width: 70px;
     height: 70px;
+    border-radius: var(--radius-sm);
+}
+
+#artist-img {
+    border-radius: 50%;
 }
 
 .search-result-info {
+    min-width: 0;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-inline: var(--spacing-xs);
+}
+
+.search-result-info::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    /* centra la línea en el hueco entre botones */
+    width: 1px;
+    height: 80%;
+    /* altura de la línea, ajusta a gusto */
+    background-color: var(--border-soft);
+    opacity: 1;
 }
 
 
+.search-result-title {
+    min-width: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+.search-result-description {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+}
+
 .search-result-ovr {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+
+}
+
+.search-result-ovr-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #1ed75fe0;
+}
+
+.search-result-ovr-level {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1ed760;
 }

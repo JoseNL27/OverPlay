@@ -2,6 +2,7 @@
 @import url("./base/variables.css");
 @import url("./base/typography.css");
 @import url("./base/time-range-button.css");
+@import url("./base/button.css");
 
 @import url("./layout/app.css");
 @import url("./layout/label.css");

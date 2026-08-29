@@ -10,7 +10,7 @@
 }
 
 .widget>div {
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
+    background: var(--bg-blur-widget);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
 

@@ -115,5 +115,9 @@
 ## 28/08
 * **Cambiada carpeta "data" por "assets"**
 * **Cambiado el nombre de la pestaña "Playlists" por la futura pestaña de "Música"**
+* **Diseño del componente search-result.**
+* **Diseño general de la pestaña de búsqueda.**
 
- 
+## 29/08
+* **Añadido filtro de búsqueda por categoría.**
+* **Componente base para button.**
