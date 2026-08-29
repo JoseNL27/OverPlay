@@ -47,7 +47,7 @@
             </div>
         </header>
         <main>
-            <section id="home-screen" class="screen active"> <!-- Pantalla de inicio -->
+            <section id="home-screen" class="screen"> <!-- Pantalla de inicio -->
                 <h1>Hola, <span id="user-name-h1" class="user-name">username</span></h1>
                 <!-- Aquí irá el contenido de la pantalla de inicio -->
                 <div id="overview" class="widget">
@@ -384,11 +384,18 @@
                 </div>
             </section>
 
-            <section id="search-screen" class="screen"> <!-- Pantalla de búsqueda -->
+            <section id="search-screen" class="screen active"> <!-- Pantalla de búsqueda -->
                 <h1>Búsqueda</h1>
                 <div class="search-box">
                     <input id="search-input" type="search" placeholder="Buscar">
-                    <button id="search-btn">Buscar</button>
+
+                    <div class="search-filters">
+                        <button class="search-filter-btn active" id="search-filter-all">Todo</button>
+                        <button class="search-filter-btn" id="search-filter-artists">Artistas</button>
+                        <button class="search-filter-btn" id="search-filter-albums">Álbumes</button>
+                        <button class="search-filter-btn" id="search-filter-tracks">Canciones</button>
+                        <button class="search-filter-btn" id="search-filter-playlists">Playlists</button>
+                    </div>
                 </div>
                 <div class="search-results-list">
                     <div class="search-results-header">
@@ -401,9 +408,9 @@
                             </div>
 
                             <div class="search-result-info">
-                                <h3 class="search-result-title">SAIKO</h3>
-                                <p class="search-result-subtitle"></p>
-                                <span id="search-result-type" class="label">label</span>
+                                <h3 class="search-result-title">Titulo</h3>
+                                <p class="search-result-subtitle">Subtitulo</p>
+                                <span id="search-result-type" class="label">Label</span>
                             </div>
 
                             <div class="search-result-ovr">
@@ -432,7 +439,7 @@
 
                     <article class="search-result">
                         <div class="search-result-image-wrapper">
-                            <img id="artist-img" class="search-result-image" src="/assets/1artist.jpg" alt="">
+                            <img id="artist-img" class="search-result-image" src="assets/1artist.jpg" alt="">
                         </div>
 
                         <div class="search-result-info">
@@ -449,7 +456,7 @@
 
                     <article class="search-result">
                         <div class="search-result-image-wrapper">
-                            <img class="search-result-image" src="/assets/cover2.jpg" alt="">
+                            <img class="search-result-image" src="assets/cover2.jpg" alt="">
                         </div>
 
                         <div class="search-result-info">

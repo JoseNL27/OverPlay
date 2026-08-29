@@ -118,4 +118,6 @@
 * **Diseño del componente search-result.**
 * **Diseño general de la pestaña de búsqueda.**
 
- 
+## 29/08
+* **Añadido filtro de búsqueda por categoría.**
+* **Componente base para button.**

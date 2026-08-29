@@ -3,8 +3,8 @@
     "short_name": "OverPlay",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#0B0D0C",
-    "theme_color": "#0B0D0C",
+    "background_color": "#2f5e2698",
+    "theme_color": "#2f5e2698",
     "icons": [
         {
             "src": "assets/icons/logo-192.png",
