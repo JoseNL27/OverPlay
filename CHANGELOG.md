@@ -121,3 +121,6 @@
 ## 29/08
 * **Añadido filtro de búsqueda por categoría.**
 * **Componente base para button.**
+
+## 31/08
+* **Ajustado el nombre del componente time-range-buttons a tab-buttons**

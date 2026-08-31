@@ -53,18 +53,18 @@
                 <div id="overview" class="widget">
                     <h2>Estado de tus escuchas</h2>
                     <div class="overview-container">
-                        <div id="overview-time-range" class="time-range-buttons">
-                            <button class="time-range-btn" data-range="7d">7D</button>
-                            <button class="time-range-btn" data-range="1m">1M</button>
-                            <button class="time-range-btn" data-range="1y">1Y</button>
-                            <button class="time-range-btn" data-range="all">ALL</button>
+                        <div id="overview-time-range" class="tab-buttons">
+                            <button class="tab-btn active" data-range="7d">7D</button>
+                            <button class="tab-btn" data-range="1m">1M</button>
+                            <button class="tab-btn" data-range="1y">1Y</button>
+                            <button class="tab-btn" data-range="all">ALL</button>
                         </div>
                         <div class="overview-grid">
                             <div class="ovr-overview"> <!-- Resumen del OVR -->
                                 <h3>OVR Actual</h3>
                                 <div class="ovr-overview-content"> <!-- OVR SCORE y descripción-->
-                                    <span id="ovr-overview-score">25</span>
-                                    <h4 id="ovr-overview-status">BAJO</h4>
+                                    <span id="ovr-overview-score" class="ovr-value">25</span>
+                                    <h4 id="ovr-overview-status" class="ovr-status">BAJO</h4>
                                     <span id="ovr-overview-evolution" class="tag"> +5%</span>
                                 </div>
                             </div>
@@ -190,11 +190,11 @@
                     <h2>Tu temperatura musical</h2>
                     <div class="musical-temperature-content">
                         <div class="musical-temperature-controls">
-                            <div id="mt-time-range" class="time-range-buttons">
-                                <button class="time-range-btn active" data-range="7d">7D</button>
-                                <button class="time-range-btn" data-range="1m">1M</button>
-                                <button class="time-range-btn" data-range="1y">1Y</button>
-                                <button class="time-range-btn" data-range="all">ALL</button>
+                            <div id="mt-time-range" class="tab-buttons">
+                                <button class="tab-btn active" data-range="7d">7D</button>
+                                <button class="tab-btn" data-range="1m">1M</button>
+                                <button class="tab-btn" data-range="1y">1Y</button>
+                                <button class="tab-btn" data-range="all">ALL</button>
                             </div>
                             <div class="musical-temperature-sort-button">
                                 <label for="temperature-type">Mostrar:</label>
@@ -333,58 +333,57 @@
 
             </section>
 
-            <section id="playlists-screen" class="screen"> <!-- Pantalla de playlists -->
-                <h1>Tus Playlists</h1>
-                <div class="playlists-content">
-                    <!-- A continuación se dejan 2  placeholder playlist para maquetar -->
-
-                    <article class="media-card"> <!-- Placeholder playlist 1 -->
-                        <div class="media-card-content">
-                            <div class="media-card-image">
-                                <img src="" alt="Playlist cover">
-                            </div>
-                            <h3 class="media-card-title">Nombre playlist</h3>
-                            <p class="media-card-description">Descripción playlist</p>
-                        </div>
-                        <div class="media-card-ovr">
-                            <span class="ovr-level">OVR</span>
-                            <canvas class="media-card-ovr-canvas"></canvas>
-                        </div>
-                    </article>
-
-                    <article class="media-card"> <!-- Placeholder playlist 2 -->
-                        <div class="media-card-content">
-                            <div class="media-card-image">
-                                <img src="" alt="Playlist cover">
-                            </div>
-                            <h3 class="media-card-title">Nombre playlist</h3>
-                            <p class="media-card-description">Descripción playlist</p>
-                        </div>
-                        <div class="media-card-ovr">
-                            <span class="ovr-level">OVR</span>
-                            <canvas class="media-card-ovr-canvas"></canvas>
-                        </div>
-                    </article>
-
-                    <template id="media-card-template">
-                        <article class="media-card">
-                            <div class="media-card-content">
-                                <div class="media-card-image">
-                                    <img src="" alt="Playlist cover">
+            <section id="library-screen" class="screen active"> <!-- Pantalla de playlists -->
+                <h1>Tu Biblioteca</h1>
+                <div class="library-wrapper">
+                    <div id="library-tabs" class="tab-buttons">
+                        <button class="tab-btn active" data-range="all">General</button>
+                        <button class="tab-btn" data-range="tracks">Canciones</button>
+                        <button class="tab-btn" data-range="artists">Artistas</button>
+                        <button class="tab-btn" data-range="albums">Álbumes</button>
+                        <button class="tab-btn" data-range="playlists">Playlists</button>
+                    </div>
+                    <div class="library-content">
+                        <div id="musical-profile" class="widget">
+                            <h2>Perfil Musical</h2>
+                            <div class="musical-profile-content">
+                                <div class="musical-profile-header">
+                                    <h3>OVR Global</h3>
+                                    <div class="ovr-container">
+                                        <span class="ovr-value">56.1</span>
+                                        <span class="ovr-status">Balanced</span>
+                                    </div>
                                 </div>
-                                <h3 class="media-card-title">Nombre playlist</h3>
-                                <p class="media-card-description">Descripción playlist</p>
+                                <div class="musical-profile-stats">
+                                    <div id="tracks-stats" class="category-stat">
+                                        <span id="tracks-count" class="label">1235</span>
+                                        <span class="label">Canciones</span>
+                                    </div>
+                                    <div id="artists-stats" class="category-stat">
+                                        <span id="artists-count" class="label">102</span>
+                                        <span class="label">Artistas</span>
+                                    </div>
+                                    <div id="albums-stats" class="category-stat">
+                                        <span id="albums-count" class="label">75</span>
+                                        <span class="label">Álbumes</span>
+                                    </div>
+                                    <div id="playlists-stats" class="category-stat">
+                                        <span id="playlists-count" class="label">12</span>
+                                        <span class="label">Playlists</span>
+                                    </div>
+
+                                </div>
+
                             </div>
-                            <div class="media-card-ovr">
-                                <span class="ovr-level">OVR</span>
-                                <canvas class="media-card-ovr-canvas"></canvas>
-                            </div>
-                        </article>
-                    </template>
+
+                        </div>
+
+                    </div>
+
                 </div>
             </section>
 
-            <section id="search-screen" class="screen active"> <!-- Pantalla de búsqueda -->
+            <section id="search-screen" class="screen"> <!-- Pantalla de búsqueda -->
                 <h1>Búsqueda</h1>
                 <div class="search-box">
                     <input id="search-input" type="search" placeholder="Buscar">
@@ -681,7 +680,7 @@
     <nav class="nav-bar">
         <!-- Barra de navegación. Se deja fuera de app-container para que se muestre sobre el contenido principal -->
         <span id="nav-home" class="nav-btn" data-screen="home-screen">Inicio</span>
-        <span id="nav-playlists" class="nav-btn" data-screen="playlists-screen">Música</span>
+        <span id="nav-library" class="nav-btn" data-screen="library-screen">OVR</span>
         <span id="nav-search" class="nav-btn" data-screen="search-screen">Buscar</span>
         <span id="nav-settings" class="nav-btn" data-screen="settings-screen">Ajustes</span>
     </nav>

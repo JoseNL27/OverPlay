@@ -1,0 +1,14 @@
+.ovr-value {
+    font-size: 4rem;
+    font-weight: 1000;
+    color: rgb(24, 199, 68);
+    line-height: 1.2;
+    /*color provisional*/
+    text-shadow: 0 0 10px rgba(24, 199, 68, 0.26);
+}
+
+.ovr-status {
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgb(154, 219, 171);
+}

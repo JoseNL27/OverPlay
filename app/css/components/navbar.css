@@ -77,7 +77,7 @@
     -webkit-mask-image: url("../../assets/icons/home.svg");
 }
 
-#nav-playlists::before {
+#nav-library::before {
     mask-image: url("../../assets/icons/playlists.svg");
     -webkit-mask-image: url("../../assets/icons/playlists.svg");
 }

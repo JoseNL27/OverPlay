@@ -1,4 +1,4 @@
-.time-range-buttons {
+.tab-buttons {
     display: flex;
     background: rgba(255, 255, 255, 0.05);
     /* Fondo oscuro general */
@@ -9,7 +9,7 @@
 }
 
 
-.time-range-btn {
+.tab-btn {
     background: transparent;
     border: none;
     color: var(--text-secondary, #a7a7a7);
@@ -21,17 +21,17 @@
     transition: all 0.2s ease;
 }
 
-.time-range-btn.active {
+.tab-btn.active {
     background: rgba(255, 255, 255, 0.12);
     color: #ffffff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.time-range-btn:not(:first-child) {
+.tab-btn:not(:first-child) {
     position: relative;
 }
 
-.time-range-btn:not(:first-child)::after {
+.tab-btn:not(:first-child)::after {
     content: "";
     position: absolute;
     left: 0;
