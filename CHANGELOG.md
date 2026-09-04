@@ -124,3 +124,11 @@
 
 ## 31/08
 * **Ajustado el nombre del componente time-range-buttons a tab-buttons**
+* **Creado componente global para ovr-value y ovr-status**
+* **Diseñado el widget de perfil musical**
+* **Añadido svg personalizado de ovr**
+
+## 04/09
+* **Reajustado el widget de perfil musical**
+* **Reestructurada la carpeta de css/components** para dividirlos entre globales y propios de cada screen.
+* 

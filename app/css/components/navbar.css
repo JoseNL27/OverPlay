@@ -78,8 +78,8 @@
 }
 
 #nav-library::before {
-    mask-image: url("../../assets/icons/playlists.svg");
-    -webkit-mask-image: url("../../assets/icons/playlists.svg");
+    mask-image: url("../../assets/icons/ovr.svg");
+    -webkit-mask-image: url("../../assets/icons/ovr.svg");
 }
 
 #nav-search::before {
