@@ -1,31 +1,67 @@
 .musical-profile-header {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     align-items: center;
     position: relative;
-    margin-block-end: var(--spacing-md);
+    margin-block: var(--spacing-md);
 }
 
-/* .musical-profile-header::before {
+.ovr-metrics {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    width: 100%;
+    padding-inline-start: var(--spacing-xl);
+}
+
+.ovr-metrics::before {
     content: "";
     position: absolute;
-    right: 0;
-    top: 100%;
-    transform: translate(0%, -50%);
+    left: 50%;
+    top: 50%;
+    transform: translate(-100%, -50%);
+    width: 1px;
+    height: 90%;
+    background-color: var(--border-soft);
+    opacity: 1;
+}
+
+.ovr-metrics>div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
+.ovr-metrics>div>span:first-child {
+    justify-self: start;
+    font-size: 0.9rem;
+    font-weight: 900;
+}
+
+.ovr-metrics>div>span:last-child {
+    justify-self: end;
+}
+
+.musical-profile-header::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -30%;
+    transform: translate(0%, 50%);
     width: 100%;
     height: 1px;
     background-color: var(--border-soft);
     opacity: 1;
-} */
+}
 
-.musical-profile-metrics {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 1fr;
+.radar-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     padding-inline: var(--spacing-md);
     padding-block: var(--spacing-sm);
-    align-items: center;
-    justify-content: center;
     position: relative;
 }
 
@@ -53,29 +89,15 @@
     opacity: 1;
 }
 
-.musical-profile-metric {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: var(--spacing-md);
-}
-
-.musical-profile-metric span:first-child {
-    font-size: 1.4rem;
-    font-weight: 900;
-}
-
-.musical-profile-metric span:last-child {
-
-    font-weight: var(--font-weight-medium);
-}
-
 .ovr-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-block: var(--spacing-sm);
+}
+
+.ovr-container>span:first-child {
+    font-size: 3.3rem;
 }
 
 .musical-profile-breakdown {

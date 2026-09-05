@@ -347,30 +347,101 @@
                         <div id="musical-profile" class="widget">
                             <h2>Perfil Musical</h2>
                             <div class="musical-profile-content">
+                                <h3>Métricas OVR</h3>
                                 <div class="musical-profile-header">
-                                    <h3>OVR Global</h3>
                                     <div class="ovr-container">
                                         <span class="ovr-value">56.1</span>
                                         <span class="ovr-status">Balanced</span>
                                     </div>
+                                    <div class="ovr-metrics">
+                                        <div class="ovr-fatigue-container">
+                                            <span id="ovr-fatigue" class="label">51.1</span>
+                                            <span class="label">Fatiga</span>
+                                        </div>
+                                        <div class="ovr-recovery-container">
+                                            <span id="ovr-recovery" class="label">15.0</span>
+                                            <span class="label">Recuperación</span>
+                                        </div>
+                                        <div class="ovr-novelty-container">
+                                            <span id="ovr-novelty" class="label">43.2</span>
+                                            <span class="label">Novedad</span>
+                                        </div>
+                                        <div class="ovr-diversity-container">
+                                            <span id="ovr-diversity" class="label">78.9</span>
+                                            <span class="label">Diversidad</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="musical-profile-metrics">
-                                    <div class="musical-profile-metric">
-                                        <span id="fatigue-index" class="label">5.1</span>
-                                        <span class="label">Índice Fatiga</span>
-                                    </div>
-                                    <div class="musical-profile-metric">
-                                        <span id="recovery-index" class="label">1.5</span>
-                                        <span class="label">Índ. Recuperación</span>
-                                    </div>
-                                    <div class="musical-profile-metric">
-                                        <span id="novelty-consumption" class="label">43.2</span>
-                                        <span class="label">Consumo Novedad</span>
-                                    </div>
-                                    <div class="musical-profile-metric">
-                                        <span id="diversity-index" class="label">78.9</span>
-                                        <span class="label">Diversidad</span>
-                                    </div>
+                                <div class="radar-container" style="position: relative; height: 260px; width: 100%;">
+                                    <canvas id="radarChart"></canvas>
+                                    <script>
+                                        // JS: Script placeholder para Chart.js (v3 / v4) con estética dark/OverPlay
+                                        const ctx = document.getElementById('radarChart').getContext('2d');
+
+                                        const radarChart = new Chart(ctx, {
+                                            type: 'radar',
+                                            data: {
+                                                labels: ['Índ. Fatiga', 'Índ. Recuperación', 'Consumo Novedad', 'Diversidad'],
+                                                datasets: [{
+                                                    label: 'Métricas de Escucha',
+                                                    // Escalados a base 100 para que la telaraña rellene de forma simétrica
+                                                    data: [51, 15, 43.2, 78.9],
+                                                    backgroundColor: 'rgba(34, 197, 94, 0.25)', // Verde OverPlay translúcido
+                                                    borderColor: '#22c55e',                     // Verde OverPlay sólido
+                                                    borderWidth: 2,
+                                                    pointBackgroundColor: '#22c55e',
+                                                    pointBorderColor: '#121212',
+                                                    pointBorderWidth: 2,
+                                                    pointRadius: 4,
+                                                    pointHoverRadius: 6
+                                                }]
+                                            },
+                                            options: {
+                                                responsive: true,
+                                                maintainAspectRatio: false,
+                                                plugins: {
+                                                    legend: {
+                                                        display: false // Ocultamos la leyenda para mantener el minimalismo
+                                                    },
+                                                    tooltip: {
+                                                        backgroundColor: '#18181b',
+                                                        titleColor: '#a1a1aa',
+                                                        bodyColor: '#22c55e',
+                                                        borderColor: 'rgba(255, 255, 255, 0.1)',
+                                                        borderWidth: 1,
+                                                        displayColors: false,
+                                                        callbacks: {
+                                                            label: (context) => ` ${context.raw}`
+                                                        }
+                                                    }
+                                                },
+                                                scales: {
+                                                    r: {
+                                                        angleLines: {
+                                                            color: 'rgba(255, 255, 255, 0.1)' // Líneas desde el centro
+                                                        },
+                                                        grid: {
+                                                            color: 'rgba(255, 255, 255, 0.08)' // Anillos de la telaraña
+                                                        },
+                                                        pointLabels: {
+                                                            color: '#a1a1aa', // Color de las etiquetas exteriores
+                                                            font: {
+                                                                size: 11,
+                                                                family: 'Inter, sans-serif',
+                                                                weight: '600'
+                                                            }
+                                                        },
+                                                        ticks: {
+                                                            display: false, // Oculta los números internos para no recargar la UI
+                                                            stepSize: 20
+                                                        },
+                                                        suggestedMin: 0,
+                                                        suggestedMax: 100
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    </script>
                                 </div>
 
                                 <div class="musical-profile-breakdown">

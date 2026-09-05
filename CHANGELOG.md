@@ -131,4 +131,7 @@
 ## 04/09
 * **Reajustado el widget de perfil musical**
 * **Reestructurada la carpeta de css/components** para dividirlos entre globales y propios de cada screen.
-* 
+
+## 05/09
+* **Detallado de métricas OVR en el widget de perfil musical**
+* **Añadido gráfico radar a métricas OVR**
